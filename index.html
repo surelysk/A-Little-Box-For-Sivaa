@@ -1,269 +1,1071 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>A Kunjii Box for Kunji Kuttyy</title>
+<title>Kunjii Sammanam</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #fff;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(115, 63, 110, 0.35), transparent 35%),
+        radial-gradient(circle at 20% 80%, rgba(48, 72, 130, 0.25), transparent 35%),
+        linear-gradient(145deg, #070710, #100b19 45%, #080812);
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+}
+
+.glow.one {
+    top: -80px;
+    left: -80px;
+    background: #a66cff;
+}
+
+.glow.two {
+    right: -100px;
+    bottom: -80px;
+    background: #5d8dff;
+}
+
+.glow.three {
+    top: 45%;
+    left: 45%;
+    width: 160px;
+    height: 160px;
+    background: #e68bdc;
+    opacity: 0.12;
+}
+
+/* =========================
+   FLOATING LIGHTS
+========================= */
+
+.light {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
+    opacity: 0.5;
+    animation: floatLight linear infinite;
+}
+
+.light:nth-child(4) {
+    left: 10%;
+    top: 20%;
+    animation-duration: 8s;
+}
+
+.light:nth-child(5) {
+    left: 25%;
+    top: 70%;
+    animation-duration: 11s;
+}
+
+.light:nth-child(6) {
+    left: 42%;
+    top: 30%;
+    animation-duration: 9s;
+}
+
+.light:nth-child(7) {
+    left: 63%;
+    top: 75%;
+    animation-duration: 13s;
+}
+
+.light:nth-child(8) {
+    left: 78%;
+    top: 22%;
+    animation-duration: 10s;
+}
+
+.light:nth-child(9) {
+    left: 90%;
+    top: 55%;
+    animation-duration: 12s;
+}
+
+@keyframes floatLight {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.15;
     }
 
-    body {
-      min-height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      background:
-        radial-gradient(circle at 50% 45%, #3b274b 0%, #171020 45%, #09070d 100%);
-
-      color: #fff;
-      font-family: Georgia, "Times New Roman", serif;
+    50% {
+        opacity: 0.8;
     }
 
-    /* Soft floating lights */
-
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 50%;
-      animation: twinkle 4s infinite ease-in-out;
-    }
-
-    .star:nth-child(1) { top: 15%; left: 18%; animation-delay: 0s; }
-    .star:nth-child(2) { top: 27%; left: 78%; animation-delay: 1s; }
-    .star:nth-child(3) { top: 63%; left: 12%; animation-delay: 2s; }
-    .star:nth-child(4) { top: 72%; left: 85%; animation-delay: 0.5s; }
-    .star:nth-child(5) { top: 12%; left: 55%; animation-delay: 2.5s; }
-    .star:nth-child(6) { top: 82%; left: 43%; animation-delay: 1.5s; }
-    .star:nth-child(7) { top: 38%; left: 91%; animation-delay: 3s; }
-    .star:nth-child(8) { top: 48%; left: 7%; animation-delay: 2s; }
-
-    @keyframes twinkle {
-      0%, 100% {
-        opacity: 0.2;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.8);
-      }
-    }
-
-    /* Main content */
-
-    .welcome {
-      position: relative;
-      z-index: 2;
-      width: 90%;
-      max-width: 600px;
-      text-align: center;
-
-      animation: appear 2s ease forwards;
-    }
-
-    @keyframes appear {
-      from {
+    100% {
+        transform: translateY(-80px) scale(1.5);
         opacity: 0;
-        transform: translateY(20px);
-      }
+    }
+}
 
-      to {
-        opacity: 1;
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 20px;
+}
+
+/* =========================
+   OPENING SCREEN
+========================= */
+
+.welcome {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.welcome.hide {
+    opacity: 0;
+    transform: scale(0.92) translateY(-30px);
+    pointer-events: none;
+}
+
+.eyebrow {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 18px;
+}
+
+.title {
+    font-size: clamp(40px, 11vw, 76px);
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-bottom: 15px;
+    text-shadow: 0 0 35px rgba(255,255,255,0.15);
+}
+
+.subtitle {
+    font-size: clamp(17px, 4.5vw, 23px);
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 55px;
+}
+
+/* =========================
+   GIFT BOX
+========================= */
+
+.gift-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 230px;
+    perspective: 800px;
+}
+
+.gift {
+    position: relative;
+    width: 150px;
+    height: 145px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+    animation: giftFloat 3.5s ease-in-out infinite;
+}
+
+.gift:hover {
+    transform: scale(1.05);
+}
+
+@keyframes giftFloat {
+    0%, 100% {
         transform: translateY(0);
-      }
     }
 
-    .little {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      opacity: 0.65;
-      margin-bottom: 22px;
+    50% {
+        transform: translateY(-9px);
     }
+}
 
-    h1 {
-      font-size: clamp(38px, 9vw, 64px);
-      font-weight: normal;
-      letter-spacing: 1px;
-      margin-bottom: 18px;
+/* BOX BODY */
+
+.box-body {
+    position: absolute;
+    left: 5px;
+    bottom: 0;
+    width: 140px;
+    height: 105px;
+    border-radius: 4px 4px 12px 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #5b183f 0%,
+            #8d2960 42%,
+            #721c4d 100%
+        );
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,0.55),
+        inset 0 0 20px rgba(255,255,255,0.08);
+}
+
+/* LID */
+
+.box-lid {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6e1d4c,
+            #a93370,
+            #7c2054
+        );
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.35);
+
+    transform-origin: left bottom;
+    transition:
+        transform 1s cubic-bezier(.2,.8,.2,1),
+        top 1s cubic-bezier(.2,.8,.2,1);
+    z-index: 5;
+}
+
+/* RIBBONS */
+
+.ribbon-vertical {
+    position: absolute;
+    left: 58px;
+    top: 0;
+    width: 24px;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #d9a441,
+        #f5d477,
+        #c89531
+    );
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
+}
+
+.ribbon-horizontal {
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(
+        90deg,
+        #d9a441,
+        #f5d477,
+        #c89531
+    );
+}
+
+/* BOW */
+
+.bow {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    width: 70px;
+    height: 45px;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.bow span {
+    position: absolute;
+    width: 38px;
+    height: 28px;
+    border: 4px solid #e3b74f;
+    background: linear-gradient(
+        135deg,
+        #f3d16b,
+        #b98525
+    );
+}
+
+.bow span:first-child {
+    left: 0;
+    top: 5px;
+    border-radius: 70% 20% 70% 20%;
+    transform: rotate(20deg);
+}
+
+.bow span:last-child {
+    right: 0;
+    top: 5px;
+    border-radius: 20% 70% 20% 70%;
+    transform: rotate(-20deg);
+}
+
+.bow::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: #f1cd63;
+    box-shadow: 0 0 10px rgba(255,215,100,0.35);
+}
+
+/* OPEN ANIMATION */
+
+.gift.opening .box-lid {
+    transform:
+        translateY(-42px)
+        rotateX(-35deg)
+        rotateZ(-4deg);
+    top: 20px;
+}
+
+.gift.opening {
+    animation: none;
+    transform: translateY(10px) scale(1.04);
+}
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+.open-button {
+    margin-top: 35px;
+    padding: 14px 28px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.06);
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.open-button:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   GIFT CONTENT
+========================= */
+
+.gift-content {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 850px;
+
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.gift-content.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   INNER HEADER
+========================= */
+
+.inner-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.inner-small {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 12px;
+}
+
+.inner-title {
+    font-size: clamp(32px, 8vw, 55px);
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.inner-subtitle {
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+}
+
+/* =========================
+   MENU GRID
+========================= */
+
+.menu {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    padding: 0 5px;
+}
+
+.menu-card {
+    position: relative;
+    min-height: 115px;
+    padding: 22px 17px;
+
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.045);
+    backdrop-filter: blur(15px);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.25);
+}
+
+.card-icon {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.card-description {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.48);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(3,3,9,0.75);
+    backdrop-filter: blur(12px);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.35s ease;
+
+    z-index: 20;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 480px;
+
+    padding: 35px 25px;
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,20,38,0.97),
+            rgba(11,11,22,0.97)
+        );
+
+    text-align: center;
+
+    transform: scale(0.92);
+    transition: transform 0.35s ease;
+}
+
+.modal.show .modal-box {
+    transform: scale(1);
+}
+
+.modal-icon {
+    font-size: 42px;
+    margin-bottom: 18px;
+}
+
+.modal-title {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.modal-text {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.62);
+}
+
+.close-button {
+    margin-top: 25px;
+
+    padding: 10px 22px;
+
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: transparent;
+    color: white;
+
+    cursor: pointer;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+    margin-top: 25px;
+
+    background: transparent;
+    border: none;
+
+    color: rgba(255,255,255,0.45);
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 520px) {
+
+    .container {
+        padding: 25px 16px;
     }
 
     .subtitle {
-      font-size: clamp(16px, 4vw, 20px);
-      line-height: 1.8;
-      opacity: 0.78;
-      font-style: italic;
-      margin-bottom: 38px;
+        margin-bottom: 35px;
     }
 
-    /* Gift */
-
-    .gift {
-      font-size: 92px;
-      display: inline-block;
-      cursor: pointer;
-
-      filter: drop-shadow(0 0 18px rgba(255,255,255,0.18));
-
-      animation: float 4s ease-in-out infinite;
-
-      transition:
-        transform 0.4s ease,
-        filter 0.4s ease;
+    .gift-wrapper {
+        height: 205px;
     }
 
-    .gift:hover {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 30px rgba(255,255,255,0.35));
+    .menu {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
+    .menu-card {
+        min-height: 125px;
+        padding: 18px 14px;
     }
 
-    /* Button */
-
-    .open-button {
-      display: block;
-      margin: 30px auto 0;
-
-      padding: 13px 28px;
-
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 40px;
-
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(10px);
-
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      letter-spacing: 1px;
-
-      cursor: pointer;
-
-      transition:
-        background 0.3s ease,
-        transform 0.3s ease,
-        border 0.3s ease;
+    .card-title {
+        font-size: 14px;
     }
 
-    .open-button:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.6);
+    .card-description {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 350px) {
+
+    .menu {
+        grid-template-columns: 1fr;
     }
 
-    .tiny {
-      margin-top: 28px;
-
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 1px;
-
-      opacity: 0.35;
+    .menu-card {
+        min-height: auto;
     }
+}
 
-    /* Small screens */
-
-    @media (max-width: 480px) {
-      .welcome {
-        width: 88%;
-      }
-
-      .gift {
-        font-size: 78px;
-      }
-
-      .subtitle {
-        line-height: 1.7;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- Background lights -->
+<!-- =========================
+     BACKGROUND
+========================= -->
 
-  <div class="stars">
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-    <div class="star"></div>
-  </div>
+<div class="background">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+    <div class="light"></div>
+
+</div>
 
 
-  <!-- Welcome screen -->
+<!-- =========================
+     MAIN
+========================= -->
 
-  <main class="welcome">
+<div class="container">
 
-    <div class="little">
-      Something made just for you
+    <!-- WELCOME SCREEN -->
+
+    <section class="welcome" id="welcome">
+
+        <div class="eyebrow">
+            A little something
+        </div>
+
+        <h1 class="title">
+            Kunjii Sammanam
+        </h1>
+
+        <p class="subtitle">
+            For Kunjii Kuttyy
+        </p>
+
+
+        <div class="gift-wrapper">
+
+            <div class="gift" id="gift" onclick="openBox()">
+
+                <div class="box-lid"></div>
+
+                <div class="box-body">
+
+                    <div class="ribbon-vertical"></div>
+                    <div class="ribbon-horizontal"></div>
+
+                </div>
+
+                <div class="bow">
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button class="open-button" onclick="openBox()">
+            OPEN THE SAMMANAM
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         INNER CONTENT
+    ========================= -->
+
+    <section class="gift-content" id="giftContent">
+
+        <div class="inner-header">
+
+            <div class="inner-small">
+                Made just for you
+            </div>
+
+            <h2 class="inner-title">
+                A little collection
+            </h2>
+
+            <p class="inner-subtitle">
+                Take your time. There's no hurry here.
+            </p>
+
+        </div>
+
+
+        <div class="menu">
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '💌',
+                    'A Letter for You',
+                    'Some words I wanted you to have, exactly as they are.'
+                 )">
+
+                <div class="card-icon">💌</div>
+
+                <div class="card-title">
+                    A Letter for You
+                </div>
+
+                <div class="card-description">
+                    Something written from the heart.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '📖',
+                    'The Things You Don’t Remember',
+                    'Little moments, tiny details, and memories that stayed with me.'
+                 )">
+
+                <div class="card-icon">📖</div>
+
+                <div class="card-title">
+                    The Things You Don't Remember
+                </div>
+
+                <div class="card-description">
+                    Moments that meant more than you knew.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '🌱',
+                    'The Girl I See',
+                    'A little collection of the things I admire about you.'
+                 )">
+
+                <div class="card-icon">🌱</div>
+
+                <div class="card-title">
+                    The Girl I See
+                </div>
+
+                <div class="card-description">
+                    Things I notice. Things I admire.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '🎙️',
+                    'Listen to This',
+                    'Some things sound different when they are spoken instead of written.'
+                 )">
+
+                <div class="card-icon">🎙️</div>
+
+                <div class="card-title">
+                    Listen to This
+                </div>
+
+                <div class="card-description">
+                    A few things meant to be heard.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '✍️',
+                    'Words I Couldn’t Say',
+                    'Thoughts that found their way onto paper before they found their way into words.'
+                 )">
+
+                <div class="card-icon">✍️</div>
+
+                <div class="card-title">
+                    Words I Couldn't Say
+                </div>
+
+                <div class="card-description">
+                    Poems, thoughts and unfinished sentences.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '🎥',
+                    'A Little Something',
+                    'A few moments from the journey of making this little place.'
+                 )">
+
+                <div class="card-icon">🎥</div>
+
+                <div class="card-title">
+                    A Little Something
+                </div>
+
+                <div class="card-description">
+                    A glimpse behind the scenes.
+                </div>
+
+            </div>
+
+
+            <div class="menu-card"
+                 onclick="openModal(
+                    '❤️',
+                    'Open Last',
+                    'Some things are better saved until everything else has been seen.'
+                 )">
+
+                <div class="card-icon">❤️</div>
+
+                <div class="card-title">
+                    Open Last
+                </div>
+
+                <div class="card-description">
+                    The final little surprise.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button class="back-button" onclick="goBack()">
+            ← BACK TO THE BOX
+        </button>
+
+    </section>
+
+</div>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-icon" id="modalIcon">
+            💌
+        </div>
+
+        <h3 class="modal-title" id="modalTitle">
+            A Letter for You
+        </h3>
+
+        <p class="modal-text" id="modalText">
+            Coming soon...
+        </p>
+
+        <button class="close-button" onclick="closeModal()">
+            CLOSE
+        </button>
+
     </div>
 
-    <h1>
-      For Sivani
-    </h1>
-
-    <p class="subtitle">
-      A little box of things<br>
-      I wanted you to keep.
-    </p>
-
-    <div class="gift">
-      🎁
-    </div>
-
-    <button class="open-button" onclick="openBox()">
-      Open the Box
-    </button>
-
-    <div class="tiny">
-      Take your time. There is no rush.
-    </div>
-
-  </main>
+</div>
 
 
-  <script>
+<script>
 
-    function openBox() {
+/* =========================
+   OPEN BOX
+========================= */
 
-      alert(
-        "The box is still being prepared... 🤍"
-      );
+function openBox() {
 
+    const gift = document.getElementById("gift");
+    const welcome = document.getElementById("welcome");
+    const content = document.getElementById("giftContent");
+
+    gift.classList.add("opening");
+
+    setTimeout(() => {
+
+        welcome.classList.add("hide");
+
+    }, 650);
+
+    setTimeout(() => {
+
+        content.style.display = "flex";
+
+        requestAnimationFrame(() => {
+            content.classList.add("show");
+        });
+
+    }, 1000);
+}
+
+
+/* =========================
+   GO BACK
+========================= */
+
+function goBack() {
+
+    const gift = document.getElementById("gift");
+    const welcome = document.getElementById("welcome");
+    const content = document.getElementById("giftContent");
+
+    content.classList.remove("show");
+
+    setTimeout(() => {
+
+        content.style.display = "none";
+
+        welcome.classList.remove("hide");
+
+        gift.classList.remove("opening");
+
+    }, 500);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(icon, title, text) {
+
+    document.getElementById("modalIcon").textContent = icon;
+    document.getElementById("modalTitle").textContent = title;
+    document.getElementById("modalText").textContent = text;
+
+    document.getElementById("modal").classList.add("show");
+}
+
+
+function closeModal() {
+
+    document.getElementById("modal").classList.remove("show");
+
+}
+
+
+/* =========================
+   CLOSE MODAL WHEN
+   CLICKING OUTSIDE
+========================= */
+
+document.getElementById("modal").addEventListener("click", function(event) {
+
+    if (event.target === this) {
+        closeModal();
     }
 
-  </script>
+});
+
+</script>
 
 </body>
-      </html>
+  </html>
