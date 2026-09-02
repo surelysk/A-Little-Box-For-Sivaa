@@ -27,12 +27,31 @@ body {
     overflow-x: hidden;
     font-family: Georgia, "Times New Roman", serif;
     color: #fff;
-    background:
-        radial-gradient(circle at 50% 20%, rgba(115, 63, 110, 0.35), transparent 35%),
-        radial-gradient(circle at 20% 80%, rgba(48, 72, 130, 0.25), transparent 35%),
-        linear-gradient(145deg, #070710, #100b19 45%, #080812);
-}
 
+    background:
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(255, 225, 185, 0.13),
+            transparent 18%
+        ),
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(105, 82, 150, 0.22),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 80% 75%,
+            rgba(70, 95, 155, 0.18),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #050711 0%,
+            #0a0b19 45%,
+            #110b19 100%
+        );
+           }
+   
 /* =========================
    BACKGROUND
 ========================= */
@@ -67,14 +86,16 @@ body {
 }
 
 .glow.three {
-    top: 45%;
-    left: 45%;
-    width: 160px;
-    height: 160px;
-    background: #e68bdc;
-    opacity: 0.12;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 190px;
+    height: 190px;
+    background: #ffe4b5;
+    opacity: 0.10;
+    filter: blur(75px);
 }
-
+   
 /* =========================
    FLOATING LIGHTS
 ========================= */
