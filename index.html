@@ -64,47 +64,39 @@ body {
     z-index: 0;
 
     background:
-        /* Moonlit upper sky */
+        /* moonlight spreading across the sky */
         radial-gradient(
-            circle at 82% 15%,
-            rgba(255, 225, 175, 0.22) 0%,
-            rgba(190, 155, 210, 0.12) 12%,
-            transparent 32%
+            circle at 82% 16%,
+            rgba(255, 239, 205, 0.16) 0%,
+            rgba(170, 170, 230, 0.07) 18%,
+            transparent 38%
         ),
 
-        /* Violet cloud atmosphere */
+        /* distant blue atmospheric glow */
         radial-gradient(
-            ellipse at 18% 42%,
-            rgba(125, 78, 170, 0.32) 0%,
-            rgba(75, 45, 125, 0.18) 35%,
-            transparent 68%
-        ),
-
-        radial-gradient(
-            ellipse at 75% 48%,
-            rgba(100, 70, 155, 0.28) 0%,
-            rgba(65, 45, 110, 0.16) 38%,
+            ellipse at 50% 48%,
+            rgba(55, 70, 145, 0.18) 0%,
+            rgba(30, 35, 90, 0.08) 38%,
             transparent 70%
         ),
 
-        /* Warm horizon */
+        /* faint violet horizon */
         radial-gradient(
-            ellipse at 50% 78%,
-            rgba(190, 105, 155, 0.22) 0%,
-            rgba(100, 65, 130, 0.14) 32%,
-            transparent 65%
+            ellipse at 50% 82%,
+            rgba(145, 75, 145, 0.14) 0%,
+            transparent 58%
         ),
 
-        /* Deep night */
+        /* actual night sky */
         linear-gradient(
             180deg,
-            #030515 0%,
-            #070923 30%,
-            #110b2c 58%,
-            #160c2c 76%,
-            #03040f 100%
+            #02030b 0%,
+            #05091a 28%,
+            #090d26 52%,
+            #100d2c 72%,
+            #03040d 100%
         );
-}
+   }
 
 /* =========================
    ETHEREAL NIGHT SCENE
@@ -273,21 +265,21 @@ body {
 
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #fffdf5 0%,
-            #f8edcf 55%,
-            #d9c89f 100%
+            circle at 35% 32%,
+            #fffdf3 0%,
+            #f8f1d8 42%,
+            #ddd5b9 72%,
+            #b9b39f 100%
         );
 
     box-shadow:
-        0 0 20px rgba(255, 242, 205, 0.45),
-        0 0 55px rgba(255, 225, 170, 0.25),
-        0 0 100px rgba(255, 220, 170, 0.12);
+        0 0 18px rgba(255, 248, 220, 0.55),
+        0 0 45px rgba(220, 220, 245, 0.28),
+        0 0 90px rgba(190, 190, 240, 0.16);
 
-    opacity: 0.9;
-
-    animation: moonBreath 5s ease-in-out infinite;
-}
+    opacity: 0.95;
+    animation: moonBreath 8s ease-in-out infinite;
+   }
 
 .moon-glow {
     position: absolute;
@@ -364,8 +356,11 @@ body {
 
 .stars {
     position: absolute;
+.stars {
+    position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: 1;
 }
 
 .stars span {
@@ -373,13 +368,28 @@ body {
     width: 2px;
     height: 2px;
     border-radius: 50%;
-    background: white;
-    opacity: 0.45;
-
-    box-shadow: 0 0 7px rgba(255,255,255,0.8);
-
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
     animation: starTwinkle 4s ease-in-out infinite;
 }
+
+/* Natural-looking scattered positions */
+
+.stars span:nth-child(1)  { top: 12%; left: 18%; animation-delay: 0s; }
+.stars span:nth-child(2)  { top: 21%; left: 36%; animation-delay: 1.2s; }
+.stars span:nth-child(3)  { top: 9%;  left: 54%; animation-delay: 2.4s; }
+.stars span:nth-child(4)  { top: 28%; left: 67%; animation-delay: 0.8s; }
+.stars span:nth-child(5)  { top: 16%; left: 78%; animation-delay: 3s; }
+.stars span:nth-child(6)  { top: 34%; left: 11%; animation-delay: 1.7s; }
+.stars span:nth-child(7)  { top: 39%; left: 27%; animation-delay: 2.8s; }
+.stars span:nth-child(8)  { top: 31%; left: 48%; animation-delay: 0.4s; }
+.stars span:nth-child(9)  { top: 42%; left: 61%; animation-delay: 1.9s; }
+.stars span:nth-child(10) { top: 24%; left: 88%; animation-delay: 3.4s; }
+.stars span:nth-child(11) { top: 52%; left: 16%; animation-delay: 2.1s; }
+.stars span:nth-child(12) { top: 47%; left: 39%; animation-delay: 0.9s; }
+.stars span:nth-child(13) { top: 55%; left: 73%; animation-delay: 2.7s; }
+.stars span:nth-child(14) { top: 61%; left: 84%; animation-delay: 1.4s; }
+.stars span:nth-child(15) { top: 67%; left: 31%; animation-delay: 3.2s; }
 
 /* Star positions */
 
@@ -492,8 +502,46 @@ body {
 .clouds {
     position: absolute;
     inset: 0;
-    overflow: hidden;
     pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+    opacity: 0.42;
+}
+
+.clouds span {
+    position: absolute;
+    display: block;
+    height: 90px;
+    width: 380px;
+    border-radius: 50%;
+    background: rgba(120, 125, 175, 0.08);
+    filter: blur(28px);
+    animation: cloudDrift 35s linear infinite;
+}
+
+.clouds span:nth-child(1) {
+    top: 24%;
+    left: -15%;
+    width: 430px;
+    animation-duration: 42s;
+}
+
+.clouds span:nth-child(2) {
+    top: 43%;
+    left: 35%;
+    width: 520px;
+    height: 110px;
+    animation-duration: 55s;
+    animation-delay: -18s;
+}
+
+.clouds span:nth-child(3) {
+    top: 58%;
+    left: 72%;
+    width: 420px;
+    height: 100px;
+    animation-duration: 48s;
+    animation-delay: -30s;
 }
 
 .cloud {
