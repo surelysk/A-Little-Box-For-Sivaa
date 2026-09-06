@@ -3,1328 +3,1124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Kunjii Sammanam</title>
 
 <style>
-
-/* =========================
-   RESET
-========================= */
+/* =========================================================
+   KUNJII SAMMANAM
+   A Little World Made With Love
+   ========================================================= */
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-    min-height: 100vh;
     overflow-x: hidden;
     font-family: Georgia, "Times New Roman", serif;
     color: #fff;
+    background: #02030b;
+}
 
-    background:
-    radial-gradient(
-        circle at 78% 12%,
-        rgba(120, 105, 180, 0.18),
-        transparent 28%
-    ),
-    radial-gradient(
-        circle at 20% 85%,
-        rgba(80, 55, 140, 0.16),
-        transparent 32%
-    ),
-    linear-gradient(
-        180deg,
-        #050817 0%,
-        #080b22 35%,
-        #100b2b 68%,
-        #050511 100%
-    );
-           }
-   
-/* =========================
-   BACKGROUND
-========================= */
+/* =========================================================
+   NIGHT WORLD
+   ========================================================= */
 
-/* =========================
-   THE NIGHT WORLD
-========================= */
-
-.background {
+.night-world {
     position: fixed;
     inset: 0;
     overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-
     background:
-        /* moonlight spreading across the sky */
         radial-gradient(
-            circle at 82% 16%,
-            rgba(255, 239, 205, 0.16) 0%,
-            rgba(170, 170, 230, 0.07) 18%,
-            transparent 38%
+            circle at 82% 14%,
+            rgba(255, 238, 196, 0.16),
+            transparent 24%
         ),
-
-        /* distant blue atmospheric glow */
         radial-gradient(
-            ellipse at 50% 48%,
-            rgba(55, 70, 145, 0.18) 0%,
-            rgba(30, 35, 90, 0.08) 38%,
-            transparent 70%
+            ellipse at 50% 65%,
+            rgba(75, 71, 150, 0.14),
+            transparent 55%
         ),
-
-        /* faint violet horizon */
-        radial-gradient(
-            ellipse at 50% 82%,
-            rgba(145, 75, 145, 0.14) 0%,
-            transparent 58%
-        ),
-
-        /* actual night sky */
         linear-gradient(
             180deg,
-            #02030b 0%,
-            #05091a 28%,
-            #090d26 52%,
-            #100d2c 72%,
-            #03040d 100%
+            #02030a 0%,
+            #05091b 30%,
+            #090d27 55%,
+            #120d2d 76%,
+            #03040b 100%
         );
-   }
+    z-index: 0;
+}
 
-/* =========================
-   ETHEREAL NIGHT SCENE
-========================= */
+/* subtle atmospheric glow */
 
-.background::before {
-    content: "";
+.atmosphere {
     position: absolute;
     inset: 0;
-
     background:
-
-        /* Large moonlit cloud - upper right */
         radial-gradient(
-            ellipse 38% 14% at 84% 25%,
-            rgba(225, 205, 235, 0.24) 0%,
-            rgba(170, 145, 205, 0.16) 38%,
-            transparent 72%
+            ellipse at 50% 75%,
+            rgba(166, 98, 170, 0.12),
+            transparent 50%
         ),
-
-        /* Cloud bank - left */
         radial-gradient(
-            ellipse 45% 16% at 12% 39%,
-            rgba(155, 125, 190, 0.30) 0%,
-            rgba(105, 75, 155, 0.20) 40%,
-            transparent 72%
-        ),
-
-        /* Cloud bank - middle */
-        radial-gradient(
-            ellipse 52% 18% at 58% 48%,
-            rgba(175, 145, 205, 0.24) 0%,
-            rgba(105, 75, 155, 0.16) 42%,
-            transparent 72%
-        ),
-
-        /* Lower mist */
-        radial-gradient(
-            ellipse 70% 22% at 50% 73%,
-            rgba(190, 125, 185, 0.26) 0%,
-            rgba(105, 65, 145, 0.18) 42%,
-            transparent 75%
+            ellipse at 15% 45%,
+            rgba(50, 70, 145, 0.12),
+            transparent 45%
         );
-
-    filter: blur(14px);
-    transform: scale(1.08);
-
-    animation: etherealClouds 18s ease-in-out infinite alternate;
+    animation: atmosphereBreath 12s ease-in-out infinite alternate;
 }
 
-@keyframes etherealClouds {
-
-    0% {
-        transform: scale(1.08) translateX(0);
+@keyframes atmosphereBreath {
+    from {
+        opacity: 0.65;
     }
-
-    100% {
-        transform: scale(1.12) translateX(-18px);
+    to {
+        opacity: 1;
     }
 }
 
-
-.background::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 42%;
-
-    background:
-
-        /* warm horizon light */
-        radial-gradient(
-            ellipse 50% 35% at 50% 15%,
-            rgba(255, 196, 170, 0.30),
-            transparent 65%
-        ),
-
-        /* distant violet land */
-        linear-gradient(
-            175deg,
-            transparent 0%,
-            rgba(45, 30, 80, 0.45) 45%,
-            rgba(8, 7, 28, 0.92) 100%
-        );
-
-    opacity: 0.95;
-}
-
-   .glow {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(90px);
-    opacity: 0.42;
-}
-
-.glow.one {
-    top: -120px;
-    left: -100px;
-    width: 430px;
-    height: 430px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(145, 91, 255, 0.70) 0%,
-            rgba(95, 55, 190, 0.35) 42%,
-            transparent 72%
-        );
-
-    opacity: 0.55;
-}
-
-.glow.two {
-    right: -140px;
-    bottom: -130px;
-    width: 500px;
-    height: 500px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(70, 105, 255, 0.55) 0%,
-            rgba(55, 65, 170, 0.25) 45%,
-            transparent 72%
-        );
-
-    opacity: 0.48;
-}
-
-.glow.three {
-    top: 4%;
-    left: 78%;
-
-    transform: translateX(-50%);
-
-    width: 360px;
-    height: 360px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 225, 170, 0.42) 0%,
-            rgba(255, 205, 150, 0.18) 38%,
-            transparent 72%
-        );
-
-    opacity: 0.65;
-    filter: blur(65px);
-   }
-   
-   /* =========================
-   MOONLIGHT
-========================= */
-
-.moon {
-    position: absolute;
-    top: 8%;
-    right: 12%;
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 32%,
-            #fffdf3 0%,
-            #f8f1d8 42%,
-            #ddd5b9 72%,
-            #b9b39f 100%
-        );
-
-    box-shadow:
-        0 0 18px rgba(255, 248, 220, 0.55),
-        0 0 45px rgba(220, 220, 245, 0.28),
-        0 0 90px rgba(190, 190, 240, 0.16);
-
-    opacity: 0.95;
-    animation: moonBreath 8s ease-in-out infinite;
-   }
-
-.moon-glow {
-    position: absolute;
-    inset: -35px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        rgba(255, 235, 190, 0.20) 0%,
-        rgba(255, 225, 180, 0.08) 40%,
-        transparent 72%
-    );
-
-    filter: blur(8px);
-}
-
-.moon-glow {
-    position: absolute;
-    inset: -35px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        rgba(255, 235, 190, 0.20) 0%,
-        rgba(255, 225, 180, 0.08) 40%,
-        transparent 72%
-    );
-
-    filter: blur(8px);
-}
-
-/* PASTE MOON-HAZE HERE */
-
-.moon-haze {
-    position: absolute;
-    top: 14%;
-    right: 5%;
-    width: 260px;
-    height: 120px;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        ellipse,
-        rgba(255, 235, 200, 0.07),
-        transparent 70%
-    );
-
-    filter: blur(25px);
-
-    transform: rotate(-12deg);
-
-    animation: hazeDrift 12s ease-in-out infinite;
-}
-
-@keyframes hazeDrift {
-
-    0%, 100% {
-        transform: translateX(0) rotate(-12deg);
-        opacity: 0.55;
-    }
-
-    50% {
-        transform: translateX(-25px) rotate(-8deg);
-        opacity: 0.85;
-    }
-}
-
-   /* =========================
+/* =========================================================
    STARS
-========================= */
+   ========================================================= */
 
 .stars {
     position: absolute;
-.stars {
-    position: absolute;
     inset: 0;
-    pointer-events: none;
     z-index: 1;
 }
 
-.stars span {
+.star {
     position: absolute;
     width: 2px;
     height: 2px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
-    animation: starTwinkle 4s ease-in-out infinite;
+    background: white;
+    box-shadow: 0 0 7px rgba(255,255,255,.7);
+    animation: twinkle var(--duration) ease-in-out infinite;
+    animation-delay: var(--delay);
 }
 
-/* Natural-looking scattered positions */
-
-.stars span:nth-child(1)  { top: 12%; left: 18%; animation-delay: 0s; }
-.stars span:nth-child(2)  { top: 21%; left: 36%; animation-delay: 1.2s; }
-.stars span:nth-child(3)  { top: 9%;  left: 54%; animation-delay: 2.4s; }
-.stars span:nth-child(4)  { top: 28%; left: 67%; animation-delay: 0.8s; }
-.stars span:nth-child(5)  { top: 16%; left: 78%; animation-delay: 3s; }
-.stars span:nth-child(6)  { top: 34%; left: 11%; animation-delay: 1.7s; }
-.stars span:nth-child(7)  { top: 39%; left: 27%; animation-delay: 2.8s; }
-.stars span:nth-child(8)  { top: 31%; left: 48%; animation-delay: 0.4s; }
-.stars span:nth-child(9)  { top: 42%; left: 61%; animation-delay: 1.9s; }
-.stars span:nth-child(10) { top: 24%; left: 88%; animation-delay: 3.4s; }
-.stars span:nth-child(11) { top: 52%; left: 16%; animation-delay: 2.1s; }
-.stars span:nth-child(12) { top: 47%; left: 39%; animation-delay: 0.9s; }
-.stars span:nth-child(13) { top: 55%; left: 73%; animation-delay: 2.7s; }
-.stars span:nth-child(14) { top: 61%; left: 84%; animation-delay: 1.4s; }
-.stars span:nth-child(15) { top: 67%; left: 31%; animation-delay: 3.2s; }
-
-/* Star positions */
-
-.stars span:nth-child(1) {
-    left: 12%;
-    top: 18%;
+.star.big {
+    width: 3px;
+    height: 3px;
 }
 
-.stars span:nth-child(2) {
-    left: 28%;
-    top: 12%;
-    animation-delay: 1s;
-}
-
-.stars span:nth-child(3) {
-    left: 40%;
-    top: 22%;
-    animation-delay: 2s;
-}
-
-.stars span:nth-child(4) {
-    left: 56%;
-    top: 13%;
-    animation-delay: 0.5s;
-}
-
-.stars span:nth-child(5) {
-    left: 68%;
-    top: 25%;
-    animation-delay: 1.7s;
-}
-
-.stars span:nth-child(6) {
-    left: 82%;
-    top: 17%;
-    animation-delay: 2.5s;
-}
-
-.stars span:nth-child(7) {
-    left: 91%;
-    top: 35%;
-    animation-delay: 1.2s;
-}
-
-.stars span:nth-child(8) {
-    left: 17%;
-    top: 42%;
-    animation-delay: 2.2s;
-}
-
-.stars span:nth-child(9) {
-    left: 34%;
-    top: 37%;
-    animation-delay: 0.8s;
-}
-
-.stars span:nth-child(10) {
-    left: 72%;
-    top: 43%;
-    animation-delay: 1.5s;
-}
-
-.stars span:nth-child(11) {
-    left: 87%;
-    top: 51%;
-    animation-delay: 2.8s;
-}
-
-.stars span:nth-child(12) {
-    left: 8%;
-    top: 62%;
-    animation-delay: 1.9s;
-}
-
-.stars span:nth-child(13) {
-    left: 46%;
-    top: 61%;
-    animation-delay: 0.3s;
-}
-
-.stars span:nth-child(14) {
-    left: 77%;
-    top: 68%;
-    animation-delay: 2.1s;
-}
-
-.stars span:nth-child(15) {
-    left: 23%;
-    top: 78%;
-    animation-delay: 1.1s;
-}
-
-@keyframes starTwinkle {
-
+@keyframes twinkle {
     0%, 100% {
-        opacity: 0.2;
-        transform: scale(0.8);
+        opacity: .25;
+        transform: scale(.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+/* =========================================================
+   MOON
+   ========================================================= */
+
+.moon {
+    position: absolute;
+    top: 8%;
+    right: 11%;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    z-index: 3;
+
+    background:
+        radial-gradient(
+            circle at 35% 32%,
+            #fffef5 0%,
+            #f8f0d2 45%,
+            #d8d1b7 78%,
+            #aaa692 100%
+        );
+
+    box-shadow:
+        0 0 20px rgba(255,248,220,.7),
+        0 0 55px rgba(230,225,255,.35),
+        0 0 110px rgba(190,190,240,.18);
+
+    animation: moonGlow 8s ease-in-out infinite;
+}
+
+.moon::before,
+.moon::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(150,145,125,.12);
+}
+
+.moon::before {
+    width: 17px;
+    height: 11px;
+    left: 20px;
+    top: 24px;
+}
+
+.moon::after {
+    width: 12px;
+    height: 16px;
+    right: 19px;
+    bottom: 21px;
+}
+
+.moon-haze {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255,245,215,.14),
+        rgba(220,220,250,.05) 35%,
+        transparent 70%
+    );
+    z-index: 2;
+    animation: haze 9s ease-in-out infinite alternate;
+}
+
+@keyframes moonGlow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 20px rgba(255,248,220,.65),
+            0 0 55px rgba(230,225,255,.3),
+            0 0 110px rgba(190,190,240,.15);
     }
 
     50% {
-        opacity: 0.9;
-        transform: scale(1.5);
+        transform: scale(1.025);
+        box-shadow:
+            0 0 25px rgba(255,248,220,.8),
+            0 0 70px rgba(230,225,255,.4),
+            0 0 130px rgba(190,190,240,.2);
     }
-   }
+}
 
-/* =========================
-   ETHEREAL CLOUDS
-========================= */
+@keyframes haze {
+    from {
+        transform: translate(0,0) scale(1);
+        opacity: .65;
+    }
+    to {
+        transform: translate(-18px,8px) scale(1.08);
+        opacity: 1;
+    }
+}
 
-.clouds {
+/* =========================================================
+   CLOUDS / MIST
+   ========================================================= */
+
+.cloud-layer {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    z-index: 1;
     overflow: hidden;
-    opacity: 0.42;
-}
-
-.clouds span {
-    position: absolute;
-    display: block;
-    height: 90px;
-    width: 380px;
-    border-radius: 50%;
-    background: rgba(120, 125, 175, 0.08);
-    filter: blur(28px);
-    animation: cloudDrift 35s linear infinite;
-}
-
-.clouds span:nth-child(1) {
-    top: 24%;
-    left: -15%;
-    width: 430px;
-    animation-duration: 42s;
-}
-
-.clouds span:nth-child(2) {
-    top: 43%;
-    left: 35%;
-    width: 520px;
-    height: 110px;
-    animation-duration: 55s;
-    animation-delay: -18s;
-}
-
-.clouds span:nth-child(3) {
-    top: 58%;
-    left: 72%;
-    width: 420px;
-    height: 100px;
-    animation-duration: 48s;
-    animation-delay: -30s;
+    z-index: 4;
+    pointer-events: none;
 }
 
 .cloud {
     position: absolute;
+    width: 430px;
+    height: 85px;
     border-radius: 50%;
-    filter: blur(28px);
-    opacity: 0.28;
+    background: rgba(150,155,190,.07);
+    filter: blur(25px);
+    animation: cloudMove linear infinite;
 }
 
-.cloud-one {
-    width: 420px;
-    height: 150px;
-    top: 10%;
-    right: -80px;
-
-    background: radial-gradient(
-        ellipse,
-        rgba(180, 155, 205, 0.18),
-        transparent 70%
-    );
-
-    animation: cloudDriftOne 18s ease-in-out infinite;
-}
-
-.cloud-two {
-    width: 520px;
-    height: 180px;
+.cloud:nth-child(1) {
     top: 27%;
-    left: -180px;
-
-    background: radial-gradient(
-        ellipse,
-        rgba(125, 105, 170, 0.16),
-        transparent 70%
-    );
-
-    animation: cloudDriftTwo 24s ease-in-out infinite;
+    left: -20%;
+    animation-duration: 55s;
 }
 
-.cloud-three {
-    width: 380px;
-    height: 130px;
-    top: 42%;
-    right: 5%;
-
-    background: radial-gradient(
-        ellipse,
-        rgba(210, 170, 200, 0.10),
-        transparent 70%
-    );
-
-    animation: cloudDriftThree 21s ease-in-out infinite;
+.cloud:nth-child(2) {
+    top: 43%;
+    left: 35%;
+    width: 550px;
+    height: 110px;
+    animation-duration: 70s;
+    animation-delay: -30s;
 }
 
-@keyframes cloudDriftOne {
+.cloud:nth-child(3) {
+    top: 57%;
+    left: 70%;
+    width: 480px;
+    animation-duration: 62s;
+    animation-delay: -18s;
+}
 
-    0%, 100% {
-        transform: translateX(0) translateY(0);
+@keyframes cloudMove {
+    from {
+        transform: translateX(-10%);
     }
 
-    50% {
-        transform: translateX(-45px) translateY(8px);
+    to {
+        transform: translateX(125vw);
     }
 }
 
-@keyframes cloudDriftTwo {
+/* =========================================================
+   MOUNTAINS
+   ========================================================= */
 
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(55px);
-    }
-}
-
-@keyframes cloudDriftThree {
-
-    0%, 100% {
-        transform: translateX(0) translateY(0);
-    }
-
-    50% {
-        transform: translateX(-30px) translateY(-8px);
-    }
-       }
-   
-@keyframes moonBreath {
-
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.82;
-    }
-
-    50% {
-        transform: scale(1.035);
-        opacity: 0.96;
-    }
-   }
-   
-/* =========================
-   FLOATING LIGHTS
-========================= */
-
-.light {
+.mountains {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    left: -5%;
+    right: -5%;
+    bottom: 25%;
+    height: 34%;
+    z-index: 5;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 300px solid rgba(8,9,23,.9);
+}
+
+.mountain:nth-child(1) {
+    left: -5%;
+    border-left-width: 240px;
+    border-right-width: 240px;
+    border-bottom-width: 260px;
+}
+
+.mountain:nth-child(2) {
+    left: 18%;
+    border-left-width: 260px;
+    border-right-width: 260px;
+    border-bottom-width: 340px;
+}
+
+.mountain:nth-child(3) {
+    left: 45%;
+    border-left-width: 230px;
+    border-right-width: 230px;
+    border-bottom-width: 285px;
+}
+
+.mountain:nth-child(4) {
+    right: -4%;
+    border-left-width: 280px;
+    border-right-width: 280px;
+    border-bottom-width: 330px;
+}
+
+.mountain-back {
+    opacity: .45;
+    transform: translateY(18px);
+    filter: blur(2px);
+}
+
+/* =========================================================
+   RIVER
+   ========================================================= */
+
+.river {
+    position: absolute;
+    left: -10%;
+    bottom: -5%;
+    width: 120%;
+    height: 47%;
+    z-index: 6;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            170deg,
+            rgba(17,20,52,.2),
+            rgba(28,31,79,.72) 45%,
+            rgba(7,9,25,.96)
+        );
+
+    clip-path: polygon(
+        38% 0%,
+        59% 0%,
+        64% 15%,
+        58% 30%,
+        67% 45%,
+        57% 60%,
+        64% 76%,
+        53% 100%,
+        22% 100%,
+        34% 78%,
+        28% 61%,
+        39% 45%,
+        32% 30%,
+        42% 14%
+    );
+}
+
+.water-line {
+    position: absolute;
+    height: 2px;
     border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
-    opacity: 0.5;
-    animation: floatLight linear infinite;
+    background: rgba(170,185,235,.18);
+    filter: blur(.5px);
+    animation: waterMove 5s ease-in-out infinite;
 }
 
-.light:nth-child(4) {
-    left: 10%;
-    top: 20%;
-    animation-duration: 8s;
-}
-
-.light:nth-child(5) {
-    left: 25%;
-    top: 70%;
-    animation-duration: 11s;
-}
-
-.light:nth-child(6) {
-    left: 42%;
-    top: 30%;
-    animation-duration: 9s;
-}
-
-.light:nth-child(7) {
-    left: 63%;
-    top: 75%;
-    animation-duration: 13s;
-}
-
-.light:nth-child(8) {
-    left: 78%;
+.water-line:nth-child(1) {
+    width: 210px;
     top: 22%;
-    animation-duration: 10s;
+    left: 42%;
 }
 
-.light:nth-child(9) {
-    left: 90%;
-    top: 55%;
-    animation-duration: 12s;
+.water-line:nth-child(2) {
+    width: 280px;
+    top: 34%;
+    left: 35%;
+    animation-delay: -1s;
 }
 
-@keyframes floatLight {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.15;
+.water-line:nth-child(3) {
+    width: 350px;
+    top: 49%;
+    left: 30%;
+    animation-delay: -2s;
+}
+
+.water-line:nth-child(4) {
+    width: 420px;
+    top: 66%;
+    left: 24%;
+    animation-delay: -3s;
+}
+
+.water-line:nth-child(5) {
+    width: 520px;
+    top: 82%;
+    left: 17%;
+    animation-delay: -4s;
+}
+
+@keyframes waterMove {
+    0%, 100% {
+        transform: translateX(-12px);
+        opacity: .25;
     }
 
     50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(-80px) scale(1.5);
-        opacity: 0;
+        transform: translateX(12px);
+        opacity: .65;
     }
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+/* =========================================================
+   MOON REFLECTION
+   ========================================================= */
 
-.container {
+.moon-reflection {
+    position: absolute;
+    top: 5%;
+    left: 45%;
+    width: 90px;
+    height: 72%;
+    z-index: 7;
+    opacity: .55;
+    transform: rotate(5deg);
+
+    background:
+        repeating-linear-gradient(
+            180deg,
+            rgba(255,244,195,.48) 0 3px,
+            transparent 3px 10px
+        );
+
+    filter: blur(3px);
+    animation: reflectionMove 4s ease-in-out infinite;
+}
+
+@keyframes reflectionMove {
+    0%, 100% {
+        transform: rotate(5deg) scaleX(.85);
+        opacity: .35;
+    }
+
+    50% {
+        transform: rotate(5deg) scaleX(1.15);
+        opacity: .65;
+    }
+}
+
+/* =========================================================
+   FOREGROUND LAND
+   ========================================================= */
+
+.foreground {
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: 0;
+    height: 24%;
+    z-index: 8;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(12,13,32,.4),
+            transparent 55%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(3,4,12,.4),
+            #020208 65%
+        );
+
+    clip-path: polygon(
+        0 40%,
+        8% 32%,
+        17% 42%,
+        25% 27%,
+        35% 40%,
+        44% 30%,
+        54% 43%,
+        63% 28%,
+        73% 40%,
+        82% 25%,
+        92% 38%,
+        100% 28%,
+        100% 100%,
+        0 100%
+    );
+}
+
+/* =========================================================
+   TREES
+   ========================================================= */
+
+.tree {
+    position: absolute;
+    bottom: 11%;
+    width: 0;
+    height: 0;
+    z-index: 9;
+
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 120px solid #02030a;
+}
+
+.tree::after {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 35px;
+    border-left: 27px solid transparent;
+    border-right: 27px solid transparent;
+    border-bottom: 90px solid #02030a;
+}
+
+.tree.t1 {
+    left: 5%;
+    transform: scale(1.25);
+}
+
+.tree.t2 {
+    left: 16%;
+    transform: scale(.75);
+}
+
+.tree.t3 {
+    right: 10%;
+    transform: scale(1.35);
+}
+
+.tree.t4 {
+    right: 20%;
+    transform: scale(.75);
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.page {
     position: relative;
-    z-index: 2;
     min-height: 100vh;
+    z-index: 20;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 35px 20px;
+    padding: 45px 20px;
 }
 
-/* =========================
-   OPENING SCREEN
-========================= */
-
-.welcome {
-    width: 100%;
-    max-width: 700px;
+.container {
+    width: min(920px, 100%);
     text-align: center;
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
 }
 
-.welcome.hide {
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+#welcome {
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+#welcome.hide {
     opacity: 0;
-    transform: scale(0.92) translateY(-30px);
+    transform: translateY(-25px);
     pointer-events: none;
 }
 
 .eyebrow {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 5px;
+    font-size: .72rem;
+    letter-spacing: .38em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 18px;
+    color: rgba(255,255,255,.55);
+    margin-bottom: 22px;
 }
 
 .title {
-    font-size: clamp(40px, 11vw, 76px);
+    font-size: clamp(3rem, 9vw, 6.8rem);
     font-weight: normal;
-    letter-spacing: 1px;
-    line-height: 1;
-    margin-bottom: 15px;
-    text-shadow: 0 0 35px rgba(255,255,255,0.15);
+    letter-spacing: .035em;
+    line-height: .95;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,.14),
+        0 8px 35px rgba(0,0,0,.7);
 }
 
 .subtitle {
-    font-size: clamp(17px, 4.5vw, 23px);
-    font-style: italic;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 55px;
+    margin-top: 20px;
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
+    color: rgba(255,255,255,.72);
+    letter-spacing: .08em;
 }
 
-/* =========================
+.small-line {
+    margin-top: 12px;
+    font-style: italic;
+    color: rgba(255,255,255,.48);
+}
+
+/* =========================================================
    GIFT BOX
-========================= */
+   ========================================================= */
 
 .gift-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 230px;
-    perspective: 800px;
+    position: relative;
+    width: 220px;
+    height: 210px;
+    margin: 48px auto 30px;
+    cursor: pointer;
+    filter:
+        drop-shadow(0 25px 35px rgba(0,0,0,.55));
+}
+
+.gift-glow {
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    background: rgba(255,205,135,.15);
+    filter: blur(30px);
+    animation: giftGlow 3s ease-in-out infinite;
+}
+
+@keyframes giftGlow {
+    0%,100% {
+        transform: scale(.9);
+        opacity: .45;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: .9;
+    }
 }
 
 .gift {
-    position: relative;
-    width: 150px;
-    height: 145px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.3s ease;
-    animation: giftFloat 3.5s ease-in-out infinite;
-}
-
-.gift:hover {
-    transform: scale(1.05);
-}
-
-@keyframes giftFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-9px);
-    }
-}
-
-/* BOX BODY */
-
-.box-body {
     position: absolute;
-    left: 5px;
-    bottom: 0;
-    width: 140px;
+    width: 150px;
+    height: 115px;
+    left: 35px;
+    bottom: 15px;
+}
+
+.gift-body {
+    position: absolute;
+    width: 150px;
     height: 105px;
-    border-radius: 4px 4px 12px 12px;
+    bottom: 0;
+    border-radius: 5px 5px 12px 12px;
 
     background:
         linear-gradient(
             90deg,
-            #5b183f 0%,
-            #8d2960 42%,
-            #721c4d 100%
+            #6f1d3e,
+            #a63d5e 50%,
+            #641934
         );
 
     box-shadow:
-        0 22px 45px rgba(0,0,0,0.55),
-        inset 0 0 20px rgba(255,255,255,0.08);
+        inset 0 0 20px rgba(255,255,255,.08);
 }
 
-/* LID */
-
-.box-lid {
+.gift-body::after {
+    content: "";
     position: absolute;
-    left: 0;
-    top: 30px;
-    width: 150px;
-    height: 35px;
-    border-radius: 5px;
+    left: 66px;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    background: rgba(248,210,150,.75);
+}
+
+.gift-lid {
+    position: absolute;
+    width: 166px;
+    height: 31px;
+    left: -8px;
+    top: -15px;
+    border-radius: 7px;
 
     background:
         linear-gradient(
             90deg,
-            #6e1d4c,
-            #a93370,
-            #7c2054
+            #812344,
+            #b94768 50%,
+            #76203f
         );
 
-    box-shadow:
-        0 8px 18px rgba(0,0,0,0.35);
-
-    transform-origin: left bottom;
+    z-index: 3;
+    transform-origin: left center;
     transition:
-        transform 1s cubic-bezier(.2,.8,.2,1),
-        top 1s cubic-bezier(.2,.8,.2,1);
-    z-index: 5;
+        transform 1.1s cubic-bezier(.2,.8,.2,1),
+        opacity .6s ease;
 }
 
-/* RIBBONS */
+.gift-lid::after {
+    content: "";
+    position: absolute;
+    left: 73px;
+    top: 0;
+    width: 18px;
+    height: 100%;
+    background: rgba(248,210,150,.82);
+}
 
 .ribbon-vertical {
     position: absolute;
-    left: 58px;
-    top: 0;
-    width: 24px;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        #d9a441,
-        #f5d477,
-        #c89531
-    );
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
+    width: 20px;
+    height: 115px;
+    left: 65px;
+    bottom: 0;
+    background: rgba(248,210,150,.78);
+    z-index: 2;
 }
-
-.ribbon-horizontal {
-    position: absolute;
-    left: 0;
-    top: 35px;
-    width: 100%;
-    height: 20px;
-    background: linear-gradient(
-        90deg,
-        #d9a441,
-        #f5d477,
-        #c89531
-    );
-}
-
-/* BOW */
 
 .bow {
     position: absolute;
-    top: 5px;
     left: 50%;
-    width: 70px;
-    height: 45px;
+    top: -43px;
+    width: 65px;
+    height: 35px;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 5;
 }
 
-.bow span {
-    position: absolute;
-    width: 38px;
-    height: 28px;
-    border: 4px solid #e3b74f;
-    background: linear-gradient(
-        135deg,
-        #f3d16b,
-        #b98525
-    );
-}
-
-.bow span:first-child {
-    left: 0;
-    top: 5px;
-    border-radius: 70% 20% 70% 20%;
-    transform: rotate(20deg);
-}
-
-.bow span:last-child {
-    right: 0;
-    top: 5px;
-    border-radius: 20% 70% 20% 70%;
-    transform: rotate(-20deg);
-}
-
+.bow::before,
 .bow::after {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 14px;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    transform: translateX(-50%);
-    background: #f1cd63;
-    box-shadow: 0 0 10px rgba(255,215,100,0.35);
+    width: 38px;
+    height: 25px;
+    top: 4px;
+    border: 7px solid #e4bb75;
 }
 
-/* OPEN ANIMATION */
+.bow::before {
+    right: 27px;
+    border-radius: 50% 20% 50% 50%;
+    transform: rotate(18deg);
+}
 
-.gift.opening .box-lid {
-    transform:
-        translateY(-42px)
-        rotateX(-35deg)
-        rotateZ(-4deg);
-    top: 20px;
+.bow::after {
+    left: 27px;
+    border-radius: 20% 50% 50% 50%;
+    transform: rotate(-18deg);
+}
+
+.gift.opening .gift-lid {
+    transform: translate(-35px,-55px) rotate(-16deg);
 }
 
 .gift.opening {
-    animation: none;
-    transform: translateY(10px) scale(1.04);
+    animation: giftOpen .9s ease forwards;
 }
 
-/* =========================
+@keyframes giftOpen {
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
    OPEN BUTTON
-========================= */
+   ========================================================= */
 
 .open-button {
-    margin-top: 35px;
-    padding: 14px 28px;
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50px;
-
-    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,.28);
+    background: rgba(255,255,255,.07);
     color: white;
-
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: .75rem;
+    letter-spacing: .2em;
     cursor: pointer;
-
-    backdrop-filter: blur(10px);
-
+    backdrop-filter: blur(12px);
     transition:
-        background 0.3s ease,
-        transform 0.3s ease,
-        border-color 0.3s ease;
+        background .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
 .open-button:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.5);
-    transform: translateY(-2px);
+    background: rgba(255,255,255,.14);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(0,0,0,.3);
 }
 
-/* =========================
-   GIFT CONTENT
-========================= */
+/* =========================================================
+   CONTENT WORLD
+   ========================================================= */
 
 .gift-content {
-    position: absolute;
-    inset: 0;
-
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    max-width: 850px;
-
     opacity: 0;
-    transform: translateY(30px);
-
+    transform: translateY(25px);
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 .gift-content.show {
-    display: flex;
+    display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* =========================
-   INNER HEADER
-========================= */
-
-.inner-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.inner-small {
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 12px;
-}
-
-.inner-title {
-    font-size: clamp(32px, 8vw, 55px);
+.content-heading {
+    font-size: clamp(2rem, 6vw, 4rem);
     font-weight: normal;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-.inner-subtitle {
-    font-size: 15px;
+.content-subheading {
+    color: rgba(255,255,255,.55);
     font-style: italic;
-    color: rgba(255,255,255,0.6);
+    margin-bottom: 35px;
 }
 
-/* =========================
-   MENU GRID
-========================= */
+/* =========================================================
+   MENU
+   ========================================================= */
 
-.menu {
-    width: 100%;
+.menu-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 13px;
-    padding: 0 5px;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 15px;
 }
 
 .menu-card {
     position: relative;
-    min-height: 115px;
-    padding: 22px 17px;
+    padding: 25px 20px;
+    min-height: 150px;
 
-    border: 1px solid rgba(255,255,255,0.11);
-    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
     backdrop-filter: blur(15px);
 
     cursor: pointer;
 
     transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease;
+        transform .35s ease,
+        background .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
 }
 
 .menu-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.25);
+    transform: translateY(-6px);
+    background: rgba(255,255,255,.105);
+    border-color: rgba(255,255,255,.22);
+    box-shadow: 0 18px 45px rgba(0,0,0,.28);
 }
 
-.card-icon {
-    font-size: 25px;
+.menu-icon {
+    font-size: 2rem;
     margin-bottom: 12px;
 }
 
-.card-title {
-    font-size: 16px;
-    margin-bottom: 6px;
+.menu-title {
+    font-size: 1.05rem;
+    margin-bottom: 7px;
 }
 
-.card-description {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
+.menu-description {
+    color: rgba(255,255,255,.5);
+    font-size: .82rem;
     line-height: 1.5;
-    color: rgba(255,255,255,0.48);
+    max-width: 300px;
 }
 
-/* =========================
-   MODAL
-========================= */
+/* =========================================================
+   ROOMS
+   ========================================================= */
 
-.modal {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 25px;
-
-    background: rgba(3,3,9,0.75);
-    backdrop-filter: blur(12px);
-
-    opacity: 0;
-    pointer-events: none;
-
-    transition: opacity 0.35s ease;
-
-    z-index: 20;
+.room {
+    display: none;
+    animation: roomIn .7s ease forwards;
 }
 
-.modal.show {
-    opacity: 1;
-    pointer-events: auto;
+.room.active {
+    display: block;
 }
 
-.modal-box {
-    width: 100%;
-    max-width: 480px;
+@keyframes roomIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
 
-    padding: 35px 25px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,0.15);
+.room-box {
+    width: min(760px, 100%);
+    margin: auto;
+    padding: clamp(28px, 6vw, 55px);
+
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(30,20,38,0.97),
-            rgba(11,11,22,0.97)
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
         );
 
-    text-align: center;
-
-    transform: scale(0.92);
-    transition: transform 0.35s ease;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 70px rgba(0,0,0,.3);
 }
 
-.modal.show .modal-box {
-    transform: scale(1);
+.room-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
-.modal-icon {
-    font-size: 42px;
-    margin-bottom: 18px;
-}
-
-.modal-title {
-    font-size: 25px;
+.room-title {
+    font-size: clamp(2rem,5vw,3.4rem);
     font-weight: normal;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
-.modal-text {
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.62);
+.room-text {
+    color: rgba(255,255,255,.72);
+    line-height: 1.9;
+    font-size: 1rem;
 }
-
-.close-button {
-    margin-top: 25px;
-
-    padding: 10px 22px;
-
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.2);
-
-    background: transparent;
-    color: white;
-
-    cursor: pointer;
-}
-
-/* =========================
-   BACK BUTTON
-========================= */
 
 .back-button {
-    margin-top: 25px;
-
+    margin-top: 30px;
+    border: 1px solid rgba(255,255,255,.18);
     background: transparent;
-    border: none;
-
-    color: rgba(255,255,255,0.45);
-
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    letter-spacing: 1px;
-
+    color: rgba(255,255,255,.7);
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-family: inherit;
     cursor: pointer;
-
-    transition: color 0.3s ease;
 }
 
-.back-button:hover {
-    color: white;
+/* =========================================================
+   FINAL ROOM
+   ========================================================= */
+
+.final-room .room-box {
+    padding-top: 65px;
+    padding-bottom: 65px;
 }
 
-/* =========================
+.final-heart {
+    font-size: 3rem;
+    animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+/* =========================================================
    RESPONSIVE
-========================= */
+   ========================================================= */
 
-@media (max-width: 520px) {
+@media (max-width: 700px) {
 
-    .container {
-        padding: 25px 16px;
+    .page {
+        padding: 35px 14px;
     }
 
-    .subtitle {
-        margin-bottom: 35px;
+    .moon {
+        width: 65px;
+        height: 65px;
+        right: 8%;
+        top: 7%;
     }
 
-    .gift-wrapper {
-        height: 205px;
+    .moon-haze {
+        width: 220px;
+        height: 220px;
+        right: -20px;
     }
 
-    .menu {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
-    .menu-card {
-        min-height: 125px;
-        padding: 18px 14px;
-    }
-
-    .card-title {
-        font-size: 14px;
-    }
-
-    .card-description {
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 350px) {
-
-    .menu {
+    .menu-grid {
         grid-template-columns: 1fr;
     }
 
     .menu-card {
-        min-height: auto;
+        min-height: 125px;
+    }
+
+    .gift-wrapper {
+        transform: scale(.88);
+        margin-top: 35px;
+    }
+
+    .river {
+        height: 43%;
     }
 }
 
+@media (max-width: 420px) {
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .eyebrow {
+        letter-spacing: .25em;
+    }
+
+    .room-box {
+        padding: 28px 20px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     BACKGROUND
-========================= -->
+<!-- =======================================================
+     NIGHT WORLD
+     ======================================================= -->
 
-<div class="background">
+<div class="night-world">
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-    <div class="glow three"></div>
+    <div class="atmosphere"></div>
 
-   <div class="moon">
-    <div class="moon-glow"></div>
-   </div>
-   
-   <div class="moon-haze"></div>
+    <div class="stars" id="stars"></div>
 
-<div class="stars">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
+    <div class="moon"></div>
+    <div class="moon-haze"></div>
 
-<div class="clouds">
-    <span class="cloud cloud-one"></span>
-    <span class="cloud cloud-two"></span>
-    <span class="cloud cloud-three"></span>
-</div>
-   
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
+    <div class="cloud-layer">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+
+    <div class="mountains">
+        <div class="mountain mountain-back"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+    </div>
+
+    <div class="river">
+        <div class="moon-reflection"></div>
+
+        <div class="water-line"></div>
+        <div class="water-line"></div>
+        <div class="water-line"></div>
+        <div class="water-line"></div>
+        <div class="water-line"></div>
+    </div>
+
+    <div class="foreground"></div>
+
+    <div class="tree t1"></div>
+    <div class="tree t2"></div>
+    <div class="tree t3"></div>
+    <div class="tree t4"></div>
 
 </div>
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- =======================================================
+     MAIN PAGE
+     ======================================================= -->
 
+<main class="page">
 <div class="container">
 
-    <!-- WELCOME SCREEN -->
+    <!-- WELCOME -->
 
-    <section class="welcome" id="welcome">
+    <section id="welcome">
 
         <div class="eyebrow">
-            A little something
+            A little world made for you
         </div>
 
         <h1 class="title">
@@ -1335,29 +1131,28 @@ body {
             For Kunjii Kuttyy
         </p>
 
+        <p class="small-line">
+            A little something.
+        </p>
 
-        <div class="gift-wrapper">
 
-            <div class="gift" id="gift" onclick="openBox()">
+        <div class="gift-wrapper" onclick="openBox()">
 
-                <div class="box-lid"></div>
+            <div class="gift-glow"></div>
 
-                <div class="box-body">
+            <div class="gift" id="gift">
 
-                    <div class="ribbon-vertical"></div>
-                    <div class="ribbon-horizontal"></div>
+                <div class="bow"></div>
 
-                </div>
+                <div class="gift-lid"></div>
 
-                <div class="bow">
-                    <span></span>
-                    <span></span>
-                </div>
+                <div class="gift-body"></div>
+
+                <div class="ribbon-vertical"></div>
 
             </div>
 
         </div>
-
 
         <button class="open-button" onclick="openBox()">
             OPEN THE SAMMANAM
@@ -1366,216 +1161,713 @@ body {
     </section>
 
 
-    <!-- =========================
-         INNER CONTENT
-    ========================= -->
+    <!-- ===================================================
+         GIFT CONTENT
+         =================================================== -->
 
-    <section class="gift-content" id="giftContent">
+    <section
+        class="gift-content"
+        id="giftContent"
+    >
 
-        <div class="inner-header">
+        <div id="menu">
 
-            <div class="inner-small">
-                Made just for you
-            </div>
-
-            <h2 class="inner-title">
-                A little collection
+            <h2 class="content-heading">
+                A Little World
             </h2>
 
-            <p class="inner-subtitle">
+            <p class="content-subheading">
                 Take your time. There's no hurry here.
             </p>
 
+
+            <div class="menu-grid">
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('letter')"
+                >
+                    <div class="menu-icon">💌</div>
+
+                    <div class="menu-title">
+                        A Letter for You
+                    </div>
+
+                    <div class="menu-description">
+                        Some words I wanted you to have.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('memories')"
+                >
+                    <div class="menu-icon">📖</div>
+
+                    <div class="menu-title">
+                        The Things You Don't Remember
+                    </div>
+
+                    <div class="menu-description">
+                        Little moments that stayed with me.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('girl')"
+                >
+                    <div class="menu-icon">🌱</div>
+
+                    <div class="menu-title">
+                        The Girl I See
+                    </div>
+
+                    <div class="menu-description">
+                        The things you may not always see in yourself.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('voice')"
+                >
+                    <div class="menu-icon">🎙️</div>
+
+                    <div class="menu-title">
+                        Listen to This
+                    </div>
+
+                    <div class="menu-description">
+                        Some things sound different when spoken.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('words')"
+                >
+                    <div class="menu-icon">✍️</div>
+
+                    <div class="menu-title">
+                        Words I Couldn't Say
+                    </div>
+
+                    <div class="menu-description">
+                        A few pieces of my heart on paper.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('behind')"
+                >
+                    <div class="menu-icon">🎥</div>
+
+                    <div class="menu-title">
+                        Behind the Box
+                    </div>
+
+                    <div class="menu-description">
+                        The little journey behind this little world.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('photos')"
+                >
+                    <div class="menu-icon">📸</div>
+
+                    <div class="menu-title">
+                        Little Things
+                    </div>
+
+                    <div class="menu-description">
+                        Moments worth keeping.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('secret')"
+                >
+                    <div class="menu-icon">🗝️</div>
+
+                    <div class="menu-title">
+                        A Little Secret
+                    </div>
+
+                    <div class="menu-description">
+                        There's something hidden here.
+                    </div>
+                </div>
+
+
+                <div
+                    class="menu-card"
+                    onclick="openRoom('final')"
+                >
+                    <div class="menu-icon">❤️</div>
+
+                    <div class="menu-title">
+                        Open Last
+                    </div>
+
+                    <div class="menu-description">
+                        Some things are better saved for the end.
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
 
-        <div class="menu">
+        <!-- =================================================
+             LETTER
+             ================================================= -->
 
-            <div class="menu-card"
-                 onclick="openModal(
-                    '💌',
-                    'A Letter for You',
-                    'Some words I wanted you to have, exactly as they are.'
-                 )">
+        <div
+            class="room"
+            id="room-letter"
+        >
 
-                <div class="card-icon">💌</div>
+            <div class="room-box">
 
-                <div class="card-title">
+                <div class="room-icon">💌</div>
+
+                <h2 class="room-title">
                     A Letter for You
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        This space will hold the letter I want
+                        you to read when the time is right.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Not a letter asking you for anything.
+                        Just a place where I can tell you
+                        what you mean to me.
+                    </p>
+
                 </div>
 
-                <div class="card-description">
-                    Something written from the heart.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '📖',
-                    'The Things You Don’t Remember',
-                    'Little moments, tiny details, and memories that stayed with me.'
-                 )">
-
-                <div class="card-icon">📖</div>
-
-                <div class="card-title">
-                    The Things You Don't Remember
-                </div>
-
-                <div class="card-description">
-                    Moments that meant more than you knew.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '🌱',
-                    'The Girl I See',
-                    'A little collection of the things I admire about you.'
-                 )">
-
-                <div class="card-icon">🌱</div>
-
-                <div class="card-title">
-                    The Girl I See
-                </div>
-
-                <div class="card-description">
-                    Things I notice. Things I admire.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '🎙️',
-                    'Listen to This',
-                    'Some things sound different when they are spoken instead of written.'
-                 )">
-
-                <div class="card-icon">🎙️</div>
-
-                <div class="card-title">
-                    Listen to This
-                </div>
-
-                <div class="card-description">
-                    A few things meant to be heard.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '✍️',
-                    'Words I Couldn’t Say',
-                    'Thoughts that found their way onto paper before they found their way into words.'
-                 )">
-
-                <div class="card-icon">✍️</div>
-
-                <div class="card-title">
-                    Words I Couldn't Say
-                </div>
-
-                <div class="card-description">
-                    Poems, thoughts and unfinished sentences.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '🎥',
-                    'A Little Something',
-                    'A few moments from the journey of making this little place.'
-                 )">
-
-                <div class="card-icon">🎥</div>
-
-                <div class="card-title">
-                    A Little Something
-                </div>
-
-                <div class="card-description">
-                    A glimpse behind the scenes.
-                </div>
-
-            </div>
-
-
-            <div class="menu-card"
-                 onclick="openModal(
-                    '❤️',
-                    'Open Last',
-                    'Some things are better saved until everything else has been seen.'
-                 )">
-
-                <div class="card-icon">❤️</div>
-
-                <div class="card-title">
-                    Open Last
-                </div>
-
-                <div class="card-description">
-                    The final little surprise.
-                </div>
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
 
             </div>
 
         </div>
 
 
-        <button class="back-button" onclick="goBack()">
-            ← BACK TO THE BOX
-        </button>
+        <!-- =================================================
+             MEMORIES
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-memories"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">📖</div>
+
+                <h2 class="room-title">
+                    The Things You Don't Remember
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        Some memories don't need to be grand.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Sometimes it's a tiny expression,
+                        a sentence, a moment, a song,
+                        or something you probably forgot
+                        five minutes later.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        I'll put those little things here.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             THE GIRL I SEE
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-girl"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">🌱</div>
+
+                <h2 class="room-title">
+                    The Girl I See
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        There may be things about yourself
+                        that you struggle to love.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        This room isn't here to tell you
+                        that you have to be perfect.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        It's here to remind you that your
+                        worth was never dependent on perfection.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        I'll fill this place with the little
+                        things I genuinely admire about you.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             VOICE
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-voice"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">🎙️</div>
+
+                <h2 class="room-title">
+                    Listen to This
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        There are some things I'd rather
+                        say than type.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Voice recordings will live here.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Just little pieces of a real voice,
+                        saved for you.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             WORDS
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-words"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">✍️</div>
+
+                <h2 class="room-title">
+                    Words I Couldn't Say
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        Poems.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Thoughts.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Things that somehow became easier
+                        to write than to say.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             BEHIND THE BOX
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-behind"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">🎥</div>
+
+                <h2 class="room-title">
+                    Behind the Box
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        Before you saw this little world,
+                        there was just an empty file.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        This room will show the journey
+                        of turning that empty file into
+                        something made especially for you.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        The mistakes, the experiments,
+                        the tiny victories and everything
+                        in between.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PHOTOS
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-photos"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">📸</div>
+
+                <h2 class="room-title">
+                    Little Things
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        A collection of photographs,
+                        screenshots and little moments
+                        worth keeping.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        This room will become a visual
+                        memory box.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SECRET
+             ================================================= -->
+
+        <div
+            class="room"
+            id="room-secret"
+        >
+
+            <div class="room-box">
+
+                <div class="room-icon">🗝️</div>
+
+                <h2 class="room-title">
+                    A Little Secret
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        You found it.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        But I'm not telling you yet
+                        what belongs here.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Some surprises deserve to stay
+                        surprises until the very end.
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FINAL
+             ================================================= -->
+
+        <div
+            class="room final-room"
+            id="room-final"
+        >
+
+            <div class="room-box">
+
+                <div class="final-heart">
+                    ❤️
+                </div>
+
+                <h2 class="room-title">
+                    Open Last
+                </h2>
+
+                <div class="room-text">
+
+                    <p>
+                        If you've reached here,
+                        you've seen almost everything.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        And there's only one thing
+                        I really wanted this little world
+                        to leave with you.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        You are worthy of beautiful things.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Not because someone chose you.
+                        Not because someone loves you.
+                        Not because you became perfect.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Simply because you are you.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        And I hope, on the days when
+                        you find yourself difficult to love,
+                        you remember that you deserve
+                        the same kindness you give
+                        to everyone else.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        — With love,
+                        <br>
+                        Sourav
+                    </p>
+
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="backToMenu()"
+                >
+                    ← BACK
+                </button>
+
+            </div>
+
+        </div>
 
     </section>
 
 </div>
-
-
-<!-- =========================
-     MODAL
-========================= -->
-
-<div class="modal" id="modal">
-
-    <div class="modal-box">
-
-        <div class="modal-icon" id="modalIcon">
-            💌
-        </div>
-
-        <h3 class="modal-title" id="modalTitle">
-            A Letter for You
-        </h3>
-
-        <p class="modal-text" id="modalText">
-            Coming soon...
-        </p>
-
-        <button class="close-button" onclick="closeModal()">
-            CLOSE
-        </button>
-
-    </div>
-
-</div>
+</main>
 
 
 <script>
+/* =========================================================
+   STAR GENERATOR
+   ========================================================= */
 
-/* =========================
-   OPEN BOX
-========================= */
+const starsContainer = document.getElementById("stars");
+
+for (let i = 0; i < 115; i++) {
+
+    const star = document.createElement("span");
+
+    star.className = "star";
+
+    if (Math.random() > 0.9) {
+        star.classList.add("big");
+    }
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 72 + "%";
+
+    star.style.setProperty(
+        "--duration",
+        (2.5 + Math.random() * 5) + "s"
+    );
+
+    star.style.setProperty(
+        "--delay",
+        (-Math.random() * 6) + "s"
+    );
+
+    starsContainer.appendChild(star);
+}
+
+
+/* =========================================================
+   OPEN GIFT
+   ========================================================= */
 
 function openBox() {
 
@@ -1586,82 +1878,65 @@ function openBox() {
     gift.classList.add("opening");
 
     setTimeout(() => {
-
         welcome.classList.add("hide");
-
     }, 650);
 
     setTimeout(() => {
 
-        content.style.display = "flex";
+        content.style.display = "block";
 
         requestAnimationFrame(() => {
             content.classList.add("show");
         });
 
-    }, 1000);
+    }, 1050);
 }
 
 
-/* =========================
-   GO BACK
-========================= */
+/* =========================================================
+   OPEN ROOM
+   ========================================================= */
 
-function goBack() {
+function openRoom(roomName) {
 
-    const gift = document.getElementById("gift");
-    const welcome = document.getElementById("welcome");
-    const content = document.getElementById("giftContent");
+    document.getElementById("menu").style.display = "none";
 
-    content.classList.remove("show");
+    document.querySelectorAll(".room").forEach(room => {
+        room.classList.remove("active");
+    });
 
-    setTimeout(() => {
+    const selectedRoom =
+        document.getElementById("room-" + roomName);
 
-        content.style.display = "none";
-
-        welcome.classList.remove("hide");
-
-        gift.classList.remove("opening");
-
-    }, 500);
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function openModal(icon, title, text) {
-
-    document.getElementById("modalIcon").textContent = icon;
-    document.getElementById("modalTitle").textContent = title;
-    document.getElementById("modalText").textContent = text;
-
-    document.getElementById("modal").classList.add("show");
-}
-
-
-function closeModal() {
-
-    document.getElementById("modal").classList.remove("show");
-
-}
-
-
-/* =========================
-   CLOSE MODAL WHEN
-   CLICKING OUTSIDE
-========================= */
-
-document.getElementById("modal").addEventListener("click", function(event) {
-
-    if (event.target === this) {
-        closeModal();
+    if (selectedRoom) {
+        selectedRoom.classList.add("active");
     }
 
-});
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 
+
+/* =========================================================
+   BACK TO MENU
+   ========================================================= */
+
+function backToMenu() {
+
+    document.querySelectorAll(".room").forEach(room => {
+        room.classList.remove("active");
+    });
+
+    document.getElementById("menu").style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 </script>
 
 </body>
-  </html>
+</html>
