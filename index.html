@@ -60,7 +60,61 @@ body {
     z-index: 0;
 }
 
-.glow {
+/* =========================
+   CINEMATIC HORIZON
+========================= */
+
+.background::before {
+    content: "";
+    position: absolute;
+    left: -15%;
+    right: -15%;
+    bottom: -12%;
+    height: 58%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 18%,
+            rgba(190, 130, 210, 0.32) 0%,
+            rgba(115, 80, 170, 0.20) 28%,
+            transparent 65%
+        ),
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(55, 40, 105, 0.28) 42%,
+            rgba(18, 20, 55, 0.58) 100%
+        );
+
+    filter: blur(18px);
+
+    transform: scale(1.08);
+    opacity: 0.95;
+}
+   .background::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 32%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(255, 210, 170, 0.18),
+            transparent 58%
+        ),
+        linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(5, 7, 25, 0.42) 100%
+        );
+
+    opacity: 0.9;
+   }
+
+   .glow {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
