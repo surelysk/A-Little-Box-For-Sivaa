@@ -316,6 +316,102 @@ body {
         transform: scale(1.5);
     }
    }
+
+/* =========================
+   ETHEREAL CLOUDS
+========================= */
+
+.clouds {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(28px);
+    opacity: 0.28;
+}
+
+.cloud-one {
+    width: 420px;
+    height: 150px;
+    top: 10%;
+    right: -80px;
+
+    background: radial-gradient(
+        ellipse,
+        rgba(180, 155, 205, 0.18),
+        transparent 70%
+    );
+
+    animation: cloudDriftOne 18s ease-in-out infinite;
+}
+
+.cloud-two {
+    width: 520px;
+    height: 180px;
+    top: 27%;
+    left: -180px;
+
+    background: radial-gradient(
+        ellipse,
+        rgba(125, 105, 170, 0.16),
+        transparent 70%
+    );
+
+    animation: cloudDriftTwo 24s ease-in-out infinite;
+}
+
+.cloud-three {
+    width: 380px;
+    height: 130px;
+    top: 42%;
+    right: 5%;
+
+    background: radial-gradient(
+        ellipse,
+        rgba(210, 170, 200, 0.10),
+        transparent 70%
+    );
+
+    animation: cloudDriftThree 21s ease-in-out infinite;
+}
+
+@keyframes cloudDriftOne {
+
+    0%, 100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-45px) translateY(8px);
+    }
+}
+
+@keyframes cloudDriftTwo {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(55px);
+    }
+}
+
+@keyframes cloudDriftThree {
+
+    0%, 100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-30px) translateY(-8px);
+    }
+       }
    
 @keyframes moonBreath {
 
@@ -983,6 +1079,12 @@ body {
     <span></span>
     <span></span>
     <span></span>
+</div>
+
+<div class="clouds">
+    <span class="cloud cloud-one"></span>
+    <span class="cloud cloud-two"></span>
+    <span class="cloud cloud-three"></span>
 </div>
    
     <div class="light"></div>
