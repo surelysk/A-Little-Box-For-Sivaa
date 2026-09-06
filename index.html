@@ -52,12 +52,58 @@ body {
    BACKGROUND
 ========================= */
 
+/* =========================
+   THE NIGHT WORLD
+========================= */
+
 .background {
     position: fixed;
     inset: 0;
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
+
+    background:
+        /* Moonlit upper sky */
+        radial-gradient(
+            circle at 82% 15%,
+            rgba(255, 225, 175, 0.22) 0%,
+            rgba(190, 155, 210, 0.12) 12%,
+            transparent 32%
+        ),
+
+        /* Violet cloud atmosphere */
+        radial-gradient(
+            ellipse at 18% 42%,
+            rgba(125, 78, 170, 0.32) 0%,
+            rgba(75, 45, 125, 0.18) 35%,
+            transparent 68%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 48%,
+            rgba(100, 70, 155, 0.28) 0%,
+            rgba(65, 45, 110, 0.16) 38%,
+            transparent 70%
+        ),
+
+        /* Warm horizon */
+        radial-gradient(
+            ellipse at 50% 78%,
+            rgba(190, 105, 155, 0.22) 0%,
+            rgba(100, 65, 130, 0.14) 32%,
+            transparent 65%
+        ),
+
+        /* Deep night */
+        linear-gradient(
+            180deg,
+            #030515 0%,
+            #070923 30%,
+            #110b2c 58%,
+            #160c2c 76%,
+            #03040f 100%
+        );
 }
 
 /* =========================
