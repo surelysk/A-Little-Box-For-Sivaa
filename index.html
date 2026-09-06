@@ -62,35 +62,67 @@ body {
 
 .glow {
     position: absolute;
-    width: 250px;
-    height: 250px;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.25;
+    pointer-events: none;
+    filter: blur(90px);
+    opacity: 0.42;
 }
 
 .glow.one {
-    top: -80px;
-    left: -80px;
-    background: #a66cff;
+    top: -120px;
+    left: -100px;
+    width: 430px;
+    height: 430px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(145, 91, 255, 0.70) 0%,
+            rgba(95, 55, 190, 0.35) 42%,
+            transparent 72%
+        );
+
+    opacity: 0.55;
 }
 
 .glow.two {
-    right: -100px;
-    bottom: -80px;
-    background: #5d8dff;
+    right: -140px;
+    bottom: -130px;
+    width: 500px;
+    height: 500px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(70, 105, 255, 0.55) 0%,
+            rgba(55, 65, 170, 0.25) 45%,
+            transparent 72%
+        );
+
+    opacity: 0.48;
 }
 
 .glow.three {
-    top: 8%;
-    left: 50%;
+    top: 4%;
+    left: 78%;
+
     transform: translateX(-50%);
-    width: 190px;
-    height: 190px;
-    background: #ffe4b5;
-    opacity: 0.10;
-    filter: blur(75px);
-}
+
+    width: 360px;
+    height: 360px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 225, 170, 0.42) 0%,
+            rgba(255, 205, 150, 0.18) 38%,
+            transparent 72%
+        );
+
+    opacity: 0.65;
+    filter: blur(65px);
+   }
+   
    /* =========================
    MOONLIGHT
 ========================= */
