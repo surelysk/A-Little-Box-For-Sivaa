@@ -107,58 +107,94 @@ body {
 }
 
 /* =========================
-   CINEMATIC HORIZON
+   ETHEREAL NIGHT SCENE
 ========================= */
 
 .background::before {
     content: "";
     position: absolute;
-    left: -15%;
-    right: -15%;
-    bottom: -12%;
-    height: 58%;
+    inset: 0;
 
     background:
+
+        /* Large moonlit cloud - upper right */
         radial-gradient(
-            ellipse at 50% 18%,
-            rgba(190, 130, 210, 0.32) 0%,
-            rgba(115, 80, 170, 0.20) 28%,
-            transparent 65%
+            ellipse 38% 14% at 84% 25%,
+            rgba(225, 205, 235, 0.24) 0%,
+            rgba(170, 145, 205, 0.16) 38%,
+            transparent 72%
         ),
-        linear-gradient(
-            180deg,
-            transparent 0%,
-            rgba(55, 40, 105, 0.28) 42%,
-            rgba(18, 20, 55, 0.58) 100%
+
+        /* Cloud bank - left */
+        radial-gradient(
+            ellipse 45% 16% at 12% 39%,
+            rgba(155, 125, 190, 0.30) 0%,
+            rgba(105, 75, 155, 0.20) 40%,
+            transparent 72%
+        ),
+
+        /* Cloud bank - middle */
+        radial-gradient(
+            ellipse 52% 18% at 58% 48%,
+            rgba(175, 145, 205, 0.24) 0%,
+            rgba(105, 75, 155, 0.16) 42%,
+            transparent 72%
+        ),
+
+        /* Lower mist */
+        radial-gradient(
+            ellipse 70% 22% at 50% 73%,
+            rgba(190, 125, 185, 0.26) 0%,
+            rgba(105, 65, 145, 0.18) 42%,
+            transparent 75%
         );
 
-    filter: blur(18px);
-
+    filter: blur(14px);
     transform: scale(1.08);
-    opacity: 0.95;
+
+    animation: etherealClouds 18s ease-in-out infinite alternate;
 }
-   .background::after {
+
+@keyframes etherealClouds {
+
+    0% {
+        transform: scale(1.08) translateX(0);
+    }
+
+    100% {
+        transform: scale(1.12) translateX(-18px);
+    }
+}
+
+
+.background::after {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 32%;
+
+    height: 42%;
 
     background:
+
+        /* warm horizon light */
         radial-gradient(
-            ellipse at 50% 0%,
-            rgba(255, 210, 170, 0.18),
-            transparent 58%
+            ellipse 50% 35% at 50% 15%,
+            rgba(255, 196, 170, 0.30),
+            transparent 65%
         ),
+
+        /* distant violet land */
         linear-gradient(
-            180deg,
+            175deg,
             transparent 0%,
-            rgba(5, 7, 25, 0.42) 100%
+            rgba(45, 30, 80, 0.45) 45%,
+            rgba(8, 7, 28, 0.92) 100%
         );
 
-    opacity: 0.9;
-   }
+    opacity: 0.95;
+}
 
    .glow {
     position: absolute;
