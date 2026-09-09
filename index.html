@@ -3,1960 +3,1283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050719">
 <title>Kunjii Sammanam</title>
 
 <style>
-/* =========================================================
-   KUNJII SAMMANAM
-   A little world made with love.
-   ========================================================= */
-
-:root {
-    --night: #050719;
-    --deep: #080a21;
-    --violet: #211438;
-    --moon: #fff3cf;
-    --gold: #f5c978;
-    --rose: #d85b78;
-    --glass: rgba(12, 12, 30, .48);
-    --line: rgba(255,255,255,.16);
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+html,body{
+    width:100%;
+    min-height:100%;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    background: var(--night);
-    color: white;
-    font-family: Georgia, "Times New Roman", serif;
+body{
+    overflow-x:hidden;
+    font-family:Georgia,"Times New Roman",serif;
+    color:#fff;
+    background:#030511;
 }
 
 /* =========================================================
-   SCENE
-   ========================================================= */
+   THE NIGHT WORLD
+========================================================= */
 
-.scene {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    z-index: 0;
+.scene{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
     background:
-        radial-gradient(
-            ellipse at 50% 45%,
-            rgba(55,58,125,.28),
-            transparent 52%
-        ),
+        radial-gradient(circle at 78% 14%,rgba(255,220,170,.13),transparent 14%),
+        radial-gradient(circle at 18% 48%,rgba(91,63,151,.24),transparent 35%),
         linear-gradient(
             180deg,
-            #03040d 0%,
-            #06091b 34%,
-            #0b0d28 57%,
-            #1a1030 78%,
-            #03040b 100%
+            #020513 0%,
+            #070a22 28%,
+            #151033 52%,
+            #241737 72%,
+            #070712 100%
         );
 }
 
-.scene svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+/* subtle atmospheric glow */
+.scene::before{
+    content:"";
+    position:absolute;
+    inset:-20%;
+    background:
+        radial-gradient(ellipse at 50% 60%,rgba(143,103,194,.16),transparent 38%),
+        radial-gradient(ellipse at 75% 30%,rgba(255,216,164,.09),transparent 24%);
+    filter:blur(35px);
+    animation:atmosphere 12s ease-in-out infinite alternate;
+}
+
+@keyframes atmosphere{
+    from{transform:translate3d(-1%,0,0) scale(1);}
+    to{transform:translate3d(1%,2%,0) scale(1.04);}
 }
 
 /* =========================================================
-   SVG ANIMATIONS
-   ========================================================= */
+   STARS
+========================================================= */
 
-#moon {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: moonBreath 8s ease-in-out infinite;
+.stars{
+    position:absolute;
+    inset:0;
+    z-index:1;
 }
 
-@keyframes moonBreath {
-    0%,100% {
-        transform: scale(1);
-        opacity: .94;
-    }
-
-    50% {
-        transform: scale(1.025);
-        opacity: 1;
-    }
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 8px rgba(255,255,255,.8);
+    animation:twinkle 3s ease-in-out infinite;
 }
 
-.cloud-group {
-    animation: cloudFloat 45s linear infinite;
+.star.big{
+    width:4px;
+    height:4px;
+    box-shadow:
+        0 0 5px #fff,
+        0 0 14px rgba(255,226,190,.8);
 }
 
-.cloud-group.two {
-    animation-duration: 60s;
-    animation-delay: -22s;
-}
+.star:nth-child(1){left:7%;top:16%;animation-delay:.4s}
+.star:nth-child(2){left:15%;top:9%;animation-delay:1.2s}
+.star:nth-child(3){left:23%;top:23%;animation-delay:2s}
+.star:nth-child(4){left:31%;top:12%;animation-delay:.8s}
+.star:nth-child(5){left:40%;top:18%;animation-delay:1.7s}
+.star:nth-child(6){left:49%;top:8%;animation-delay:.2s}
+.star:nth-child(7){left:58%;top:22%;animation-delay:2.3s}
+.star:nth-child(8){left:67%;top:11%;animation-delay:1s}
+.star:nth-child(9){left:73%;top:27%;animation-delay:.6s}
+.star:nth-child(10){left:84%;top:17%;animation-delay:1.8s}
+.star:nth-child(11){left:91%;top:31%;animation-delay:2.5s}
+.star:nth-child(12){left:12%;top:37%;animation-delay:1.1s}
+.star:nth-child(13){left:36%;top:34%;animation-delay:2.1s}
+.star:nth-child(14){left:55%;top:39%;animation-delay:.7s}
+.star:nth-child(15){left:94%;top:10%;animation-delay:1.5s}
+.star:nth-child(16){left:4%;top:46%;animation-delay:2.7s}
+.star:nth-child(17){left:78%;top:43%;animation-delay:1.3s}
+.star:nth-child(18){left:88%;top:52%;animation-delay:.9s}
 
-.cloud-group.three {
-    animation-duration: 70s;
-    animation-delay: -40s;
-}
-
-@keyframes cloudFloat {
-    from {
-        transform: translateX(-80px);
-    }
-
-    to {
-        transform: translateX(100px);
-    }
-}
-
-.water {
-    animation: waterShift 5s ease-in-out infinite;
-}
-
-@keyframes waterShift {
-    0%,100% {
-        opacity: .48;
-        transform: translateX(-5px);
-    }
-
-    50% {
-        opacity: .8;
-        transform: translateX(5px);
-    }
-}
-
-.reflection {
-    animation: reflectionPulse 4s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-}
-
-@keyframes reflectionPulse {
-    0%,100% {
-        opacity: .35;
-        transform: scaleX(.85);
-    }
-
-    50% {
-        opacity: .72;
-        transform: scaleX(1.1);
-    }
-}
-
-.firefly {
-    animation: firefly 4s ease-in-out infinite;
-}
-
-.firefly:nth-child(2n) {
-    animation-delay: -1.5s;
-}
-
-.firefly:nth-child(3n) {
-    animation-delay: -3s;
-}
-
-@keyframes firefly {
-    0%,100% {
-        opacity: .1;
-        transform: translateY(4px);
-    }
-
-    50% {
-        opacity: .9;
-        transform: translateY(-10px);
-    }
+@keyframes twinkle{
+    0%,100%{opacity:.25;transform:scale(.7)}
+    50%{opacity:1;transform:scale(1.35)}
 }
 
 /* =========================================================
-   CONTENT
-   ========================================================= */
+   MOON
+========================================================= */
 
-.page {
-    position: relative;
-    z-index: 20;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 42px 18px;
+.moon{
+    position:absolute;
+    z-index:3;
+    top:8%;
+    right:10%;
+    width:92px;
+    height:92px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 32%,#fffdf4 0 18%,transparent 19%),
+        radial-gradient(circle at 65% 65%,rgba(178,157,139,.28) 0 7%,transparent 8%),
+        radial-gradient(circle at 38% 67%,rgba(185,165,149,.25) 0 10%,transparent 11%),
+        radial-gradient(circle at 58% 35%,rgba(183,160,144,.2) 0 8%,transparent 9%),
+        linear-gradient(145deg,#fffdf3,#ffe9c5 58%,#d9c2a7);
+    box-shadow:
+        0 0 25px rgba(255,235,192,.75),
+        0 0 70px rgba(255,214,159,.35),
+        0 0 130px rgba(181,140,221,.18);
+    animation:moonBreath 7s ease-in-out infinite;
 }
 
-.container {
-    width: min(1000px, 100%);
-    text-align: center;
+.moon::after{
+    content:"";
+    position:absolute;
+    inset:-25px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,226,178,.17),transparent 65%);
+    z-index:-1;
+}
+
+@keyframes moonBreath{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.025)}
 }
 
 /* =========================================================
-   OPENING
-   ========================================================= */
+   CLOUDS
+========================================================= */
 
-#welcome {
-    transition:
-        opacity .9s ease,
-        transform .9s ease;
+.cloud{
+    position:absolute;
+    z-index:2;
+    border-radius:50%;
+    filter:blur(12px);
+    opacity:.32;
 }
 
-#welcome.hide {
-    opacity: 0;
-    transform: translateY(-30px) scale(.98);
-    pointer-events: none;
+.cloud.one{
+    width:520px;
+    height:125px;
+    left:-80px;
+    top:24%;
+    background:
+        radial-gradient(ellipse at 25% 65%,#8976a8 0 18%,transparent 48%),
+        radial-gradient(ellipse at 52% 45%,#786796 0 24%,transparent 53%),
+        radial-gradient(ellipse at 75% 65%,#665782 0 20%,transparent 52%);
+    animation:cloudMove 25s ease-in-out infinite alternate;
 }
 
-.eyebrow {
-    font-size: .68rem;
-    letter-spacing: .48em;
-    text-transform: uppercase;
-    color: rgba(255,242,207,.75);
-    margin-bottom: 18px;
-    text-shadow: 0 0 18px rgba(255,220,150,.3);
+.cloud.two{
+    width:620px;
+    height:150px;
+    right:-170px;
+    top:31%;
+    opacity:.25;
+    background:
+        radial-gradient(ellipse at 20% 60%,#9a83ad 0 18%,transparent 48%),
+        radial-gradient(ellipse at 50% 45%,#76648e 0 28%,transparent 54%),
+        radial-gradient(ellipse at 80% 65%,#604e79 0 20%,transparent 50%);
+    animation:cloudMove 32s ease-in-out infinite alternate-reverse;
 }
 
-.eyebrow::before,
-.eyebrow::after {
-    content: "—";
-    margin: 0 13px;
-    color: rgba(245,201,120,.55);
+.cloud.three{
+    width:800px;
+    height:120px;
+    left:15%;
+    top:42%;
+    opacity:.15;
+    background:radial-gradient(ellipse,#b194bc,transparent 68%);
+    filter:blur(22px);
 }
 
-.title {
-    font-size: clamp(3.1rem, 8vw, 7.2rem);
-    font-weight: normal;
-    line-height: .94;
-    letter-spacing: .025em;
+@keyframes cloudMove{
+    from{transform:translateX(-3%)}
+    to{transform:translateX(7%)}
+}
 
-    color: #fff5dd;
+/* =========================================================
+   DISTANT MOUNTAINS
+========================================================= */
 
+.mountains{
+    position:absolute;
+    z-index:4;
+    left:0;
+    right:0;
+    bottom:29%;
+    height:34%;
+}
+
+.mountain{
+    position:absolute;
+    bottom:0;
+    width:0;
+    height:0;
+    border-left:180px solid transparent;
+    border-right:180px solid transparent;
+    border-bottom:260px solid rgba(20,18,43,.9);
+    filter:blur(.2px);
+}
+
+.mountain::after{
+    content:"";
+    position:absolute;
+    left:-175px;
+    top:155px;
+    width:350px;
+    height:110px;
+    background:linear-gradient(
+        180deg,
+        rgba(112,89,143,.18),
+        transparent
+    );
+}
+
+.m1{left:-110px;transform:scale(1.3)}
+.m2{left:13%;transform:scale(.9);border-bottom-color:rgba(31,25,56,.85)}
+.m3{left:29%;transform:scale(1.18);border-bottom-color:rgba(26,21,50,.92)}
+.m4{left:47%;transform:scale(.78);border-bottom-color:rgba(41,30,62,.78)}
+.m5{left:61%;transform:scale(1.25);border-bottom-color:rgba(24,21,48,.9)}
+.m6{left:80%;transform:scale(.95);border-bottom-color:rgba(31,24,53,.9)}
+.m7{left:91%;transform:scale(1.25);border-bottom-color:rgba(17,17,38,.95)}
+
+/* distant haze */
+.horizon-haze{
+    position:absolute;
+    z-index:5;
+    left:-10%;
+    right:-10%;
+    bottom:28%;
+    height:15%;
+    background:linear-gradient(
+        180deg,
+        rgba(173,133,184,.06),
+        rgba(238,190,175,.12),
+        transparent
+    );
+    filter:blur(18px);
+}
+
+/* =========================================================
+   RIVER
+========================================================= */
+
+.river{
+    position:absolute;
+    z-index:5;
+    left:50%;
+    bottom:-8%;
+    transform:translateX(-50%);
+    width:75%;
+    height:47%;
+    clip-path:polygon(
+        43% 0,
+        57% 0,
+        64% 18%,
+        72% 35%,
+        82% 55%,
+        100% 100%,
+        0 100%,
+        18% 55%,
+        28% 35%,
+        36% 18%
+    );
+    background:
+        radial-gradient(
+            ellipse at 50% 5%,
+            rgba(255,218,180,.45),
+            transparent 18%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(48,50,93,.8),
+            rgba(29,35,73,.92) 40%,
+            rgba(10,16,38,1)
+        );
+    box-shadow:0 -20px 80px rgba(160,117,188,.12);
+}
+
+.river::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:3%;
+    transform:translateX(-50%);
+    width:17%;
+    height:95%;
+    background:
+        repeating-linear-gradient(
+            180deg,
+            transparent 0 12px,
+            rgba(255,210,167,.25) 13px 15px,
+            transparent 16px 30px
+        );
+    filter:blur(1px);
+    opacity:.75;
+}
+
+.river::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            165deg,
+            transparent 42%,
+            rgba(175,138,202,.16) 48%,
+            transparent 53%
+        ),
+        linear-gradient(
+            195deg,
+            transparent 48%,
+            rgba(255,199,161,.13) 53%,
+            transparent 57%
+        );
+}
+
+/* =========================================================
+   TREES / FOREGROUND
+========================================================= */
+
+.tree{
+    position:absolute;
+    z-index:8;
+    bottom:-4%;
+    width:280px;
+    height:520px;
+    opacity:.9;
+}
+
+.tree.left{left:-80px}
+.tree.right{right:-80px;transform:scaleX(-1)}
+
+.tree::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    width:28px;
+    height:85%;
+    background:linear-gradient(90deg,#090813,#21162a,#06060e);
+    transform:translateX(-50%) rotate(7deg);
+    border-radius:50%;
+}
+
+.tree::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 25% 18%,#100d1c 0 13%,transparent 14%),
+        radial-gradient(circle at 47% 10%,#151020 0 18%,transparent 19%),
+        radial-gradient(circle at 68% 24%,#0d0b19 0 18%,transparent 19%),
+        radial-gradient(circle at 32% 38%,#171020 0 20%,transparent 21%),
+        radial-gradient(circle at 72% 43%,#0b0915 0 22%,transparent 23%),
+        radial-gradient(circle at 18% 58%,#100c19 0 18%,transparent 19%);
+    filter:blur(1px);
+}
+
+/* =========================================================
+   FOREGROUND GLOW / FLOWERS
+========================================================= */
+
+.foreground{
+    position:absolute;
+    z-index:9;
+    inset:auto 0 0;
+    height:24%;
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(3,4,12,.6) 65%,
+            #03030a 100%
+        );
+}
+
+.flower{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#e9a9d3;
+    box-shadow:
+        0 0 8px rgba(255,172,220,.7),
+        0 0 18px rgba(226,127,204,.35);
+    animation:flowerGlow 4s ease-in-out infinite;
+}
+
+.flower:nth-child(1){left:7%;bottom:12%;animation-delay:.5s}
+.flower:nth-child(2){left:15%;bottom:19%;animation-delay:1.4s}
+.flower:nth-child(3){left:25%;bottom:7%;animation-delay:2.1s}
+.flower:nth-child(4){left:74%;bottom:12%;animation-delay:.8s}
+.flower:nth-child(5){left:83%;bottom:22%;animation-delay:1.8s}
+.flower:nth-child(6){left:92%;bottom:9%;animation-delay:2.5s}
+
+@keyframes flowerGlow{
+    0%,100%{opacity:.45;transform:scale(.8)}
+    50%{opacity:1;transform:scale(1.25)}
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.container{
+    position:relative;
+    z-index:20;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.welcome{
+    width:min(900px,100%);
+    transition:opacity .6s,transform .8s;
+}
+
+.welcome.hide{
+    opacity:0;
+    transform:translateY(-25px) scale(.98);
+    pointer-events:none;
+}
+
+.eyebrow{
+    font-size:12px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:rgba(255,239,220,.82);
+    margin-bottom:18px;
+    text-shadow:0 0 18px rgba(255,215,173,.3);
+}
+
+.title{
+    font-size:clamp(52px,8vw,104px);
+    line-height:.95;
+    font-weight:normal;
+    letter-spacing:-3px;
+    color:#fff4df;
     text-shadow:
-        0 0 12px rgba(255,225,166,.35),
-        0 0 38px rgba(255,195,120,.18),
-        0 12px 45px rgba(0,0,0,.72);
+        0 0 8px rgba(255,230,190,.55),
+        0 0 28px rgba(255,205,154,.28),
+        0 10px 35px rgba(0,0,0,.5);
 }
 
-.subtitle {
-    margin-top: 22px;
-    font-size: clamp(1.05rem, 2.6vw, 1.5rem);
-    font-style: italic;
-    color: rgba(255,245,222,.88);
+.subtitle{
+    margin-top:25px;
+    font-size:clamp(21px,3vw,31px);
+    font-style:italic;
+    color:#f6e9df;
+    text-shadow:0 0 14px rgba(255,221,191,.25);
 }
 
-.subtitle::before,
-.subtitle::after {
-    content: "✦";
-    font-size: .65em;
-    margin: 0 15px;
-    color: var(--gold);
-}
-
-.small-line {
-    margin-top: 11px;
-    font-size: .78rem;
-    letter-spacing: .2em;
-    color: rgba(255,255,255,.48);
-    text-transform: uppercase;
+.small-text{
+    margin-top:13px;
+    font-size:12px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:rgba(255,239,227,.7);
 }
 
 /* =========================================================
    GIFT
-   ========================================================= */
+========================================================= */
 
-.gift-area {
-    position: relative;
-    width: 260px;
-    height: 225px;
-    margin: 40px auto 27px;
-    cursor: pointer;
+.gift-wrap{
+    position:relative;
+    width:190px;
+    height:210px;
+    margin:55px auto 34px;
+    filter:drop-shadow(0 25px 28px rgba(0,0,0,.45));
 }
 
-.gift-light {
-    position: absolute;
-    width: 230px;
-    height: 130px;
-    left: 15px;
-    top: 50px;
-    border-radius: 50%;
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(255,199,103,.42),
-            rgba(255,160,80,.12) 38%,
-            transparent 72%
-        );
-    filter: blur(12px);
-    animation: giftLight 3.5s ease-in-out infinite;
+.gift-glow{
+    position:absolute;
+    left:50%;
+    bottom:5px;
+    width:210px;
+    height:100px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(
+        ellipse,
+        rgba(255,205,124,.58),
+        rgba(255,163,109,.16) 40%,
+        transparent 72%
+    );
+    filter:blur(8px);
+    animation:giftGlow 3.5s ease-in-out infinite;
 }
 
-@keyframes giftLight {
-    0%,100% {
-        opacity: .55;
-        transform: scale(.88);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.12);
-    }
+@keyframes giftGlow{
+    0%,100%{opacity:.65;transform:translateX(-50%) scale(.94)}
+    50%{opacity:1;transform:translateX(-50%) scale(1.08)}
 }
 
-.gift {
-    position: absolute;
-    width: 165px;
-    height: 140px;
-    left: 47px;
-    bottom: 14px;
-    filter: drop-shadow(0 22px 25px rgba(0,0,0,.65));
-}
-
-.gift-body {
-    position: absolute;
-    left: 7px;
-    bottom: 0;
-    width: 151px;
-    height: 104px;
-    border-radius: 5px 5px 12px 12px;
-
+.gift{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%);
+    width:170px;
+    height:130px;
+    border-radius:8px;
     background:
         linear-gradient(
             90deg,
-            #7b183f 0%,
-            #b83d62 45%,
-            #d35170 52%,
-            #8a2148 100%
+            #8e234b,
+            #d64d72 45%,
+            #bd355f
         );
-
     box-shadow:
-        inset 0 0 25px rgba(255,255,255,.1),
-        0 5px 12px rgba(0,0,0,.3);
+        inset 0 4px 10px rgba(255,255,255,.13),
+        0 15px 25px rgba(0,0,0,.3);
 }
 
-.gift-body::after {
-    content: "";
-    position: absolute;
-    left: 66px;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(205,145,62,.8),
-            #f6cf7c,
-            rgba(255,222,139,.72)
-        );
-    box-shadow: 0 0 15px rgba(255,208,108,.35);
+.gift::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    width:24px;
+    height:100%;
+    background:linear-gradient(90deg,#f0a62e,#ffd86c,#e99b26);
+    box-shadow:0 0 14px rgba(255,196,63,.4);
 }
 
-.gift-lid {
-    position: absolute;
-    left: 0;
-    top: 17px;
-    width: 165px;
-    height: 31px;
-    border-radius: 6px;
-    z-index: 4;
-
-    background:
-        linear-gradient(
-            90deg,
-            #8b2049,
-            #ce4e70 50%,
-            #8c2048
-        );
-
+.lid{
+    position:absolute;
+    left:50%;
+    top:-19px;
+    transform:translateX(-50%);
+    width:188px;
+    height:42px;
+    border-radius:7px;
+    background:linear-gradient(180deg,#dc5576,#a72a51);
     box-shadow:
-        0 5px 9px rgba(0,0,0,.3);
-    transform-origin: 12% 100%;
-
-    transition:
-        transform 1s cubic-bezier(.2,.8,.2,1);
+        inset 0 3px 8px rgba(255,255,255,.16),
+        0 7px 12px rgba(0,0,0,.3);
 }
 
-.gift-lid::after {
-    content: "";
-    position: absolute;
-    left: 72px;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    background: #f5ca72;
+.lid::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    width:25px;
+    height:100%;
+    background:linear-gradient(90deg,#eaa029,#ffdc65,#e89b27);
 }
 
-.gift-ribbon {
-    position: absolute;
-    left: 73px;
-    bottom: 0;
-    width: 20px;
-    height: 104px;
-    z-index: 3;
-    background:
-        linear-gradient(
-            90deg,
-            #d79d4b,
-            #f8d47e,
-            #dca34f
-        );
-}
-
-.bow {
-    position: absolute;
-    z-index: 5;
-    left: 82px;
-    top: -3px;
-    width: 0;
-    height: 0;
+.bow{
+    position:absolute;
+    left:50%;
+    top:-51px;
+    transform:translateX(-50%);
+    width:82px;
+    height:42px;
 }
 
 .bow::before,
-.bow::after {
-    content: "";
-    position: absolute;
-    width: 47px;
-    height: 28px;
-    border: 8px solid #f0c36c;
-    box-shadow: 0 0 12px rgba(255,210,120,.3);
+.bow::after{
+    content:"";
+    position:absolute;
+    top:8px;
+    width:43px;
+    height:27px;
+    border:8px solid #ffc94d;
+    box-shadow:0 0 8px rgba(255,192,61,.45);
 }
 
-.bow::before {
-    right: 0;
-    border-radius: 60% 20% 60% 40%;
-    transform: rotate(18deg);
+.bow::before{
+    right:40px;
+    border-radius:55% 45% 50% 50%;
+    transform:rotate(-15deg);
 }
 
-.bow::after {
-    left: 0;
-    border-radius: 20% 60% 40% 60%;
-    transform: rotate(-18deg);
+.bow::after{
+    left:40px;
+    border-radius:45% 55% 50% 50%;
+    transform:rotate(15deg);
 }
 
-.gift.open .gift-lid {
-    transform: translate(-32px,-58px) rotate(-18deg);
-}
-
-.gift.open {
-    animation: giftRise .9s ease;
-}
-
-@keyframes giftRise {
-    0% {
-        transform: translateY(0);
-    }
-
-    45% {
-        transform: translateY(-12px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+.bow span{
+    position:absolute;
+    left:50%;
+    top:8px;
+    transform:translateX(-50%);
+    width:17px;
+    height:32px;
+    border-radius:5px;
+    background:#ffd35a;
+    z-index:2;
 }
 
 /* =========================================================
    BUTTON
-   ========================================================= */
+========================================================= */
 
-.open-button {
-    position: relative;
-    border: 1px solid rgba(255,224,167,.32);
+.open-button{
+    position:relative;
+    border:1px solid rgba(255,218,184,.45);
+    border-radius:40px;
+    padding:17px 38px;
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.1),
-            rgba(255,190,110,.06)
+            rgba(54,37,60,.75),
+            rgba(25,20,42,.78)
         );
-    color: #fff3d7;
-    padding: 15px 31px;
-    border-radius: 999px;
-
-    font-family: inherit;
-    font-size: .7rem;
-    letter-spacing: .23em;
-
-    cursor: pointer;
-    backdrop-filter: blur(14px);
-
+    color:#fff5e8;
+    font-family:inherit;
+    font-size:12px;
+    letter-spacing:3px;
+    cursor:pointer;
     box-shadow:
-        0 10px 35px rgba(0,0,0,.3),
-        inset 0 0 20px rgba(255,255,255,.025);
-
-    transition:
-        transform .3s ease,
-        background .3s ease,
-        box-shadow .3s ease;
+        0 10px 30px rgba(0,0,0,.25),
+        inset 0 0 20px rgba(255,220,178,.05);
+    transition:.3s ease;
 }
 
-.open-button::after {
-    content: "♥";
-    position: absolute;
-    left: 50%;
-    bottom: -18px;
-    transform: translateX(-50%);
-    color: #f4ca79;
-    font-size: .75rem;
+.open-button:hover{
+    transform:translateY(-3px);
+    border-color:rgba(255,222,187,.8);
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35),
+        0 0 25px rgba(255,190,144,.16);
 }
 
-.open-button:hover {
-    transform: translateY(-3px);
-    background: rgba(255,213,145,.12);
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.4),
-        0 0 25px rgba(255,190,100,.12);
+.open-button span{
+    display:block;
+    margin-top:7px;
+    font-size:16px;
+    letter-spacing:0;
+    color:#ffd9b5;
 }
 
 /* =========================================================
-   CONTENT
-   ========================================================= */
+   CONTENT ROOMS
+========================================================= */
 
-.gift-content {
-    display: none;
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
+.gift-content{
+    position:absolute;
+    inset:0;
+    z-index:30;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:35px 18px;
+    opacity:0;
+    transform:translateY(25px);
+    transition:opacity .7s,transform .7s;
 }
 
-.gift-content.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+.gift-content.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
-.content-heading {
-    font-size: clamp(2.3rem, 6vw, 4.6rem);
-    font-weight: normal;
-    color: #fff0d3;
-    text-shadow: 0 0 30px rgba(255,208,130,.16);
+.room-title{
+    font-size:clamp(34px,6vw,58px);
+    font-weight:normal;
+    color:#fff1df;
+    text-shadow:0 0 25px rgba(255,211,170,.2);
 }
 
-.content-subheading {
-    margin-top: 12px;
-    margin-bottom: 36px;
-    color: rgba(255,255,255,.58);
-    font-style: italic;
+.room-subtitle{
+    margin-top:10px;
+    color:rgba(255,237,223,.68);
+    font-style:italic;
 }
 
-/* =========================================================
-   CARDS
-   ========================================================= */
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+.menu{
+    width:min(850px,100%);
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:32px;
 }
 
-.menu-card {
-    min-height: 165px;
-    padding: 25px 18px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-    overflow: hidden;
-
-    border: 1px solid rgba(255,221,169,.13);
-    border-radius: 22px;
-
+.menu-card{
+    padding:24px 18px;
+    border:1px solid rgba(255,220,190,.13);
+    border-radius:18px;
     background:
         linear-gradient(
-            145deg,
-            rgba(255,255,255,.085),
+            135deg,
+            rgba(255,255,255,.07),
             rgba(255,255,255,.025)
         );
-
-    backdrop-filter: blur(17px);
-
-    cursor: pointer;
-
-    transition:
-        transform .35s ease,
-        border-color .35s ease,
-        background .35s ease,
-        box-shadow .35s ease;
+    backdrop-filter:blur(14px);
+    cursor:pointer;
+    transition:.3s ease;
 }
 
-.menu-card::before {
-    content: "";
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    top: -75px;
-    right: -65px;
-    border-radius: 50%;
-    background: rgba(255,203,127,.08);
-    filter: blur(15px);
+.menu-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,219,184,.4);
+    background:rgba(255,255,255,.09);
 }
 
-.menu-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(255,218,157,.3);
-    background: rgba(255,255,255,.1);
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.3),
-        0 0 25px rgba(255,191,106,.06);
+.menu-icon{
+    font-size:27px;
+    margin-bottom:10px;
 }
 
-.menu-icon {
-    font-size: 2rem;
-    margin-bottom: 13px;
+.menu-title{
+    font-size:18px;
+    color:#fff1e5;
 }
 
-.menu-title {
-    font-size: 1.02rem;
-    color: #fff1d8;
-    margin-bottom: 8px;
+.menu-desc{
+    margin-top:7px;
+    font-size:12px;
+    line-height:1.6;
+    color:rgba(255,235,223,.57);
 }
 
-.menu-description {
-    max-width: 250px;
-    font-size: .78rem;
-    line-height: 1.55;
-    color: rgba(255,255,255,.5);
+.back-button{
+    margin-top:28px;
+    border:0;
+    background:none;
+    color:rgba(255,231,213,.65);
+    font-family:inherit;
+    letter-spacing:2px;
+    cursor:pointer;
 }
 
 /* =========================================================
-   ROOMS
-   ========================================================= */
+   MODAL
+========================================================= */
 
-.room {
-    display: none;
-    animation: roomIn .7s ease forwards;
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(2,2,10,.72);
+    backdrop-filter:blur(10px);
+    opacity:0;
+    visibility:hidden;
+    transition:.35s;
 }
 
-.room.active {
-    display: block;
+.modal.show{
+    opacity:1;
+    visibility:visible;
 }
 
-@keyframes roomIn {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.room-box {
-    width: min(760px, 100%);
-    margin: auto;
-    padding: clamp(30px, 6vw, 60px);
-
-    border-radius: 28px;
-    border: 1px solid rgba(255,220,166,.14);
-
+.modal-box{
+    width:min(520px,100%);
+    padding:40px 30px;
+    text-align:center;
+    border:1px solid rgba(255,220,190,.22);
+    border-radius:24px;
     background:
         linear-gradient(
             145deg,
-            rgba(16,15,37,.7),
-            rgba(10,9,27,.5)
+            rgba(42,28,53,.96),
+            rgba(12,12,28,.96)
         );
-
-    backdrop-filter: blur(22px);
-
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.42),
-        inset 0 1px rgba(255,255,255,.04);
+    box-shadow:0 30px 80px rgba(0,0,0,.55);
+    transform:translateY(20px) scale(.97);
+    transition:.35s;
 }
 
-.room-icon {
-    font-size: 2.7rem;
-    margin-bottom: 18px;
+.modal.show .modal-box{
+    transform:translateY(0) scale(1);
 }
 
-.room-title {
-    font-size: clamp(2rem,5vw,3.5rem);
-    font-weight: normal;
-    color: #fff0d5;
-    margin-bottom: 25px;
+.modal-icon{
+    font-size:42px;
+    margin-bottom:18px;
 }
 
-.room-text {
-    color: rgba(255,255,255,.73);
-    font-size: 1rem;
-    line-height: 1.9;
+.modal-title{
+    font-size:27px;
+    font-weight:normal;
+    color:#fff0df;
 }
 
-.back-button {
-    margin-top: 35px;
-    padding: 11px 22px;
-    border-radius: 999px;
-
-    border: 1px solid rgba(255,255,255,.17);
-    background: rgba(255,255,255,.04);
-    color: rgba(255,255,255,.7);
-
-    font-family: inherit;
-    cursor: pointer;
-
-    transition:
-        background .3s ease,
-        transform .3s ease;
+.modal-text{
+    margin-top:16px;
+    line-height:1.8;
+    color:rgba(255,236,225,.72);
 }
 
-.back-button:hover {
-    background: rgba(255,255,255,.09);
-    transform: translateY(-2px);
+.close-button{
+    margin-top:25px;
+    padding:11px 24px;
+    border:1px solid rgba(255,220,190,.25);
+    border-radius:25px;
+    background:transparent;
+    color:#ffe9d5;
+    font-family:inherit;
+    cursor:pointer;
 }
 
 /* =========================================================
-   FINAL
-   ========================================================= */
+   OPENING ANIMATION
+========================================================= */
 
-.final-heart {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    animation: heartPulse 2.2s ease-in-out infinite;
+.gift-wrap.opening{
+    animation:giftRise 1s ease forwards;
 }
 
-@keyframes heartPulse {
-    0%,100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.13);
-    }
+@keyframes giftRise{
+    0%{transform:translateY(0)}
+    40%{transform:translateY(-20px)}
+    100%{transform:translateY(-80px) scale(.8);opacity:0}
 }
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 760px) {
+@media(max-width:650px){
 
-    .page {
-        padding: 35px 14px;
+    .moon{
+        width:68px;
+        height:68px;
+        right:8%;
+        top:8%;
     }
 
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .eyebrow{
+        font-size:9px;
+        letter-spacing:4px;
     }
 
-    .moon-large {
-        transform: scale(.72);
-        transform-origin: center;
+    .title{
+        font-size:clamp(42px,12vw,70px);
+        letter-spacing:-2px;
     }
 
-    .title {
-        font-size: clamp(3rem, 12vw, 5rem);
-    }
-}
-
-@media (max-width: 480px) {
-
-    .menu-grid {
-        grid-template-columns: 1fr;
+    .subtitle{
+        font-size:21px;
     }
 
-    .menu-card {
-        min-height: 135px;
+    .gift-wrap{
+        transform:scale(.82);
+        margin-top:40px;
+        margin-bottom:20px;
     }
 
-    .gift-area {
-        transform: scale(.9);
-        margin-top: 30px;
-        margin-bottom: 18px;
+    .gift-wrap.opening{
+        animation:giftRiseMobile 1s ease forwards;
     }
 
-    .eyebrow {
-        letter-spacing: .28em;
+    @keyframes giftRiseMobile{
+        0%{transform:scale(.82) translateY(0)}
+        40%{transform:scale(.82) translateY(-15px)}
+        100%{transform:scale(.65) translateY(-80px);opacity:0}
     }
 
-    .eyebrow::before,
-    .eyebrow::after {
-        display: none;
+    .menu{
+        grid-template-columns:1fr;
+        max-height:58vh;
+        overflow-y:auto;
+        padding-right:3px;
+    }
+
+    .menu-card{
+        padding:19px 16px;
+    }
+
+    .room-title{
+        font-size:37px;
+    }
+
+    .river{
+        width:105%;
+        height:45%;
+    }
+
+    .tree{
+        transform:scale(.75);
+        transform-origin:bottom;
+    }
+
+    .tree.right{
+        transform:scaleX(-1) scale(.75);
     }
 }
 </style>
 </head>
 
-
 <body>
 
-<!-- =======================================================
-     CINEMATIC NIGHT WORLD
-     ======================================================= -->
+<!-- =========================================================
+     NIGHT SCENE
+========================================================= -->
 
 <div class="scene">
 
-<svg
-    viewBox="0 0 1600 900"
-    preserveAspectRatio="xMidYMid slice"
-    aria-hidden="true"
->
-
-<defs>
-
-    <!-- Sky -->
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#02030c"/>
-        <stop offset="35%" stop-color="#080c24"/>
-        <stop offset="65%" stop-color="#111338"/>
-        <stop offset="82%" stop-color="#241337"/>
-        <stop offset="100%" stop-color="#03040c"/>
-    </linearGradient>
-
-    <!-- Moon -->
-    <radialGradient id="moonGradient">
-        <stop offset="0%" stop-color="#fffef0"/>
-        <stop offset="55%" stop-color="#fff4d3"/>
-        <stop offset="82%" stop-color="#e7d9b8"/>
-        <stop offset="100%" stop-color="#b7ab91"/>
-    </radialGradient>
-
-    <!-- Moon glow -->
-    <radialGradient id="moonGlow">
-        <stop offset="0%" stop-color="#fff2c9" stop-opacity=".42"/>
-        <stop offset="35%" stop-color="#dcdcff" stop-opacity=".18"/>
-        <stop offset="100%" stop-color="#b8b9ff" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Water -->
-    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#161a42"/>
-        <stop offset="45%" stop-color="#111638"/>
-        <stop offset="100%" stop-color="#040713"/>
-    </linearGradient>
-
-    <!-- Mountain -->
-    <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#15152e"/>
-        <stop offset="100%" stop-color="#050611"/>
-    </linearGradient>
-
-    <!-- Cloud -->
-    <filter id="blurCloud">
-        <feGaussianBlur stdDeviation="17"/>
-    </filter>
-
-    <!-- Moon blur -->
-    <filter id="blurMoon">
-        <feGaussianBlur stdDeviation="25"/>
-    </filter>
-
-    <!-- Water blur -->
-    <filter id="waterBlur">
-        <feGaussianBlur stdDeviation="2"/>
-    </filter>
-
-    <!-- Gift light -->
-    <radialGradient id="giftGlow">
-        <stop offset="0%" stop-color="#ffd889" stop-opacity=".65"/>
-        <stop offset="50%" stop-color="#e99b66" stop-opacity=".18"/>
-        <stop offset="100%" stop-color="#d75d83" stop-opacity="0"/>
-    </radialGradient>
-
-</defs>
-
-
-<!-- =====================================================
-     SKY
-     ===================================================== -->
-
-<rect width="1600" height="900" fill="url(#sky)"/>
-
-
-<!-- subtle upper atmosphere -->
-
-<ellipse
-    cx="800"
-    cy="390"
-    rx="720"
-    ry="310"
-    fill="#4c477f"
-    opacity=".08"
-/>
-
-<ellipse
-    cx="780"
-    cy="600"
-    rx="700"
-    ry="220"
-    fill="#9a5c9d"
-    opacity=".07"
-/>
-
-
-<!-- =====================================================
-     STARS
-     ===================================================== -->
-
-<g fill="#fff">
-
-    <circle cx="80" cy="100" r="1.6" opacity=".75"/>
-    <circle cx="145" cy="210" r="1.2" opacity=".55"/>
-    <circle cx="220" cy="78" r="1.8" opacity=".9"/>
-    <circle cx="310" cy="150" r="1.1" opacity=".5"/>
-    <circle cx="390" cy="65" r="1.4" opacity=".8"/>
-    <circle cx="455" cy="205" r="1.2" opacity=".6"/>
-    <circle cx="530" cy="112" r="1.8" opacity=".7"/>
-    <circle cx="620" cy="170" r="1" opacity=".5"/>
-    <circle cx="710" cy="82" r="1.4" opacity=".8"/>
-    <circle cx="805" cy="145" r="1.1" opacity=".65"/>
-    <circle cx="910" cy="72" r="1.5" opacity=".8"/>
-    <circle cx="1010" cy="180" r="1" opacity=".55"/>
-    <circle cx="1090" cy="105" r="1.7" opacity=".75"/>
-    <circle cx="1160" cy="195" r="1.1" opacity=".6"/>
-    <circle cx="1300" cy="82" r="1.5" opacity=".8"/>
-    <circle cx="1400" cy="165" r="1.2" opacity=".6"/>
-    <circle cx="1510" cy="95" r="1.8" opacity=".8"/>
-
-    <circle cx="60" cy="310" r="1.1" opacity=".6"/>
-    <circle cx="180" cy="280" r="1.7" opacity=".75"/>
-    <circle cx="280" cy="330" r="1" opacity=".55"/>
-    <circle cx="410" cy="290" r="1.5" opacity=".8"/>
-    <circle cx="550" cy="350" r="1.1" opacity=".5"/>
-    <circle cx="690" cy="285" r="1.5" opacity=".75"/>
-    <circle cx="820" cy="330" r="1" opacity=".6"/>
-    <circle cx="950" cy="260" r="1.7" opacity=".8"/>
-    <circle cx="1080" cy="315" r="1.2" opacity=".55"/>
-    <circle cx="1190" cy="275" r="1.5" opacity=".75"/>
-    <circle cx="1370" cy="320" r="1" opacity=".6"/>
-    <circle cx="1510" cy="290" r="1.5" opacity=".8"/>
-
-</g>
-
-
-<!-- brighter stars -->
-
-<g fill="#fff5d8">
-
-    <circle cx="235" cy="225" r="2.8"/>
-    <circle cx="610" cy="245" r="2.2"/>
-    <circle cx="1015" cy="210" r="2.7"/>
-    <circle cx="1280" cy="245" r="2.3"/>
-    <circle cx="1450" cy="350" r="2.4"/>
-
-    <g opacity=".75">
-        <path d="M330 110 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
-        <path d="M890 220 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
-        <path d="M1200 130 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
-        <path d="M1470 190 l2 8 8 2 -8 2 -2 8 -2-8 -8-2 8-2z"/>
-    </g>
-
-</g>
-
-
-<!-- =====================================================
-     MOON
-     ===================================================== -->
-
-<circle
-    cx="1280"
-    cy="155"
-    r="170"
-    fill="url(#moonGlow)"
-    filter="url(#blurMoon)"
-/>
-
-<circle
-    id="moon"
-    cx="1280"
-    cy="155"
-    r="61"
-    fill="url(#moonGradient)"
-/>
-
-<!-- subtle moon craters -->
-
-<g fill="#aaa38f" opacity=".18">
-
-    <ellipse cx="1252" cy="130" rx="12" ry="7"/>
-    <ellipse cx="1305" cy="145" rx="9" ry="13"/>
-    <ellipse cx="1275" cy="178" rx="14" ry="9"/>
-    <ellipse cx="1300" cy="190" rx="6" ry="5"/>
-    <ellipse cx="1250" cy="180" rx="6" ry="4"/>
-
-</g>
-
-
-<!-- =====================================================
-     CLOUDS
-     ===================================================== -->
-
-<g
-    class="cloud-group"
-    fill="#76739d"
-    opacity=".15"
-    filter="url(#blurCloud)"
->
-
-    <ellipse cx="1090" cy="185" rx="210" ry="45"/>
-    <ellipse cx="1240" cy="210" rx="240" ry="52"/>
-    <ellipse cx="1380" cy="190" rx="180" ry="42"/>
-
-</g>
-
-
-<g
-    class="cloud-group two"
-    fill="#9b7ba6"
-    opacity=".13"
-    filter="url(#blurCloud)"
->
-
-    <ellipse cx="230" cy="390" rx="270" ry="55"/>
-    <ellipse cx="450" cy="360" rx="250" ry="45"/>
-    <ellipse cx="610" cy="410" rx="300" ry="55"/>
-
-</g>
-
-
-<g
-    class="cloud-group three"
-    fill="#8b72a4"
-    opacity=".11"
-    filter="url(#blurCloud)"
->
-
-    <ellipse cx="1040" cy="410" rx="310" ry="60"/>
-    <ellipse cx="1320" cy="380" rx="270" ry="50"/>
-    <ellipse cx="1500" cy="420" rx="250" ry="60"/>
-
-</g>
-
-
-<!-- =====================================================
-     DISTANT HORIZON LIGHTS
-     ===================================================== -->
-
-<g fill="#ffd887">
-
-    <circle cx="190" cy="585" r="2.2" opacity=".7"/>
-    <circle cx="215" cy="575" r="1.7" opacity=".55"/>
-    <circle cx="242" cy="590" r="2.4" opacity=".65"/>
-    <circle cx="275" cy="570" r="1.5" opacity=".55"/>
-    <circle cx="310" cy="582" r="2" opacity=".65"/>
-
-    <circle cx="1340" cy="575" r="1.8" opacity=".55"/>
-    <circle cx="1370" cy="585" r="2.2" opacity=".7"/>
-    <circle cx="1405" cy="568" r="1.4" opacity=".5"/>
-    <circle cx="1430" cy="590" r="2" opacity=".65"/>
-
-</g>
-
-
-<!-- =====================================================
-     BACK MOUNTAINS
-     ===================================================== -->
-
-<path
-    d="
-    M0 610
-    L150 505
-    L250 565
-    L370 455
-    L510 560
-    L650 470
-    L790 570
-    L920 465
-    L1060 550
-    L1190 430
-    L1320 545
-    L1450 470
-    L1600 565
-    L1600 700
-    L0 700 Z
-    "
-    fill="#17162f"
-    opacity=".72"
-/>
-
-
-<!-- nearer mountains -->
-
-<path
-    d="
-    M0 665
-    L125 545
-    L245 630
-    L385 505
-    L535 635
-    L700 535
-    L830 650
-    L1010 520
-    L1140 635
-    L1300 515
-    L1450 625
-    L1600 535
-    L1600 735
-    L0 735 Z
-    "
-    fill="url(#mountain)"
-/>
-
-
-<!-- mountain haze -->
-
-<path
-    d="
-    M0 630
-    Q400 570 800 635
-    T1600 610
-    L1600 700
-    Q1100 665 800 700
-    T0 690 Z
-    "
-    fill="#77709b"
-    opacity=".08"
-/>
-
-
-<!-- =====================================================
-     RIVER / LAKE
-     ===================================================== -->
-
-<path
-    d="
-    M610 610
-    C675 640 720 665 770 690
-    C850 730 900 760 875 900
-
-    L1380 900
-    C1240 810 1150 755 1050 710
-    C970 675 920 640 905 610
-    Z
-    "
-    fill="url(#water)"
-/>
-
-
-<!-- broad water atmosphere -->
-
-<path
-    d="
-    M700 620
-    C780 650 840 685 880 715
-    C930 750 990 810 1030 900
-    L1260 900
-    C1160 805 1070 745 970 690
-    C900 650 850 625 800 610
-    Z
-    "
-    fill="#313566"
-    opacity=".15"
-/>
-
-
-<!-- =====================================================
-     MOON REFLECTION
-     ===================================================== -->
-
-<g class="reflection" fill="#f7dca2">
-
-    <ellipse cx="850" cy="635" rx="40" ry="5" opacity=".42"/>
-    <ellipse cx="865" cy="650" rx="55" ry="4" opacity=".34"/>
-    <ellipse cx="880" cy="668" rx="68" ry="4" opacity=".29"/>
-    <ellipse cx="895" cy="688" rx="83" ry="4" opacity=".25"/>
-    <ellipse cx="915" cy="710" rx="105" ry="4" opacity=".22"/>
-    <ellipse cx="940" cy="735" rx="130" ry="4" opacity=".18"/>
-    <ellipse cx="970" cy="765" rx="160" ry="4" opacity=".14"/>
-    <ellipse cx="1010" cy="805" rx="205" ry="4" opacity=".1"/>
-
-</g>
-
-
-<!-- =====================================================
-     WATER RIPPLE DETAIL
-     ===================================================== -->
-
-<g
-    class="water"
-    fill="none"
-    stroke="#9ca6d5"
-    stroke-width="2"
-    opacity=".25"
->
-
-    <path d="M710 675 Q810 665 900 680"/>
-    <path d="M690 695 Q810 683 930 700"/>
-    <path d="M665 720 Q810 705 960 725"/>
-    <path d="M630 750 Q810 730 1000 755"/>
-    <path d="M590 785 Q810 760 1050 790"/>
-    <path d="M550 825 Q810 795 1110 830"/>
-    <path d="M510 865 Q810 830 1160 870"/>
-
-</g>
-
-
-<!-- =====================================================
-     FOREGROUND
-     ===================================================== -->
-
-<path
-    d="
-    M0 710
-    Q100 650 190 700
-    Q280 745 370 685
-    Q450 640 540 710
-    Q610 750 680 715
-    Q750 680 820 730
-    Q900 770 990 720
-    Q1080 675 1160 720
-    Q1250 760 1340 700
-    Q1450 640 1600 700
-    L1600 900
-    L0 900 Z
-    "
-    fill="#03050d"
-/>
-
-
-<!-- =====================================================
-     TREES
-     ===================================================== -->
-
-<g fill="#02030a">
-
-    <path d="M70 750 L115 470 L160 750 Z"/>
-    <path d="M25 790 L110 540 L195 790 Z"/>
-
-    <path d="M190 780 L230 590 L270 780 Z"/>
-    <path d="M1450 790 L1510 470 L1570 790 Z"/>
-    <path d="M1380 810 L1500 545 L1610 810 Z"/>
-
-    <path d="M1280 810 L1330 610 L1380 810 Z"/>
-
-</g>
-
-
-<!-- branches -->
-
-<g
-    fill="none"
-    stroke="#02030a"
-    stroke-width="12"
-    stroke-linecap="round"
->
-
-    <path d="M110 650 Q60 580 15 565"/>
-    <path d="M125 625 Q180 555 215 540"/>
-    <path d="M1510 640 Q1450 575 1400 560"/>
-    <path d="M1500 610 Q1550 545 1600 525"/>
-
-</g>
-
-
-<!-- =====================================================
-     FOREGROUND GLOW / FIREFLIES
-     ===================================================== -->
-
-<g class="firefly" fill="#ffd58a">
-    <circle cx="190" cy="740" r="3"/>
-    <circle cx="330" cy="680" r="2"/>
-    <circle cx="1260" cy="735" r="3"/>
-    <circle cx="1380" cy="690" r="2"/>
-    <circle cx="470" cy="750" r="2"/>
-    <circle cx="1160" cy="690" r="2"/>
-</g>
-
-
-<!-- subtle center glow behind gift -->
-
-<ellipse
-    cx="800"
-    cy="690"
-    rx="260"
-    ry="110"
-    fill="url(#giftGlow)"
-/>
-
-
-</svg>
-</div>
-
-
-<!-- =======================================================
-     PAGE
-     ======================================================= -->
-
-<main class="page">
-
-<div class="container">
-
-<section id="welcome">
-
-    <div class="eyebrow">
-        A little world made for you
+    <div class="stars">
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
     </div>
 
-    <h1 class="title">
-        Kunjii Sammanam
-    </h1>
+    <div class="moon"></div>
 
-    <p class="subtitle">
-        For Kunjii Kuttyy
-    </p>
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
 
-    <p class="small-line">
-        A little something
-    </p>
+    <div class="mountains">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="mountain m4"></div>
+        <div class="mountain m5"></div>
+        <div class="mountain m6"></div>
+        <div class="mountain m7"></div>
+    </div>
 
+    <div class="horizon-haze"></div>
 
-    <div
-        class="gift-area"
-        onclick="openBox()"
-    >
+    <div class="river"></div>
 
-        <div class="gift-light"></div>
+    <div class="tree left"></div>
+    <div class="tree right"></div>
 
-        <div
-            class="gift"
-            id="gift"
-        >
+    <div class="foreground">
+        <span class="flower"></span>
+        <span class="flower"></span>
+        <span class="flower"></span>
+        <span class="flower"></span>
+        <span class="flower"></span>
+        <span class="flower"></span>
+    </div>
 
-            <div class="bow"></div>
+</div>
 
-            <div class="gift-lid"></div>
+<!-- =========================================================
+     WELCOME
+========================================================= -->
 
-            <div class="gift-body"></div>
+<main class="container">
 
-            <div class="gift-ribbon"></div>
+    <section class="welcome" id="welcome">
+
+        <div class="eyebrow">
+            A LITTLE WORLD MADE FOR YOU
+        </div>
+
+        <h1 class="title">
+            Kunjii Sammanam
+        </h1>
+
+        <div class="subtitle">
+            For Kunjii Kuttyy
+        </div>
+
+        <div class="small-text">
+            A little something
+        </div>
+
+        <div class="gift-wrap" id="gift">
+
+            <div class="gift-glow"></div>
+
+            <div class="gift">
+
+                <div class="lid"></div>
+
+                <div class="bow">
+                    <span></span>
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
+        <button class="open-button" onclick="openBox()">
+            OPEN THE SAMMANAM
+            <span>♡</span>
+        </button>
 
+    </section>
 
-    <button
-        class="open-button"
-        onclick="openBox()"
-    >
-        OPEN THE SAMMANAM
-    </button>
+    <!-- =====================================================
+         GIFT CONTENT
+    ====================================================== -->
 
-</section>
+    <section class="gift-content" id="giftContent">
 
-
-<!-- =====================================================
-     CONTENT
-     ===================================================== -->
-
-<section
-    class="gift-content"
-    id="giftContent"
->
-
-<div id="menu">
-
-    <h2 class="content-heading">
-        A Little World
-    </h2>
-
-    <p class="content-subheading">
-        Take your time. There's no hurry here.
-    </p>
-
-
-    <div class="menu-grid">
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('letter')"
-        >
-            <div class="menu-icon">💌</div>
-
-            <div class="menu-title">
-                A Letter for You
-            </div>
-
-            <div class="menu-description">
-                Some words I wanted you to have.
-            </div>
+        <div class="room-title">
+            For You
         </div>
 
-
-        <div
-            class="menu-card"
-            onclick="openRoom('memories')"
-        >
-            <div class="menu-icon">📖</div>
-
-            <div class="menu-title">
-                The Things You Don't Remember
-            </div>
-
-            <div class="menu-description">
-                Little moments that stayed with me.
-            </div>
+        <div class="room-subtitle">
+            Take your time. There is no hurry here.
         </div>
 
+        <div class="menu">
 
-        <div
-            class="menu-card"
-            onclick="openRoom('girl')"
-        >
-            <div class="menu-icon">🌱</div>
+            <div class="menu-card"
+                 onclick="openModal(
+                 '💌',
+                 'A Letter for You',
+                 'Some words I wanted you to have, exactly as they are.'
+                 )">
 
-            <div class="menu-title">
-                The Girl I See
+                <div class="menu-icon">💌</div>
+                <div class="menu-title">A Letter for You</div>
+                <div class="menu-desc">
+                    Something written especially for you.
+                </div>
+
             </div>
 
-            <div class="menu-description">
-                The things you may not always see in yourself.
+            <div class="menu-card"
+                 onclick="openModal(
+                 '📖',
+                 'The Things You Don’t Remember',
+                 'Little moments, tiny details, and memories that stayed with me.'
+                 )">
+
+                <div class="menu-icon">📖</div>
+                <div class="menu-title">The Things You Don’t Remember</div>
+                <div class="menu-desc">
+                    Little moments that became important to me.
+                </div>
+
             </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '🌱',
+                 'The Girl I See',
+                 'A little collection of the things I admire about you.'
+                 )">
+
+                <div class="menu-icon">🌱</div>
+                <div class="menu-title">The Girl I See</div>
+                <div class="menu-desc">
+                    The beautiful things you may not always see in yourself.
+                </div>
+
+            </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '🎙️',
+                 'Listen to This',
+                 'Some things sound different when they are spoken instead of written.'
+                 )">
+
+                <div class="menu-icon">🎙️</div>
+                <div class="menu-title">Listen to This</div>
+                <div class="menu-desc">
+                    A few things I wanted you to hear from me.
+                </div>
+
+            </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '✍️',
+                 'Words I Couldn’t Say',
+                 'Thoughts that found their way onto paper before they found their way into words.'
+                 )">
+
+                <div class="menu-icon">✍️</div>
+                <div class="menu-title">Words I Couldn’t Say</div>
+                <div class="menu-desc">
+                    Poems, thoughts and little pieces of me.
+                </div>
+
+            </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '🎥',
+                 'Behind the Box',
+                 'A few moments from the journey of making this little place.'
+                 )">
+
+                <div class="menu-icon">🎥</div>
+                <div class="menu-title">Behind the Box</div>
+                <div class="menu-desc">
+                    The story of how this little world came to exist.
+                </div>
+
+            </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '📸',
+                 'Little Things',
+                 'A collection of moments I wanted to keep.'
+                 )">
+
+                <div class="menu-icon">📸</div>
+                <div class="menu-title">Little Things</div>
+                <div class="menu-desc">
+                    Photos, memories and tiny pieces of time.
+                </div>
+
+            </div>
+
+            <div class="menu-card"
+                 onclick="openModal(
+                 '❤️',
+                 'Open Last',
+                 'Some things are better saved until everything else has been seen.'
+                 )">
+
+                <div class="menu-icon">❤️</div>
+                <div class="menu-title">Open Last</div>
+                <div class="menu-desc">
+                    Keep this one for the very end.
+                </div>
+
+            </div>
+
         </div>
 
+        <button class="back-button" onclick="goBack()">
+            ← BACK TO THE NIGHT
+        </button>
 
-        <div
-            class="menu-card"
-            onclick="openRoom('voice')"
-        >
-            <div class="menu-icon">🎙️</div>
+    </section>
 
-            <div class="menu-title">
-                Listen to This
-            </div>
-
-            <div class="menu-description">
-                Some things sound different when spoken.
-            </div>
-        </div>
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('words')"
-        >
-            <div class="menu-icon">✍️</div>
-
-            <div class="menu-title">
-                Words I Couldn't Say
-            </div>
-
-            <div class="menu-description">
-                Things that became easier to write.
-            </div>
-        </div>
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('behind')"
-        >
-            <div class="menu-icon">🎥</div>
-
-            <div class="menu-title">
-                Behind the Box
-            </div>
-
-            <div class="menu-description">
-                The story of making this little place.
-            </div>
-        </div>
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('photos')"
-        >
-            <div class="menu-icon">📸</div>
-
-            <div class="menu-title">
-                Little Things
-            </div>
-
-            <div class="menu-description">
-                Moments worth keeping.
-            </div>
-        </div>
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('secret')"
-        >
-            <div class="menu-icon">🗝️</div>
-
-            <div class="menu-title">
-                A Little Secret
-            </div>
-
-            <div class="menu-description">
-                There's something hidden here.
-            </div>
-        </div>
-
-
-        <div
-            class="menu-card"
-            onclick="openRoom('final')"
-        >
-            <div class="menu-icon">❤️</div>
-
-            <div class="menu-title">
-                Open Last
-            </div>
-
-            <div class="menu-description">
-                Some things are better saved for the end.
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     ROOMS
-     ===================================================== -->
-
-
-<div class="room" id="room-letter">
-
-<div class="room-box">
-
-    <div class="room-icon">💌</div>
-
-    <h2 class="room-title">
-        A Letter for You
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            This is where your real letter will live.
-        </p>
-
-        <br>
-
-        <p>
-            Not a letter asking you for anything.
-            Just words I wanted you to have.
-        </p>
-
-    </div>
-
-    <button
-        class="back-button"
-        onclick="backToMenu()"
-    >
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-memories">
-
-<div class="room-box">
-
-    <div class="room-icon">📖</div>
-
-    <h2 class="room-title">
-        The Things You Don't Remember
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            The tiny moments that probably meant
-            nothing to you at the time.
-        </p>
-
-        <br>
-
-        <p>
-            Somehow, they stayed with me.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-girl">
-
-<div class="room-box">
-
-    <div class="room-icon">🌱</div>
-
-    <h2 class="room-title">
-        The Girl I See
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            For the parts of yourself you sometimes
-            find difficult to love.
-        </p>
-
-        <br>
-
-        <p>
-            I want this room to remind you that
-            your worth isn't measured by perfection.
-        </p>
-
-        <br>
-
-        <p>
-            I'll fill it with the little things
-            I genuinely admire about you.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-voice">
-
-<div class="room-box">
-
-    <div class="room-icon">🎙️</div>
-
-    <h2 class="room-title">
-        Listen to This
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            Some things deserve to be heard
-            instead of read.
-        </p>
-
-        <br>
-
-        <p>
-            Your voice recordings will live here.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-words">
-
-<div class="room-box">
-
-    <div class="room-icon">✍️</div>
-
-    <h2 class="room-title">
-        Words I Couldn't Say
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            Poems, thoughts and pieces of writing
-            that found their way onto paper.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-behind">
-
-<div class="room-box">
-
-    <div class="room-icon">🎥</div>
-
-    <h2 class="room-title">
-        Behind the Box
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            Before this became a little world,
-            it was just an empty file.
-        </p>
-
-        <br>
-
-        <p>
-            This room will hold the journey:
-            the experiments, mistakes, tiny victories
-            and the moments behind the making.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-photos">
-
-<div class="room-box">
-
-    <div class="room-icon">📸</div>
-
-    <h2 class="room-title">
-        Little Things
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            A visual little memory box.
-        </p>
-
-        <br>
-
-        <p>
-            Photographs, screenshots and moments
-            that deserve to stay somewhere.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-secret">
-
-<div class="room-box">
-
-    <div class="room-icon">🗝️</div>
-
-    <h2 class="room-title">
-        A Little Secret
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            You found the secret room.
-        </p>
-
-        <br>
-
-        <p>
-            What belongs here?
-        </p>
-
-        <br>
-
-        <p>
-            I'm keeping that secret for now.
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-<div class="room" id="room-final">
-
-<div class="room-box">
-
-    <div class="final-heart">
-        ❤️
-    </div>
-
-    <h2 class="room-title">
-        Open Last
-    </h2>
-
-    <div class="room-text">
-
-        <p>
-            If you've reached here,
-            you've seen almost everything.
-        </p>
-
-        <br>
-
-        <p>
-            But I hope this little world leaves
-            you with something more important
-            than anything inside it.
-        </p>
-
-        <br>
-
-        <p>
-            You are worthy of beautiful things.
-        </p>
-
-        <br>
-
-        <p>
-            Not because someone chose you.
-            Not because someone loves you.
-            Not because you became perfect.
-        </p>
-
-        <br>
-
-        <p>
-            Simply because you are you.
-        </p>
-
-        <br>
-
-        <p>
-            And on the days when you find yourself
-            difficult to love, I hope you remember
-            to be gentle with yourself.
-        </p>
-
-        <br>
-
-        <p>
-            — With love,
-            <br>
-            Sourav
-        </p>
-
-    </div>
-
-    <button class="back-button" onclick="backToMenu()">
-        ← BACK
-    </button>
-
-</div>
-
-</div>
-
-
-</section>
-
-</div>
 </main>
 
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-icon" id="modalIcon">💌</div>
+
+        <h2 class="modal-title" id="modalTitle">
+            A Letter for You
+        </h2>
+
+        <p class="modal-text" id="modalText">
+            Coming soon...
+        </p>
+
+        <button class="close-button" onclick="closeModal()">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
 
 <script>
 
-/* =========================================================
-   OPENING
-   ========================================================= */
-
-function openBox() {
+function openBox(){
 
     const gift = document.getElementById("gift");
     const welcome = document.getElementById("welcome");
     const content = document.getElementById("giftContent");
 
-    gift.classList.add("open");
+    gift.classList.add("opening");
 
-    setTimeout(() => {
+    setTimeout(function(){
         welcome.classList.add("hide");
-    }, 650);
+    },650);
 
-    setTimeout(() => {
+    setTimeout(function(){
 
-        content.style.display = "block";
+        content.style.display = "flex";
 
-        requestAnimationFrame(() => {
+        requestAnimationFrame(function(){
             content.classList.add("show");
         });
 
-    }, 1050);
+    },1000);
 }
 
 
-/* =========================================================
-   ROOMS
-   ========================================================= */
+function goBack(){
 
-function openRoom(name) {
+    const gift = document.getElementById("gift");
+    const welcome = document.getElementById("welcome");
+    const content = document.getElementById("giftContent");
 
-    document.getElementById("menu").style.display = "none";
+    content.classList.remove("show");
 
-    document.querySelectorAll(".room").forEach(room => {
-        room.classList.remove("active");
-    });
+    setTimeout(function(){
 
-    const room = document.getElementById("room-" + name);
+        content.style.display = "none";
 
-    if (room) {
-        room.classList.add("active");
+        welcome.classList.remove("hide");
+
+        gift.classList.remove("opening");
+
+    },500);
+}
+
+
+function openModal(icon,title,text){
+
+    document.getElementById("modalIcon").textContent = icon;
+
+    document.getElementById("modalTitle").textContent = title;
+
+    document.getElementById("modalText").textContent = text;
+
+    document.getElementById("modal").classList.add("show");
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
+}
+
+
+document.getElementById("modal").addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+            closeModal();
+        }
+
     }
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================================
-   BACK
-   ========================================================= */
-
-function backToMenu() {
-
-    document.querySelectorAll(".room").forEach(room => {
-        room.classList.remove("active");
-    });
-
-    document.getElementById("menu").style.display = "block";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+);
 
 </script>
 
