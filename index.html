@@ -3,13 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050719">
 <title>Kunjii Sammanam</title>
 
 <style>
 /* =========================================================
    KUNJII SAMMANAM
-   A Little World Made With Love
+   A little world made with love.
    ========================================================= */
+
+:root {
+    --night: #050719;
+    --deep: #080a21;
+    --violet: #211438;
+    --moon: #fff3cf;
+    --gold: #f5c978;
+    --rose: #d85b78;
+    --glass: rgba(12, 12, 30, .48);
+    --line: rgba(255,255,255,.16);
+}
 
 * {
     box-sizing: border-box;
@@ -24,662 +36,308 @@ body {
 }
 
 body {
+    min-height: 100vh;
     overflow-x: hidden;
+    background: var(--night);
+    color: white;
     font-family: Georgia, "Times New Roman", serif;
-    color: #fff;
-    background: #02030b;
 }
 
 /* =========================================================
-   NIGHT WORLD
+   SCENE
    ========================================================= */
 
-.night-world {
+.scene {
     position: fixed;
     inset: 0;
     overflow: hidden;
+    z-index: 0;
     background:
         radial-gradient(
-            circle at 82% 14%,
-            rgba(255, 238, 196, 0.16),
-            transparent 24%
-        ),
-        radial-gradient(
-            ellipse at 50% 65%,
-            rgba(75, 71, 150, 0.14),
-            transparent 55%
+            ellipse at 50% 45%,
+            rgba(55,58,125,.28),
+            transparent 52%
         ),
         linear-gradient(
             180deg,
-            #02030a 0%,
-            #05091b 30%,
-            #090d27 55%,
-            #120d2d 76%,
+            #03040d 0%,
+            #06091b 34%,
+            #0b0d28 57%,
+            #1a1030 78%,
             #03040b 100%
         );
-    z-index: 0;
 }
 
-/* subtle atmospheric glow */
-
-.atmosphere {
+.scene svg {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(
-            ellipse at 50% 75%,
-            rgba(166, 98, 170, 0.12),
-            transparent 50%
-        ),
-        radial-gradient(
-            ellipse at 15% 45%,
-            rgba(50, 70, 145, 0.12),
-            transparent 45%
-        );
-    animation: atmosphereBreath 12s ease-in-out infinite alternate;
-}
-
-@keyframes atmosphereBreath {
-    from {
-        opacity: 0.65;
-    }
-    to {
-        opacity: 1;
-    }
+    width: 100%;
+    height: 100%;
 }
 
 /* =========================================================
-   STARS
+   SVG ANIMATIONS
    ========================================================= */
 
-.stars {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+#moon {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: moonBreath 8s ease-in-out infinite;
 }
 
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 7px rgba(255,255,255,.7);
-    animation: twinkle var(--duration) ease-in-out infinite;
-    animation-delay: var(--delay);
-}
-
-.star.big {
-    width: 3px;
-    height: 3px;
-}
-
-@keyframes twinkle {
-    0%, 100% {
-        opacity: .25;
-        transform: scale(.7);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-}
-
-/* =========================================================
-   MOON
-   ========================================================= */
-
-.moon {
-    position: absolute;
-    top: 8%;
-    right: 11%;
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    z-index: 3;
-
-    background:
-        radial-gradient(
-            circle at 35% 32%,
-            #fffef5 0%,
-            #f8f0d2 45%,
-            #d8d1b7 78%,
-            #aaa692 100%
-        );
-
-    box-shadow:
-        0 0 20px rgba(255,248,220,.7),
-        0 0 55px rgba(230,225,255,.35),
-        0 0 110px rgba(190,190,240,.18);
-
-    animation: moonGlow 8s ease-in-out infinite;
-}
-
-.moon::before,
-.moon::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(150,145,125,.12);
-}
-
-.moon::before {
-    width: 17px;
-    height: 11px;
-    left: 20px;
-    top: 24px;
-}
-
-.moon::after {
-    width: 12px;
-    height: 16px;
-    right: 19px;
-    bottom: 21px;
-}
-
-.moon-haze {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(255,245,215,.14),
-        rgba(220,220,250,.05) 35%,
-        transparent 70%
-    );
-    z-index: 2;
-    animation: haze 9s ease-in-out infinite alternate;
-}
-
-@keyframes moonGlow {
-    0%, 100% {
+@keyframes moonBreath {
+    0%,100% {
         transform: scale(1);
-        box-shadow:
-            0 0 20px rgba(255,248,220,.65),
-            0 0 55px rgba(230,225,255,.3),
-            0 0 110px rgba(190,190,240,.15);
+        opacity: .94;
     }
 
     50% {
         transform: scale(1.025);
-        box-shadow:
-            0 0 25px rgba(255,248,220,.8),
-            0 0 70px rgba(230,225,255,.4),
-            0 0 130px rgba(190,190,240,.2);
-    }
-}
-
-@keyframes haze {
-    from {
-        transform: translate(0,0) scale(1);
-        opacity: .65;
-    }
-    to {
-        transform: translate(-18px,8px) scale(1.08);
         opacity: 1;
     }
 }
 
-/* =========================================================
-   CLOUDS / MIST
-   ========================================================= */
-
-.cloud-layer {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 4;
-    pointer-events: none;
+.cloud-group {
+    animation: cloudFloat 45s linear infinite;
 }
 
-.cloud {
-    position: absolute;
-    width: 430px;
-    height: 85px;
-    border-radius: 50%;
-    background: rgba(150,155,190,.07);
-    filter: blur(25px);
-    animation: cloudMove linear infinite;
+.cloud-group.two {
+    animation-duration: 60s;
+    animation-delay: -22s;
 }
 
-.cloud:nth-child(1) {
-    top: 27%;
-    left: -20%;
-    animation-duration: 55s;
-}
-
-.cloud:nth-child(2) {
-    top: 43%;
-    left: 35%;
-    width: 550px;
-    height: 110px;
+.cloud-group.three {
     animation-duration: 70s;
-    animation-delay: -30s;
+    animation-delay: -40s;
 }
 
-.cloud:nth-child(3) {
-    top: 57%;
-    left: 70%;
-    width: 480px;
-    animation-duration: 62s;
-    animation-delay: -18s;
-}
-
-@keyframes cloudMove {
+@keyframes cloudFloat {
     from {
-        transform: translateX(-10%);
+        transform: translateX(-80px);
     }
 
     to {
-        transform: translateX(125vw);
+        transform: translateX(100px);
     }
 }
 
-/* =========================================================
-   MOUNTAINS
-   ========================================================= */
-
-.mountains {
-    position: absolute;
-    left: -5%;
-    right: -5%;
-    bottom: 25%;
-    height: 34%;
-    z-index: 5;
+.water {
+    animation: waterShift 5s ease-in-out infinite;
 }
 
-.mountain {
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-left: 180px solid transparent;
-    border-right: 180px solid transparent;
-    border-bottom: 300px solid rgba(8,9,23,.9);
+@keyframes waterShift {
+    0%,100% {
+        opacity: .48;
+        transform: translateX(-5px);
+    }
+
+    50% {
+        opacity: .8;
+        transform: translateX(5px);
+    }
 }
 
-.mountain:nth-child(1) {
-    left: -5%;
-    border-left-width: 240px;
-    border-right-width: 240px;
-    border-bottom-width: 260px;
+.reflection {
+    animation: reflectionPulse 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
-.mountain:nth-child(2) {
-    left: 18%;
-    border-left-width: 260px;
-    border-right-width: 260px;
-    border-bottom-width: 340px;
+@keyframes reflectionPulse {
+    0%,100% {
+        opacity: .35;
+        transform: scaleX(.85);
+    }
+
+    50% {
+        opacity: .72;
+        transform: scaleX(1.1);
+    }
 }
 
-.mountain:nth-child(3) {
-    left: 45%;
-    border-left-width: 230px;
-    border-right-width: 230px;
-    border-bottom-width: 285px;
+.firefly {
+    animation: firefly 4s ease-in-out infinite;
 }
 
-.mountain:nth-child(4) {
-    right: -4%;
-    border-left-width: 280px;
-    border-right-width: 280px;
-    border-bottom-width: 330px;
+.firefly:nth-child(2n) {
+    animation-delay: -1.5s;
 }
 
-.mountain-back {
-    opacity: .45;
-    transform: translateY(18px);
-    filter: blur(2px);
-}
-
-/* =========================================================
-   RIVER
-   ========================================================= */
-
-.river {
-    position: absolute;
-    left: -10%;
-    bottom: -5%;
-    width: 120%;
-    height: 47%;
-    z-index: 6;
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            170deg,
-            rgba(17,20,52,.2),
-            rgba(28,31,79,.72) 45%,
-            rgba(7,9,25,.96)
-        );
-
-    clip-path: polygon(
-        38% 0%,
-        59% 0%,
-        64% 15%,
-        58% 30%,
-        67% 45%,
-        57% 60%,
-        64% 76%,
-        53% 100%,
-        22% 100%,
-        34% 78%,
-        28% 61%,
-        39% 45%,
-        32% 30%,
-        42% 14%
-    );
-}
-
-.water-line {
-    position: absolute;
-    height: 2px;
-    border-radius: 50%;
-    background: rgba(170,185,235,.18);
-    filter: blur(.5px);
-    animation: waterMove 5s ease-in-out infinite;
-}
-
-.water-line:nth-child(1) {
-    width: 210px;
-    top: 22%;
-    left: 42%;
-}
-
-.water-line:nth-child(2) {
-    width: 280px;
-    top: 34%;
-    left: 35%;
-    animation-delay: -1s;
-}
-
-.water-line:nth-child(3) {
-    width: 350px;
-    top: 49%;
-    left: 30%;
-    animation-delay: -2s;
-}
-
-.water-line:nth-child(4) {
-    width: 420px;
-    top: 66%;
-    left: 24%;
+.firefly:nth-child(3n) {
     animation-delay: -3s;
 }
 
-.water-line:nth-child(5) {
-    width: 520px;
-    top: 82%;
-    left: 17%;
-    animation-delay: -4s;
-}
-
-@keyframes waterMove {
-    0%, 100% {
-        transform: translateX(-12px);
-        opacity: .25;
+@keyframes firefly {
+    0%,100% {
+        opacity: .1;
+        transform: translateY(4px);
     }
 
     50% {
-        transform: translateX(12px);
-        opacity: .65;
+        opacity: .9;
+        transform: translateY(-10px);
     }
 }
 
 /* =========================================================
-   MOON REFLECTION
-   ========================================================= */
-
-.moon-reflection {
-    position: absolute;
-    top: 5%;
-    left: 45%;
-    width: 90px;
-    height: 72%;
-    z-index: 7;
-    opacity: .55;
-    transform: rotate(5deg);
-
-    background:
-        repeating-linear-gradient(
-            180deg,
-            rgba(255,244,195,.48) 0 3px,
-            transparent 3px 10px
-        );
-
-    filter: blur(3px);
-    animation: reflectionMove 4s ease-in-out infinite;
-}
-
-@keyframes reflectionMove {
-    0%, 100% {
-        transform: rotate(5deg) scaleX(.85);
-        opacity: .35;
-    }
-
-    50% {
-        transform: rotate(5deg) scaleX(1.15);
-        opacity: .65;
-    }
-}
-
-/* =========================================================
-   FOREGROUND LAND
-   ========================================================= */
-
-.foreground {
-    position: absolute;
-    left: -5%;
-    right: -5%;
-    bottom: 0;
-    height: 24%;
-    z-index: 8;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 0%,
-            rgba(12,13,32,.4),
-            transparent 55%
-        ),
-        linear-gradient(
-            180deg,
-            rgba(3,4,12,.4),
-            #020208 65%
-        );
-
-    clip-path: polygon(
-        0 40%,
-        8% 32%,
-        17% 42%,
-        25% 27%,
-        35% 40%,
-        44% 30%,
-        54% 43%,
-        63% 28%,
-        73% 40%,
-        82% 25%,
-        92% 38%,
-        100% 28%,
-        100% 100%,
-        0 100%
-    );
-}
-
-/* =========================================================
-   TREES
-   ========================================================= */
-
-.tree {
-    position: absolute;
-    bottom: 11%;
-    width: 0;
-    height: 0;
-    z-index: 9;
-
-    border-left: 35px solid transparent;
-    border-right: 35px solid transparent;
-    border-bottom: 120px solid #02030a;
-}
-
-.tree::after {
-    content: "";
-    position: absolute;
-    left: -27px;
-    top: 35px;
-    border-left: 27px solid transparent;
-    border-right: 27px solid transparent;
-    border-bottom: 90px solid #02030a;
-}
-
-.tree.t1 {
-    left: 5%;
-    transform: scale(1.25);
-}
-
-.tree.t2 {
-    left: 16%;
-    transform: scale(.75);
-}
-
-.tree.t3 {
-    right: 10%;
-    transform: scale(1.35);
-}
-
-.tree.t4 {
-    right: 20%;
-    transform: scale(.75);
-}
-
-/* =========================================================
-   MAIN CONTENT
+   CONTENT
    ========================================================= */
 
 .page {
     position: relative;
-    min-height: 100vh;
     z-index: 20;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 45px 20px;
+    padding: 42px 18px;
 }
 
 .container {
-    width: min(920px, 100%);
+    width: min(1000px, 100%);
     text-align: center;
 }
 
 /* =========================================================
-   WELCOME
+   OPENING
    ========================================================= */
 
 #welcome {
     transition:
-        opacity .8s ease,
-        transform .8s ease;
+        opacity .9s ease,
+        transform .9s ease;
 }
 
 #welcome.hide {
     opacity: 0;
-    transform: translateY(-25px);
+    transform: translateY(-30px) scale(.98);
     pointer-events: none;
 }
 
 .eyebrow {
-    font-size: .72rem;
-    letter-spacing: .38em;
+    font-size: .68rem;
+    letter-spacing: .48em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.55);
-    margin-bottom: 22px;
+    color: rgba(255,242,207,.75);
+    margin-bottom: 18px;
+    text-shadow: 0 0 18px rgba(255,220,150,.3);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+    content: "—";
+    margin: 0 13px;
+    color: rgba(245,201,120,.55);
 }
 
 .title {
-    font-size: clamp(3rem, 9vw, 6.8rem);
+    font-size: clamp(3.1rem, 8vw, 7.2rem);
     font-weight: normal;
-    letter-spacing: .035em;
-    line-height: .95;
+    line-height: .94;
+    letter-spacing: .025em;
+
+    color: #fff5dd;
 
     text-shadow:
-        0 0 20px rgba(255,255,255,.14),
-        0 8px 35px rgba(0,0,0,.7);
+        0 0 12px rgba(255,225,166,.35),
+        0 0 38px rgba(255,195,120,.18),
+        0 12px 45px rgba(0,0,0,.72);
 }
 
 .subtitle {
-    margin-top: 20px;
-    font-size: clamp(1rem, 2.4vw, 1.35rem);
-    color: rgba(255,255,255,.72);
-    letter-spacing: .08em;
+    margin-top: 22px;
+    font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+    font-style: italic;
+    color: rgba(255,245,222,.88);
+}
+
+.subtitle::before,
+.subtitle::after {
+    content: "✦";
+    font-size: .65em;
+    margin: 0 15px;
+    color: var(--gold);
 }
 
 .small-line {
-    margin-top: 12px;
-    font-style: italic;
+    margin-top: 11px;
+    font-size: .78rem;
+    letter-spacing: .2em;
     color: rgba(255,255,255,.48);
+    text-transform: uppercase;
 }
 
 /* =========================================================
-   GIFT BOX
+   GIFT
    ========================================================= */
 
-.gift-wrapper {
+.gift-area {
     position: relative;
-    width: 220px;
-    height: 210px;
-    margin: 48px auto 30px;
+    width: 260px;
+    height: 225px;
+    margin: 40px auto 27px;
     cursor: pointer;
-    filter:
-        drop-shadow(0 25px 35px rgba(0,0,0,.55));
 }
 
-.gift-glow {
+.gift-light {
     position: absolute;
-    inset: 15px;
+    width: 230px;
+    height: 130px;
+    left: 15px;
+    top: 50px;
     border-radius: 50%;
-    background: rgba(255,205,135,.15);
-    filter: blur(30px);
-    animation: giftGlow 3s ease-in-out infinite;
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,199,103,.42),
+            rgba(255,160,80,.12) 38%,
+            transparent 72%
+        );
+    filter: blur(12px);
+    animation: giftLight 3.5s ease-in-out infinite;
 }
 
-@keyframes giftGlow {
+@keyframes giftLight {
     0%,100% {
-        transform: scale(.9);
-        opacity: .45;
+        opacity: .55;
+        transform: scale(.88);
     }
+
     50% {
-        transform: scale(1.15);
-        opacity: .9;
+        opacity: 1;
+        transform: scale(1.12);
     }
 }
 
 .gift {
     position: absolute;
-    width: 150px;
-    height: 115px;
-    left: 35px;
-    bottom: 15px;
+    width: 165px;
+    height: 140px;
+    left: 47px;
+    bottom: 14px;
+    filter: drop-shadow(0 22px 25px rgba(0,0,0,.65));
 }
 
 .gift-body {
     position: absolute;
-    width: 150px;
-    height: 105px;
+    left: 7px;
     bottom: 0;
+    width: 151px;
+    height: 104px;
     border-radius: 5px 5px 12px 12px;
 
     background:
         linear-gradient(
             90deg,
-            #6f1d3e,
-            #a63d5e 50%,
-            #641934
+            #7b183f 0%,
+            #b83d62 45%,
+            #d35170 52%,
+            #8a2148 100%
         );
 
     box-shadow:
-        inset 0 0 20px rgba(255,255,255,.08);
+        inset 0 0 25px rgba(255,255,255,.1),
+        0 5px 12px rgba(0,0,0,.3);
 }
 
 .gift-body::after {
@@ -687,138 +345,182 @@ body {
     position: absolute;
     left: 66px;
     top: 0;
-    width: 18px;
+    width: 20px;
     height: 100%;
-    background: rgba(248,210,150,.75);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(205,145,62,.8),
+            #f6cf7c,
+            rgba(255,222,139,.72)
+        );
+    box-shadow: 0 0 15px rgba(255,208,108,.35);
 }
 
 .gift-lid {
     position: absolute;
-    width: 166px;
+    left: 0;
+    top: 17px;
+    width: 165px;
     height: 31px;
-    left: -8px;
-    top: -15px;
-    border-radius: 7px;
+    border-radius: 6px;
+    z-index: 4;
 
     background:
         linear-gradient(
             90deg,
-            #812344,
-            #b94768 50%,
-            #76203f
+            #8b2049,
+            #ce4e70 50%,
+            #8c2048
         );
 
-    z-index: 3;
-    transform-origin: left center;
+    box-shadow:
+        0 5px 9px rgba(0,0,0,.3);
+    transform-origin: 12% 100%;
+
     transition:
-        transform 1.1s cubic-bezier(.2,.8,.2,1),
-        opacity .6s ease;
+        transform 1s cubic-bezier(.2,.8,.2,1);
 }
 
 .gift-lid::after {
     content: "";
     position: absolute;
-    left: 73px;
+    left: 72px;
     top: 0;
-    width: 18px;
+    width: 20px;
     height: 100%;
-    background: rgba(248,210,150,.82);
+    background: #f5ca72;
 }
 
-.ribbon-vertical {
+.gift-ribbon {
     position: absolute;
-    width: 20px;
-    height: 115px;
-    left: 65px;
+    left: 73px;
     bottom: 0;
-    background: rgba(248,210,150,.78);
-    z-index: 2;
+    width: 20px;
+    height: 104px;
+    z-index: 3;
+    background:
+        linear-gradient(
+            90deg,
+            #d79d4b,
+            #f8d47e,
+            #dca34f
+        );
 }
 
 .bow {
     position: absolute;
-    left: 50%;
-    top: -43px;
-    width: 65px;
-    height: 35px;
-    transform: translateX(-50%);
     z-index: 5;
+    left: 82px;
+    top: -3px;
+    width: 0;
+    height: 0;
 }
 
 .bow::before,
 .bow::after {
     content: "";
     position: absolute;
-    width: 38px;
-    height: 25px;
-    top: 4px;
-    border: 7px solid #e4bb75;
+    width: 47px;
+    height: 28px;
+    border: 8px solid #f0c36c;
+    box-shadow: 0 0 12px rgba(255,210,120,.3);
 }
 
 .bow::before {
-    right: 27px;
-    border-radius: 50% 20% 50% 50%;
+    right: 0;
+    border-radius: 60% 20% 60% 40%;
     transform: rotate(18deg);
 }
 
 .bow::after {
-    left: 27px;
-    border-radius: 20% 50% 50% 50%;
+    left: 0;
+    border-radius: 20% 60% 40% 60%;
     transform: rotate(-18deg);
 }
 
-.gift.opening .gift-lid {
-    transform: translate(-35px,-55px) rotate(-16deg);
+.gift.open .gift-lid {
+    transform: translate(-32px,-58px) rotate(-18deg);
 }
 
-.gift.opening {
-    animation: giftOpen .9s ease forwards;
+.gift.open {
+    animation: giftRise .9s ease;
 }
 
-@keyframes giftOpen {
-    50% {
-        transform: translateY(-8px);
+@keyframes giftRise {
+    0% {
+        transform: translateY(0);
     }
+
+    45% {
+        transform: translateY(-12px);
+    }
+
     100% {
         transform: translateY(0);
     }
 }
 
 /* =========================================================
-   OPEN BUTTON
+   BUTTON
    ========================================================= */
 
 .open-button {
-    border: 1px solid rgba(255,255,255,.28);
-    background: rgba(255,255,255,.07);
-    color: white;
-    padding: 15px 28px;
+    position: relative;
+    border: 1px solid rgba(255,224,167,.32);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.1),
+            rgba(255,190,110,.06)
+        );
+    color: #fff3d7;
+    padding: 15px 31px;
     border-radius: 999px;
+
     font-family: inherit;
-    font-size: .75rem;
-    letter-spacing: .2em;
+    font-size: .7rem;
+    letter-spacing: .23em;
+
     cursor: pointer;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.3),
+        inset 0 0 20px rgba(255,255,255,.025);
+
     transition:
-        background .3s ease,
         transform .3s ease,
+        background .3s ease,
         box-shadow .3s ease;
 }
 
+.open-button::after {
+    content: "♥";
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    color: #f4ca79;
+    font-size: .75rem;
+}
+
 .open-button:hover {
-    background: rgba(255,255,255,.14);
     transform: translateY(-3px);
-    box-shadow: 0 10px 35px rgba(0,0,0,.3);
+    background: rgba(255,213,145,.12);
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.4),
+        0 0 25px rgba(255,190,100,.12);
 }
 
 /* =========================================================
-   CONTENT WORLD
+   CONTENT
    ========================================================= */
 
 .gift-content {
     display: none;
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(30px);
     transition:
         opacity .8s ease,
         transform .8s ease;
@@ -831,80 +533,99 @@ body {
 }
 
 .content-heading {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(2.3rem, 6vw, 4.6rem);
     font-weight: normal;
-    margin-bottom: 10px;
+    color: #fff0d3;
+    text-shadow: 0 0 30px rgba(255,208,130,.16);
 }
 
 .content-subheading {
-    color: rgba(255,255,255,.55);
+    margin-top: 12px;
+    margin-bottom: 36px;
+    color: rgba(255,255,255,.58);
     font-style: italic;
-    margin-bottom: 35px;
 }
 
 /* =========================================================
-   MENU
+   CARDS
    ========================================================= */
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
 .menu-card {
-    position: relative;
-    padding: 25px 20px;
-    min-height: 150px;
+    min-height: 165px;
+    padding: 25px 18px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(255,255,255,.11);
-    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid rgba(255,221,169,.13);
+    border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.075),
+            rgba(255,255,255,.085),
             rgba(255,255,255,.025)
         );
 
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(17px);
 
     cursor: pointer;
 
     transition:
         transform .35s ease,
-        background .35s ease,
         border-color .35s ease,
+        background .35s ease,
         box-shadow .35s ease;
 }
 
+.menu-card::before {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: -75px;
+    right: -65px;
+    border-radius: 50%;
+    background: rgba(255,203,127,.08);
+    filter: blur(15px);
+}
+
 .menu-card:hover {
-    transform: translateY(-6px);
-    background: rgba(255,255,255,.105);
-    border-color: rgba(255,255,255,.22);
-    box-shadow: 0 18px 45px rgba(0,0,0,.28);
+    transform: translateY(-7px);
+    border-color: rgba(255,218,157,.3);
+    background: rgba(255,255,255,.1);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.3),
+        0 0 25px rgba(255,191,106,.06);
 }
 
 .menu-icon {
     font-size: 2rem;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
 }
 
 .menu-title {
-    font-size: 1.05rem;
-    margin-bottom: 7px;
+    font-size: 1.02rem;
+    color: #fff1d8;
+    margin-bottom: 8px;
 }
 
 .menu-description {
+    max-width: 250px;
+    font-size: .78rem;
+    line-height: 1.55;
     color: rgba(255,255,255,.5);
-    font-size: .82rem;
-    line-height: 1.5;
-    max-width: 300px;
 }
 
 /* =========================================================
@@ -923,7 +644,7 @@ body {
 @keyframes roomIn {
     from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(25px);
     }
 
     to {
@@ -935,938 +656,1239 @@ body {
 .room-box {
     width: min(760px, 100%);
     margin: auto;
-    padding: clamp(28px, 6vw, 55px);
+    padding: clamp(30px, 6vw, 60px);
 
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 25px;
+    border-radius: 28px;
+    border: 1px solid rgba(255,220,166,.14);
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.025)
+            rgba(16,15,37,.7),
+            rgba(10,9,27,.5)
         );
 
-    backdrop-filter: blur(20px);
-    box-shadow: 0 25px 70px rgba(0,0,0,.3);
+    backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        inset 0 1px rgba(255,255,255,.04);
 }
 
 .room-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+    font-size: 2.7rem;
+    margin-bottom: 18px;
 }
 
 .room-title {
-    font-size: clamp(2rem,5vw,3.4rem);
+    font-size: clamp(2rem,5vw,3.5rem);
     font-weight: normal;
-    margin-bottom: 20px;
+    color: #fff0d5;
+    margin-bottom: 25px;
 }
 
 .room-text {
-    color: rgba(255,255,255,.72);
-    line-height: 1.9;
+    color: rgba(255,255,255,.73);
     font-size: 1rem;
+    line-height: 1.9;
 }
 
 .back-button {
-    margin-top: 30px;
-    border: 1px solid rgba(255,255,255,.18);
-    background: transparent;
-    color: rgba(255,255,255,.7);
-    padding: 11px 20px;
+    margin-top: 35px;
+    padding: 11px 22px;
     border-radius: 999px;
+
+    border: 1px solid rgba(255,255,255,.17);
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.7);
+
     font-family: inherit;
     cursor: pointer;
+
+    transition:
+        background .3s ease,
+        transform .3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255,255,255,.09);
+    transform: translateY(-2px);
 }
 
 /* =========================================================
-   FINAL ROOM
+   FINAL
    ========================================================= */
-
-.final-room .room-box {
-    padding-top: 65px;
-    padding-bottom: 65px;
-}
 
 .final-heart {
     font-size: 3rem;
-    animation: heartBeat 2s ease-in-out infinite;
+    margin-bottom: 10px;
+    animation: heartPulse 2.2s ease-in-out infinite;
 }
 
-@keyframes heartBeat {
+@keyframes heartPulse {
     0%,100% {
         transform: scale(1);
     }
+
     50% {
-        transform: scale(1.12);
+        transform: scale(1.13);
     }
 }
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
    ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
 
     .page {
         padding: 35px 14px;
     }
 
-    .moon {
-        width: 65px;
-        height: 65px;
-        right: 8%;
-        top: 7%;
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .moon-haze {
-        width: 220px;
-        height: 220px;
-        right: -20px;
+    .moon-large {
+        transform: scale(.72);
+        transform-origin: center;
     }
+
+    .title {
+        font-size: clamp(3rem, 12vw, 5rem);
+    }
+}
+
+@media (max-width: 480px) {
 
     .menu-grid {
         grid-template-columns: 1fr;
     }
 
     .menu-card {
-        min-height: 125px;
+        min-height: 135px;
     }
 
-    .gift-wrapper {
-        transform: scale(.88);
-        margin-top: 35px;
-    }
-
-    .river {
-        height: 43%;
-    }
-}
-
-@media (max-width: 420px) {
-
-    .title {
-        font-size: 3rem;
+    .gift-area {
+        transform: scale(.9);
+        margin-top: 30px;
+        margin-bottom: 18px;
     }
 
     .eyebrow {
-        letter-spacing: .25em;
+        letter-spacing: .28em;
     }
 
-    .room-box {
-        padding: 28px 20px;
+    .eyebrow::before,
+    .eyebrow::after {
+        display: none;
     }
 }
 </style>
 </head>
 
+
 <body>
 
 <!-- =======================================================
-     NIGHT WORLD
+     CINEMATIC NIGHT WORLD
      ======================================================= -->
 
-<div class="night-world">
+<div class="scene">
 
-    <div class="atmosphere"></div>
+<svg
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+>
 
-    <div class="stars" id="stars"></div>
+<defs>
 
-    <div class="moon"></div>
-    <div class="moon-haze"></div>
+    <!-- Sky -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#02030c"/>
+        <stop offset="35%" stop-color="#080c24"/>
+        <stop offset="65%" stop-color="#111338"/>
+        <stop offset="82%" stop-color="#241337"/>
+        <stop offset="100%" stop-color="#03040c"/>
+    </linearGradient>
 
-    <div class="cloud-layer">
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-        <div class="cloud"></div>
-    </div>
+    <!-- Moon -->
+    <radialGradient id="moonGradient">
+        <stop offset="0%" stop-color="#fffef0"/>
+        <stop offset="55%" stop-color="#fff4d3"/>
+        <stop offset="82%" stop-color="#e7d9b8"/>
+        <stop offset="100%" stop-color="#b7ab91"/>
+    </radialGradient>
 
-    <div class="mountains">
-        <div class="mountain mountain-back"></div>
-        <div class="mountain"></div>
-        <div class="mountain"></div>
-        <div class="mountain"></div>
-    </div>
+    <!-- Moon glow -->
+    <radialGradient id="moonGlow">
+        <stop offset="0%" stop-color="#fff2c9" stop-opacity=".42"/>
+        <stop offset="35%" stop-color="#dcdcff" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#b8b9ff" stop-opacity="0"/>
+    </radialGradient>
 
-    <div class="river">
-        <div class="moon-reflection"></div>
+    <!-- Water -->
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#161a42"/>
+        <stop offset="45%" stop-color="#111638"/>
+        <stop offset="100%" stop-color="#040713"/>
+    </linearGradient>
 
-        <div class="water-line"></div>
-        <div class="water-line"></div>
-        <div class="water-line"></div>
-        <div class="water-line"></div>
-        <div class="water-line"></div>
-    </div>
+    <!-- Mountain -->
+    <linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#15152e"/>
+        <stop offset="100%" stop-color="#050611"/>
+    </linearGradient>
 
-    <div class="foreground"></div>
+    <!-- Cloud -->
+    <filter id="blurCloud">
+        <feGaussianBlur stdDeviation="17"/>
+    </filter>
 
-    <div class="tree t1"></div>
-    <div class="tree t2"></div>
-    <div class="tree t3"></div>
-    <div class="tree t4"></div>
+    <!-- Moon blur -->
+    <filter id="blurMoon">
+        <feGaussianBlur stdDeviation="25"/>
+    </filter>
 
+    <!-- Water blur -->
+    <filter id="waterBlur">
+        <feGaussianBlur stdDeviation="2"/>
+    </filter>
+
+    <!-- Gift light -->
+    <radialGradient id="giftGlow">
+        <stop offset="0%" stop-color="#ffd889" stop-opacity=".65"/>
+        <stop offset="50%" stop-color="#e99b66" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#d75d83" stop-opacity="0"/>
+    </radialGradient>
+
+</defs>
+
+
+<!-- =====================================================
+     SKY
+     ===================================================== -->
+
+<rect width="1600" height="900" fill="url(#sky)"/>
+
+
+<!-- subtle upper atmosphere -->
+
+<ellipse
+    cx="800"
+    cy="390"
+    rx="720"
+    ry="310"
+    fill="#4c477f"
+    opacity=".08"
+/>
+
+<ellipse
+    cx="780"
+    cy="600"
+    rx="700"
+    ry="220"
+    fill="#9a5c9d"
+    opacity=".07"
+/>
+
+
+<!-- =====================================================
+     STARS
+     ===================================================== -->
+
+<g fill="#fff">
+
+    <circle cx="80" cy="100" r="1.6" opacity=".75"/>
+    <circle cx="145" cy="210" r="1.2" opacity=".55"/>
+    <circle cx="220" cy="78" r="1.8" opacity=".9"/>
+    <circle cx="310" cy="150" r="1.1" opacity=".5"/>
+    <circle cx="390" cy="65" r="1.4" opacity=".8"/>
+    <circle cx="455" cy="205" r="1.2" opacity=".6"/>
+    <circle cx="530" cy="112" r="1.8" opacity=".7"/>
+    <circle cx="620" cy="170" r="1" opacity=".5"/>
+    <circle cx="710" cy="82" r="1.4" opacity=".8"/>
+    <circle cx="805" cy="145" r="1.1" opacity=".65"/>
+    <circle cx="910" cy="72" r="1.5" opacity=".8"/>
+    <circle cx="1010" cy="180" r="1" opacity=".55"/>
+    <circle cx="1090" cy="105" r="1.7" opacity=".75"/>
+    <circle cx="1160" cy="195" r="1.1" opacity=".6"/>
+    <circle cx="1300" cy="82" r="1.5" opacity=".8"/>
+    <circle cx="1400" cy="165" r="1.2" opacity=".6"/>
+    <circle cx="1510" cy="95" r="1.8" opacity=".8"/>
+
+    <circle cx="60" cy="310" r="1.1" opacity=".6"/>
+    <circle cx="180" cy="280" r="1.7" opacity=".75"/>
+    <circle cx="280" cy="330" r="1" opacity=".55"/>
+    <circle cx="410" cy="290" r="1.5" opacity=".8"/>
+    <circle cx="550" cy="350" r="1.1" opacity=".5"/>
+    <circle cx="690" cy="285" r="1.5" opacity=".75"/>
+    <circle cx="820" cy="330" r="1" opacity=".6"/>
+    <circle cx="950" cy="260" r="1.7" opacity=".8"/>
+    <circle cx="1080" cy="315" r="1.2" opacity=".55"/>
+    <circle cx="1190" cy="275" r="1.5" opacity=".75"/>
+    <circle cx="1370" cy="320" r="1" opacity=".6"/>
+    <circle cx="1510" cy="290" r="1.5" opacity=".8"/>
+
+</g>
+
+
+<!-- brighter stars -->
+
+<g fill="#fff5d8">
+
+    <circle cx="235" cy="225" r="2.8"/>
+    <circle cx="610" cy="245" r="2.2"/>
+    <circle cx="1015" cy="210" r="2.7"/>
+    <circle cx="1280" cy="245" r="2.3"/>
+    <circle cx="1450" cy="350" r="2.4"/>
+
+    <g opacity=".75">
+        <path d="M330 110 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
+        <path d="M890 220 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
+        <path d="M1200 130 l3 10 10 3 -10 3 -3 10 -3-10 -10-3 10-3z"/>
+        <path d="M1470 190 l2 8 8 2 -8 2 -2 8 -2-8 -8-2 8-2z"/>
+    </g>
+
+</g>
+
+
+<!-- =====================================================
+     MOON
+     ===================================================== -->
+
+<circle
+    cx="1280"
+    cy="155"
+    r="170"
+    fill="url(#moonGlow)"
+    filter="url(#blurMoon)"
+/>
+
+<circle
+    id="moon"
+    cx="1280"
+    cy="155"
+    r="61"
+    fill="url(#moonGradient)"
+/>
+
+<!-- subtle moon craters -->
+
+<g fill="#aaa38f" opacity=".18">
+
+    <ellipse cx="1252" cy="130" rx="12" ry="7"/>
+    <ellipse cx="1305" cy="145" rx="9" ry="13"/>
+    <ellipse cx="1275" cy="178" rx="14" ry="9"/>
+    <ellipse cx="1300" cy="190" rx="6" ry="5"/>
+    <ellipse cx="1250" cy="180" rx="6" ry="4"/>
+
+</g>
+
+
+<!-- =====================================================
+     CLOUDS
+     ===================================================== -->
+
+<g
+    class="cloud-group"
+    fill="#76739d"
+    opacity=".15"
+    filter="url(#blurCloud)"
+>
+
+    <ellipse cx="1090" cy="185" rx="210" ry="45"/>
+    <ellipse cx="1240" cy="210" rx="240" ry="52"/>
+    <ellipse cx="1380" cy="190" rx="180" ry="42"/>
+
+</g>
+
+
+<g
+    class="cloud-group two"
+    fill="#9b7ba6"
+    opacity=".13"
+    filter="url(#blurCloud)"
+>
+
+    <ellipse cx="230" cy="390" rx="270" ry="55"/>
+    <ellipse cx="450" cy="360" rx="250" ry="45"/>
+    <ellipse cx="610" cy="410" rx="300" ry="55"/>
+
+</g>
+
+
+<g
+    class="cloud-group three"
+    fill="#8b72a4"
+    opacity=".11"
+    filter="url(#blurCloud)"
+>
+
+    <ellipse cx="1040" cy="410" rx="310" ry="60"/>
+    <ellipse cx="1320" cy="380" rx="270" ry="50"/>
+    <ellipse cx="1500" cy="420" rx="250" ry="60"/>
+
+</g>
+
+
+<!-- =====================================================
+     DISTANT HORIZON LIGHTS
+     ===================================================== -->
+
+<g fill="#ffd887">
+
+    <circle cx="190" cy="585" r="2.2" opacity=".7"/>
+    <circle cx="215" cy="575" r="1.7" opacity=".55"/>
+    <circle cx="242" cy="590" r="2.4" opacity=".65"/>
+    <circle cx="275" cy="570" r="1.5" opacity=".55"/>
+    <circle cx="310" cy="582" r="2" opacity=".65"/>
+
+    <circle cx="1340" cy="575" r="1.8" opacity=".55"/>
+    <circle cx="1370" cy="585" r="2.2" opacity=".7"/>
+    <circle cx="1405" cy="568" r="1.4" opacity=".5"/>
+    <circle cx="1430" cy="590" r="2" opacity=".65"/>
+
+</g>
+
+
+<!-- =====================================================
+     BACK MOUNTAINS
+     ===================================================== -->
+
+<path
+    d="
+    M0 610
+    L150 505
+    L250 565
+    L370 455
+    L510 560
+    L650 470
+    L790 570
+    L920 465
+    L1060 550
+    L1190 430
+    L1320 545
+    L1450 470
+    L1600 565
+    L1600 700
+    L0 700 Z
+    "
+    fill="#17162f"
+    opacity=".72"
+/>
+
+
+<!-- nearer mountains -->
+
+<path
+    d="
+    M0 665
+    L125 545
+    L245 630
+    L385 505
+    L535 635
+    L700 535
+    L830 650
+    L1010 520
+    L1140 635
+    L1300 515
+    L1450 625
+    L1600 535
+    L1600 735
+    L0 735 Z
+    "
+    fill="url(#mountain)"
+/>
+
+
+<!-- mountain haze -->
+
+<path
+    d="
+    M0 630
+    Q400 570 800 635
+    T1600 610
+    L1600 700
+    Q1100 665 800 700
+    T0 690 Z
+    "
+    fill="#77709b"
+    opacity=".08"
+/>
+
+
+<!-- =====================================================
+     RIVER / LAKE
+     ===================================================== -->
+
+<path
+    d="
+    M610 610
+    C675 640 720 665 770 690
+    C850 730 900 760 875 900
+
+    L1380 900
+    C1240 810 1150 755 1050 710
+    C970 675 920 640 905 610
+    Z
+    "
+    fill="url(#water)"
+/>
+
+
+<!-- broad water atmosphere -->
+
+<path
+    d="
+    M700 620
+    C780 650 840 685 880 715
+    C930 750 990 810 1030 900
+    L1260 900
+    C1160 805 1070 745 970 690
+    C900 650 850 625 800 610
+    Z
+    "
+    fill="#313566"
+    opacity=".15"
+/>
+
+
+<!-- =====================================================
+     MOON REFLECTION
+     ===================================================== -->
+
+<g class="reflection" fill="#f7dca2">
+
+    <ellipse cx="850" cy="635" rx="40" ry="5" opacity=".42"/>
+    <ellipse cx="865" cy="650" rx="55" ry="4" opacity=".34"/>
+    <ellipse cx="880" cy="668" rx="68" ry="4" opacity=".29"/>
+    <ellipse cx="895" cy="688" rx="83" ry="4" opacity=".25"/>
+    <ellipse cx="915" cy="710" rx="105" ry="4" opacity=".22"/>
+    <ellipse cx="940" cy="735" rx="130" ry="4" opacity=".18"/>
+    <ellipse cx="970" cy="765" rx="160" ry="4" opacity=".14"/>
+    <ellipse cx="1010" cy="805" rx="205" ry="4" opacity=".1"/>
+
+</g>
+
+
+<!-- =====================================================
+     WATER RIPPLE DETAIL
+     ===================================================== -->
+
+<g
+    class="water"
+    fill="none"
+    stroke="#9ca6d5"
+    stroke-width="2"
+    opacity=".25"
+>
+
+    <path d="M710 675 Q810 665 900 680"/>
+    <path d="M690 695 Q810 683 930 700"/>
+    <path d="M665 720 Q810 705 960 725"/>
+    <path d="M630 750 Q810 730 1000 755"/>
+    <path d="M590 785 Q810 760 1050 790"/>
+    <path d="M550 825 Q810 795 1110 830"/>
+    <path d="M510 865 Q810 830 1160 870"/>
+
+</g>
+
+
+<!-- =====================================================
+     FOREGROUND
+     ===================================================== -->
+
+<path
+    d="
+    M0 710
+    Q100 650 190 700
+    Q280 745 370 685
+    Q450 640 540 710
+    Q610 750 680 715
+    Q750 680 820 730
+    Q900 770 990 720
+    Q1080 675 1160 720
+    Q1250 760 1340 700
+    Q1450 640 1600 700
+    L1600 900
+    L0 900 Z
+    "
+    fill="#03050d"
+/>
+
+
+<!-- =====================================================
+     TREES
+     ===================================================== -->
+
+<g fill="#02030a">
+
+    <path d="M70 750 L115 470 L160 750 Z"/>
+    <path d="M25 790 L110 540 L195 790 Z"/>
+
+    <path d="M190 780 L230 590 L270 780 Z"/>
+    <path d="M1450 790 L1510 470 L1570 790 Z"/>
+    <path d="M1380 810 L1500 545 L1610 810 Z"/>
+
+    <path d="M1280 810 L1330 610 L1380 810 Z"/>
+
+</g>
+
+
+<!-- branches -->
+
+<g
+    fill="none"
+    stroke="#02030a"
+    stroke-width="12"
+    stroke-linecap="round"
+>
+
+    <path d="M110 650 Q60 580 15 565"/>
+    <path d="M125 625 Q180 555 215 540"/>
+    <path d="M1510 640 Q1450 575 1400 560"/>
+    <path d="M1500 610 Q1550 545 1600 525"/>
+
+</g>
+
+
+<!-- =====================================================
+     FOREGROUND GLOW / FIREFLIES
+     ===================================================== -->
+
+<g class="firefly" fill="#ffd58a">
+    <circle cx="190" cy="740" r="3"/>
+    <circle cx="330" cy="680" r="2"/>
+    <circle cx="1260" cy="735" r="3"/>
+    <circle cx="1380" cy="690" r="2"/>
+    <circle cx="470" cy="750" r="2"/>
+    <circle cx="1160" cy="690" r="2"/>
+</g>
+
+
+<!-- subtle center glow behind gift -->
+
+<ellipse
+    cx="800"
+    cy="690"
+    rx="260"
+    ry="110"
+    fill="url(#giftGlow)"
+/>
+
+
+</svg>
 </div>
 
 
 <!-- =======================================================
-     MAIN PAGE
+     PAGE
      ======================================================= -->
 
 <main class="page">
+
 <div class="container">
 
-    <!-- WELCOME -->
+<section id="welcome">
 
-    <section id="welcome">
+    <div class="eyebrow">
+        A little world made for you
+    </div>
 
-        <div class="eyebrow">
-            A little world made for you
-        </div>
+    <h1 class="title">
+        Kunjii Sammanam
+    </h1>
 
-        <h1 class="title">
-            Kunjii Sammanam
-        </h1>
+    <p class="subtitle">
+        For Kunjii Kuttyy
+    </p>
 
-        <p class="subtitle">
-            For Kunjii Kuttyy
-        </p>
-
-        <p class="small-line">
-            A little something.
-        </p>
+    <p class="small-line">
+        A little something
+    </p>
 
 
-        <div class="gift-wrapper" onclick="openBox()">
-
-            <div class="gift-glow"></div>
-
-            <div class="gift" id="gift">
-
-                <div class="bow"></div>
-
-                <div class="gift-lid"></div>
-
-                <div class="gift-body"></div>
-
-                <div class="ribbon-vertical"></div>
-
-            </div>
-
-        </div>
-
-        <button class="open-button" onclick="openBox()">
-            OPEN THE SAMMANAM
-        </button>
-
-    </section>
-
-
-    <!-- ===================================================
-         GIFT CONTENT
-         =================================================== -->
-
-    <section
-        class="gift-content"
-        id="giftContent"
+    <div
+        class="gift-area"
+        onclick="openBox()"
     >
 
-        <div id="menu">
-
-            <h2 class="content-heading">
-                A Little World
-            </h2>
-
-            <p class="content-subheading">
-                Take your time. There's no hurry here.
-            </p>
-
-
-            <div class="menu-grid">
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('letter')"
-                >
-                    <div class="menu-icon">💌</div>
-
-                    <div class="menu-title">
-                        A Letter for You
-                    </div>
-
-                    <div class="menu-description">
-                        Some words I wanted you to have.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('memories')"
-                >
-                    <div class="menu-icon">📖</div>
-
-                    <div class="menu-title">
-                        The Things You Don't Remember
-                    </div>
-
-                    <div class="menu-description">
-                        Little moments that stayed with me.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('girl')"
-                >
-                    <div class="menu-icon">🌱</div>
-
-                    <div class="menu-title">
-                        The Girl I See
-                    </div>
-
-                    <div class="menu-description">
-                        The things you may not always see in yourself.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('voice')"
-                >
-                    <div class="menu-icon">🎙️</div>
-
-                    <div class="menu-title">
-                        Listen to This
-                    </div>
-
-                    <div class="menu-description">
-                        Some things sound different when spoken.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('words')"
-                >
-                    <div class="menu-icon">✍️</div>
-
-                    <div class="menu-title">
-                        Words I Couldn't Say
-                    </div>
-
-                    <div class="menu-description">
-                        A few pieces of my heart on paper.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('behind')"
-                >
-                    <div class="menu-icon">🎥</div>
-
-                    <div class="menu-title">
-                        Behind the Box
-                    </div>
-
-                    <div class="menu-description">
-                        The little journey behind this little world.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('photos')"
-                >
-                    <div class="menu-icon">📸</div>
-
-                    <div class="menu-title">
-                        Little Things
-                    </div>
-
-                    <div class="menu-description">
-                        Moments worth keeping.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('secret')"
-                >
-                    <div class="menu-icon">🗝️</div>
-
-                    <div class="menu-title">
-                        A Little Secret
-                    </div>
-
-                    <div class="menu-description">
-                        There's something hidden here.
-                    </div>
-                </div>
-
-
-                <div
-                    class="menu-card"
-                    onclick="openRoom('final')"
-                >
-                    <div class="menu-icon">❤️</div>
-
-                    <div class="menu-title">
-                        Open Last
-                    </div>
-
-                    <div class="menu-description">
-                        Some things are better saved for the end.
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             LETTER
-             ================================================= -->
+        <div class="gift-light"></div>
 
         <div
-            class="room"
-            id="room-letter"
+            class="gift"
+            id="gift"
         >
 
-            <div class="room-box">
+            <div class="bow"></div>
 
-                <div class="room-icon">💌</div>
+            <div class="gift-lid"></div>
 
-                <h2 class="room-title">
-                    A Letter for You
-                </h2>
+            <div class="gift-body"></div>
 
-                <div class="room-text">
-
-                    <p>
-                        This space will hold the letter I want
-                        you to read when the time is right.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Not a letter asking you for anything.
-                        Just a place where I can tell you
-                        what you mean to me.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
-            </div>
+            <div class="gift-ribbon"></div>
 
         </div>
 
+    </div>
 
-        <!-- =================================================
-             MEMORIES
-             ================================================= -->
+
+    <button
+        class="open-button"
+        onclick="openBox()"
+    >
+        OPEN THE SAMMANAM
+    </button>
+
+</section>
+
+
+<!-- =====================================================
+     CONTENT
+     ===================================================== -->
+
+<section
+    class="gift-content"
+    id="giftContent"
+>
+
+<div id="menu">
+
+    <h2 class="content-heading">
+        A Little World
+    </h2>
+
+    <p class="content-subheading">
+        Take your time. There's no hurry here.
+    </p>
+
+
+    <div class="menu-grid">
+
 
         <div
-            class="room"
-            id="room-memories"
+            class="menu-card"
+            onclick="openRoom('letter')"
         >
+            <div class="menu-icon">💌</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">📖</div>
-
-                <h2 class="room-title">
-                    The Things You Don't Remember
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        Some memories don't need to be grand.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Sometimes it's a tiny expression,
-                        a sentence, a moment, a song,
-                        or something you probably forgot
-                        five minutes later.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        I'll put those little things here.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                A Letter for You
             </div>
 
+            <div class="menu-description">
+                Some words I wanted you to have.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             THE GIRL I SEE
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-girl"
+            class="menu-card"
+            onclick="openRoom('memories')"
         >
+            <div class="menu-icon">📖</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">🌱</div>
-
-                <h2 class="room-title">
-                    The Girl I See
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        There may be things about yourself
-                        that you struggle to love.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        This room isn't here to tell you
-                        that you have to be perfect.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        It's here to remind you that your
-                        worth was never dependent on perfection.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        I'll fill this place with the little
-                        things I genuinely admire about you.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                The Things You Don't Remember
             </div>
 
+            <div class="menu-description">
+                Little moments that stayed with me.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             VOICE
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-voice"
+            class="menu-card"
+            onclick="openRoom('girl')"
         >
+            <div class="menu-icon">🌱</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">🎙️</div>
-
-                <h2 class="room-title">
-                    Listen to This
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        There are some things I'd rather
-                        say than type.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Voice recordings will live here.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Just little pieces of a real voice,
-                        saved for you.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                The Girl I See
             </div>
 
+            <div class="menu-description">
+                The things you may not always see in yourself.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             WORDS
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-words"
+            class="menu-card"
+            onclick="openRoom('voice')"
         >
+            <div class="menu-icon">🎙️</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">✍️</div>
-
-                <h2 class="room-title">
-                    Words I Couldn't Say
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        Poems.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Thoughts.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Things that somehow became easier
-                        to write than to say.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                Listen to This
             </div>
 
+            <div class="menu-description">
+                Some things sound different when spoken.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             BEHIND THE BOX
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-behind"
+            class="menu-card"
+            onclick="openRoom('words')"
         >
+            <div class="menu-icon">✍️</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">🎥</div>
-
-                <h2 class="room-title">
-                    Behind the Box
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        Before you saw this little world,
-                        there was just an empty file.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        This room will show the journey
-                        of turning that empty file into
-                        something made especially for you.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        The mistakes, the experiments,
-                        the tiny victories and everything
-                        in between.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                Words I Couldn't Say
             </div>
 
+            <div class="menu-description">
+                Things that became easier to write.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             PHOTOS
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-photos"
+            class="menu-card"
+            onclick="openRoom('behind')"
         >
+            <div class="menu-icon">🎥</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">📸</div>
-
-                <h2 class="room-title">
-                    Little Things
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        A collection of photographs,
-                        screenshots and little moments
-                        worth keeping.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        This room will become a visual
-                        memory box.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                Behind the Box
             </div>
 
+            <div class="menu-description">
+                The story of making this little place.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             SECRET
-             ================================================= -->
 
         <div
-            class="room"
-            id="room-secret"
+            class="menu-card"
+            onclick="openRoom('photos')"
         >
+            <div class="menu-icon">📸</div>
 
-            <div class="room-box">
-
-                <div class="room-icon">🗝️</div>
-
-                <h2 class="room-title">
-                    A Little Secret
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        You found it.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        But I'm not telling you yet
-                        what belongs here.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Some surprises deserve to stay
-                        surprises until the very end.
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                Little Things
             </div>
 
+            <div class="menu-description">
+                Moments worth keeping.
+            </div>
         </div>
 
-
-        <!-- =================================================
-             FINAL
-             ================================================= -->
 
         <div
-            class="room final-room"
-            id="room-final"
+            class="menu-card"
+            onclick="openRoom('secret')"
         >
+            <div class="menu-icon">🗝️</div>
 
-            <div class="room-box">
-
-                <div class="final-heart">
-                    ❤️
-                </div>
-
-                <h2 class="room-title">
-                    Open Last
-                </h2>
-
-                <div class="room-text">
-
-                    <p>
-                        If you've reached here,
-                        you've seen almost everything.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        And there's only one thing
-                        I really wanted this little world
-                        to leave with you.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        You are worthy of beautiful things.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Not because someone chose you.
-                        Not because someone loves you.
-                        Not because you became perfect.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        Simply because you are you.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        And I hope, on the days when
-                        you find yourself difficult to love,
-                        you remember that you deserve
-                        the same kindness you give
-                        to everyone else.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        — With love,
-                        <br>
-                        Sourav
-                    </p>
-
-                </div>
-
-                <button
-                    class="back-button"
-                    onclick="backToMenu()"
-                >
-                    ← BACK
-                </button>
-
+            <div class="menu-title">
+                A Little Secret
             </div>
 
+            <div class="menu-description">
+                There's something hidden here.
+            </div>
         </div>
 
-    </section>
+
+        <div
+            class="menu-card"
+            onclick="openRoom('final')"
+        >
+            <div class="menu-icon">❤️</div>
+
+            <div class="menu-title">
+                Open Last
+            </div>
+
+            <div class="menu-description">
+                Some things are better saved for the end.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ROOMS
+     ===================================================== -->
+
+
+<div class="room" id="room-letter">
+
+<div class="room-box">
+
+    <div class="room-icon">💌</div>
+
+    <h2 class="room-title">
+        A Letter for You
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            This is where your real letter will live.
+        </p>
+
+        <br>
+
+        <p>
+            Not a letter asking you for anything.
+            Just words I wanted you to have.
+        </p>
+
+    </div>
+
+    <button
+        class="back-button"
+        onclick="backToMenu()"
+    >
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-memories">
+
+<div class="room-box">
+
+    <div class="room-icon">📖</div>
+
+    <h2 class="room-title">
+        The Things You Don't Remember
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            The tiny moments that probably meant
+            nothing to you at the time.
+        </p>
+
+        <br>
+
+        <p>
+            Somehow, they stayed with me.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-girl">
+
+<div class="room-box">
+
+    <div class="room-icon">🌱</div>
+
+    <h2 class="room-title">
+        The Girl I See
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            For the parts of yourself you sometimes
+            find difficult to love.
+        </p>
+
+        <br>
+
+        <p>
+            I want this room to remind you that
+            your worth isn't measured by perfection.
+        </p>
+
+        <br>
+
+        <p>
+            I'll fill it with the little things
+            I genuinely admire about you.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-voice">
+
+<div class="room-box">
+
+    <div class="room-icon">🎙️</div>
+
+    <h2 class="room-title">
+        Listen to This
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            Some things deserve to be heard
+            instead of read.
+        </p>
+
+        <br>
+
+        <p>
+            Your voice recordings will live here.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-words">
+
+<div class="room-box">
+
+    <div class="room-icon">✍️</div>
+
+    <h2 class="room-title">
+        Words I Couldn't Say
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            Poems, thoughts and pieces of writing
+            that found their way onto paper.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-behind">
+
+<div class="room-box">
+
+    <div class="room-icon">🎥</div>
+
+    <h2 class="room-title">
+        Behind the Box
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            Before this became a little world,
+            it was just an empty file.
+        </p>
+
+        <br>
+
+        <p>
+            This room will hold the journey:
+            the experiments, mistakes, tiny victories
+            and the moments behind the making.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-photos">
+
+<div class="room-box">
+
+    <div class="room-icon">📸</div>
+
+    <h2 class="room-title">
+        Little Things
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            A visual little memory box.
+        </p>
+
+        <br>
+
+        <p>
+            Photographs, screenshots and moments
+            that deserve to stay somewhere.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-secret">
+
+<div class="room-box">
+
+    <div class="room-icon">🗝️</div>
+
+    <h2 class="room-title">
+        A Little Secret
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            You found the secret room.
+        </p>
+
+        <br>
+
+        <p>
+            What belongs here?
+        </p>
+
+        <br>
+
+        <p>
+            I'm keeping that secret for now.
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+<div class="room" id="room-final">
+
+<div class="room-box">
+
+    <div class="final-heart">
+        ❤️
+    </div>
+
+    <h2 class="room-title">
+        Open Last
+    </h2>
+
+    <div class="room-text">
+
+        <p>
+            If you've reached here,
+            you've seen almost everything.
+        </p>
+
+        <br>
+
+        <p>
+            But I hope this little world leaves
+            you with something more important
+            than anything inside it.
+        </p>
+
+        <br>
+
+        <p>
+            You are worthy of beautiful things.
+        </p>
+
+        <br>
+
+        <p>
+            Not because someone chose you.
+            Not because someone loves you.
+            Not because you became perfect.
+        </p>
+
+        <br>
+
+        <p>
+            Simply because you are you.
+        </p>
+
+        <br>
+
+        <p>
+            And on the days when you find yourself
+            difficult to love, I hope you remember
+            to be gentle with yourself.
+        </p>
+
+        <br>
+
+        <p>
+            — With love,
+            <br>
+            Sourav
+        </p>
+
+    </div>
+
+    <button class="back-button" onclick="backToMenu()">
+        ← BACK
+    </button>
+
+</div>
+
+</div>
+
+
+</section>
 
 </div>
 </main>
 
 
 <script>
-/* =========================================================
-   STAR GENERATOR
-   ========================================================= */
-
-const starsContainer = document.getElementById("stars");
-
-for (let i = 0; i < 115; i++) {
-
-    const star = document.createElement("span");
-
-    star.className = "star";
-
-    if (Math.random() > 0.9) {
-        star.classList.add("big");
-    }
-
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 72 + "%";
-
-    star.style.setProperty(
-        "--duration",
-        (2.5 + Math.random() * 5) + "s"
-    );
-
-    star.style.setProperty(
-        "--delay",
-        (-Math.random() * 6) + "s"
-    );
-
-    starsContainer.appendChild(star);
-}
-
 
 /* =========================================================
-   OPEN GIFT
+   OPENING
    ========================================================= */
 
 function openBox() {
@@ -1875,7 +1897,7 @@ function openBox() {
     const welcome = document.getElementById("welcome");
     const content = document.getElementById("giftContent");
 
-    gift.classList.add("opening");
+    gift.classList.add("open");
 
     setTimeout(() => {
         welcome.classList.add("hide");
@@ -1894,10 +1916,10 @@ function openBox() {
 
 
 /* =========================================================
-   OPEN ROOM
+   ROOMS
    ========================================================= */
 
-function openRoom(roomName) {
+function openRoom(name) {
 
     document.getElementById("menu").style.display = "none";
 
@@ -1905,11 +1927,10 @@ function openRoom(roomName) {
         room.classList.remove("active");
     });
 
-    const selectedRoom =
-        document.getElementById("room-" + roomName);
+    const room = document.getElementById("room-" + name);
 
-    if (selectedRoom) {
-        selectedRoom.classList.add("active");
+    if (room) {
+        room.classList.add("active");
     }
 
     window.scrollTo({
@@ -1920,7 +1941,7 @@ function openRoom(roomName) {
 
 
 /* =========================================================
-   BACK TO MENU
+   BACK
    ========================================================= */
 
 function backToMenu() {
@@ -1936,7 +1957,8 @@ function backToMenu() {
         behavior: "smooth"
     });
 }
+
 </script>
 
 </body>
-</html>
+   </html>
