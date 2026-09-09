@@ -18,14 +18,14 @@ html,body{
 }
 
 body{
-    overflow-x:hidden;
+    overflow:hidden;
     font-family:Georgia,"Times New Roman",serif;
-    color:#fff;
-    background:#030511;
+    color:white;
+    background:#08051b;
 }
 
 /* =========================================================
-   THE NIGHT WORLD
+   CINEMATIC NIGHT WORLD
 ========================================================= */
 
 .scene{
@@ -35,14 +35,18 @@ body{
 
     background:
         linear-gradient(
-            rgba(8,5,25,.28),
-            rgba(5,3,18,.42)
+            180deg,
+            rgba(7,4,27,.18),
+            rgba(13,5,35,.38) 55%,
+            rgba(5,2,18,.72)
         ),
-        url("https://images.pexels.com/photos/18928472/pexels-photo-18928472.jpeg?cs=srgb&dl=pexels-bylukemiller-18928472.jpg&fm=jpg")
+        url("https://images.pexels.com/photos/38790727/pexels-photo-38790727.jpeg?cs=srgb&dl=pexels-tasso-mitsarakis-4849571-38790727.jpg&fm=jpg")
         center center / cover no-repeat;
 
-    background-attachment:fixed;
+    z-index:0;
 }
+
+/* Deep purple cinematic grading */
 
 .scene::before{
     content:"";
@@ -51,19 +55,27 @@ body{
 
     background:
         radial-gradient(
-            circle at 72% 17%,
-            rgba(255,218,170,.18),
-            transparent 15%
+            ellipse at 50% 48%,
+            rgba(127,76,170,.22),
+            transparent 48%
+        ),
+        radial-gradient(
+            circle at 78% 20%,
+            rgba(255,184,190,.20),
+            transparent 20%
         ),
         linear-gradient(
-            180deg,
-            transparent 42%,
-            rgba(10,5,28,.18) 70%,
-            rgba(3,2,12,.55) 100%
+            90deg,
+            rgba(10,3,30,.45),
+            transparent 28%,
+            transparent 72%,
+            rgba(10,3,30,.42)
         );
 
     pointer-events:none;
 }
+
+/* Warm cinematic glow near the gift */
 
 .scene::after{
     content:"";
@@ -72,19 +84,145 @@ body{
 
     background:
         radial-gradient(
-            ellipse at 50% 72%,
-            rgba(255,183,119,.13),
-            transparent 25%
+            ellipse at 50% 70%,
+            rgba(255,174,117,.18),
+            transparent 23%
         ),
         linear-gradient(
-            90deg,
-            rgba(3,2,12,.35),
-            transparent 25%,
-            transparent 75%,
-            rgba(3,2,12,.35)
+            180deg,
+            transparent 58%,
+            rgba(8,2,22,.18) 72%,
+            rgba(3,1,12,.62) 100%
         );
 
     pointer-events:none;
+}
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:#fff7ed;
+    box-shadow:0 0 9px rgba(255,235,220,.9);
+    animation:twinkle 4s ease-in-out infinite;
+}
+
+.star.big{
+    width:4px;
+    height:4px;
+    box-shadow:
+        0 0 7px #fff,
+        0 0 18px rgba(255,209,188,.9);
+}
+
+.star:nth-child(1){left:6%;top:15%;animation-delay:.4s}
+.star:nth-child(2){left:13%;top:29%;animation-delay:1.2s}
+.star:nth-child(3){left:21%;top:11%;animation-delay:2s}
+.star:nth-child(4){left:30%;top:20%;animation-delay:.8s}
+.star:nth-child(5){left:39%;top:9%;animation-delay:1.7s}
+.star:nth-child(6){left:48%;top:26%;animation-delay:.2s}
+.star:nth-child(7){left:57%;top:12%;animation-delay:2.3s}
+.star:nth-child(8){left:65%;top:23%;animation-delay:1s}
+.star:nth-child(9){left:74%;top:9%;animation-delay:.6s}
+.star:nth-child(10){left:83%;top:29%;animation-delay:1.8s}
+.star:nth-child(11){left:92%;top:15%;animation-delay:2.5s}
+.star:nth-child(12){left:17%;top:42%;animation-delay:1.1s}
+.star:nth-child(13){left:35%;top:35%;animation-delay:2.1s}
+.star:nth-child(14){left:54%;top:38%;animation-delay:.7s}
+.star:nth-child(15){left:89%;top:42%;animation-delay:1.5s}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.3;
+        transform:scale(.7);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.35);
+    }
+}
+
+/* =========================================================
+   FLOATING PETALS
+========================================================= */
+
+.petals{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+}
+
+.petal{
+    position:absolute;
+    width:7px;
+    height:12px;
+    border-radius:70% 30% 70% 30%;
+    background:rgba(255,164,213,.75);
+    box-shadow:0 0 12px rgba(255,126,204,.45);
+    animation:floatPetal 9s linear infinite;
+}
+
+.petal:nth-child(1){
+    left:20%;
+    top:38%;
+    animation-delay:1s;
+}
+
+.petal:nth-child(2){
+    left:72%;
+    top:45%;
+    animation-delay:4s;
+}
+
+.petal:nth-child(3){
+    left:30%;
+    top:60%;
+    animation-delay:2s;
+}
+
+.petal:nth-child(4){
+    left:82%;
+    top:62%;
+    animation-delay:6s;
+}
+
+.petal:nth-child(5){
+    left:57%;
+    top:34%;
+    animation-delay:3s;
+}
+
+@keyframes floatPetal{
+    0%{
+        transform:translate3d(0,-20px,0) rotate(0);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    85%{
+        opacity:.65;
+    }
+
+    100%{
+        transform:translate3d(70px,300px,0) rotate(240deg);
+        opacity:0;
+    }
 }
 
 /* =========================================================
@@ -99,55 +237,90 @@ body{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:40px 20px;
+    padding:35px 18px;
 }
 
 .welcome{
-    width:min(900px,100%);
-    transition:opacity .6s,transform .8s;
+    width:min(1050px,100%);
+    transition:
+        opacity .65s ease,
+        transform .8s ease;
 }
 
 .welcome.hide{
     opacity:0;
-    transform:translateY(-25px) scale(.98);
+    transform:translateY(-30px) scale(.97);
     pointer-events:none;
 }
 
 .eyebrow{
-    font-size:12px;
-    letter-spacing:6px;
+    font-size:11px;
+    letter-spacing:7px;
     text-transform:uppercase;
-    color:rgba(255,239,220,.82);
+    color:rgba(255,239,225,.88);
+    text-shadow:0 0 18px rgba(255,205,179,.5);
     margin-bottom:18px;
-    text-shadow:0 0 18px rgba(255,215,173,.3);
+}
+
+.decor{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:12px;
+    color:#f5c58e;
+    opacity:.85;
+}
+
+.decor-line{
+    width:75px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(245,197,142,.75)
+    );
+}
+
+.decor-line.right{
+    transform:rotate(180deg);
+}
+
+.decor-heart{
+    font-size:13px;
+    text-shadow:0 0 12px rgba(255,180,130,.8);
 }
 
 .title{
-    font-size:clamp(52px,8vw,104px);
+    font-size:clamp(48px,7.8vw,105px);
     line-height:.95;
     font-weight:normal;
     letter-spacing:-3px;
-    color:#fff4df;
+    color:#fff1d7;
+
     text-shadow:
-        0 0 8px rgba(255,230,190,.55),
-        0 0 28px rgba(255,205,154,.28),
-        0 10px 35px rgba(0,0,0,.5);
+        0 0 8px rgba(255,225,190,.8),
+        0 0 30px rgba(255,184,140,.38),
+        0 8px 35px rgba(0,0,0,.55);
 }
 
 .subtitle{
     margin-top:25px;
-    font-size:clamp(21px,3vw,31px);
+    font-size:clamp(22px,3vw,32px);
     font-style:italic;
-    color:#f6e9df;
-    text-shadow:0 0 14px rgba(255,221,191,.25);
+    color:#fff0e1;
+
+    text-shadow:
+        0 0 15px rgba(255,205,180,.45),
+        0 5px 18px rgba(0,0,0,.45);
 }
 
 .small-text{
     margin-top:13px;
-    font-size:12px;
-    letter-spacing:4px;
+    font-size:11px;
+    letter-spacing:6px;
     text-transform:uppercase;
-    color:rgba(255,239,227,.7);
+    color:rgba(255,232,219,.76);
 }
 
 /* =========================================================
@@ -156,34 +329,61 @@ body{
 
 .gift-wrap{
     position:relative;
-    width:190px;
-    height:210px;
-    margin:55px auto 34px;
-    filter:drop-shadow(0 25px 28px rgba(0,0,0,.45));
+    width:205px;
+    height:220px;
+    margin:42px auto 25px;
+
+    cursor:pointer;
+
+    filter:
+        drop-shadow(0 25px 35px rgba(0,0,0,.48))
+        drop-shadow(0 0 18px rgba(255,157,107,.15));
+
+    transition:
+        transform .3s ease,
+        filter .3s ease;
+}
+
+.gift-wrap:hover{
+    transform:translateY(-6px) scale(1.025);
+
+    filter:
+        drop-shadow(0 30px 40px rgba(0,0,0,.55))
+        drop-shadow(0 0 30px rgba(255,170,116,.32));
+}
+
+.gift-wrap:active{
+    transform:translateY(-2px) scale(.98);
 }
 
 .gift-glow{
     position:absolute;
     left:50%;
-    bottom:5px;
-    width:210px;
-    height:100px;
+    bottom:0;
+    width:240px;
+    height:115px;
+
     transform:translateX(-50%);
+
     border-radius:50%;
-    background:radial-gradient(
-        ellipse,
-        rgba(255,205,124,.58),
-        rgba(255,163,109,.16) 40%,
-        transparent 72%
-    );
-    filter:blur(8px);
-    animation:giftGlow 3.5s ease-in-out infinite;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(255,205,121,.72),
+            rgba(255,137,105,.25) 42%,
+            transparent 72%
+        );
+
+    filter:blur(9px);
+
+    animation:giftGlow 3s ease-in-out infinite;
 }
 
 @keyframes giftGlow{
     0%,100%{
         opacity:.65;
-        transform:translateX(-50%) scale(.94);
+        transform:translateX(-50%) scale(.93);
     }
 
     50%{
@@ -196,175 +396,263 @@ body{
     position:absolute;
     left:50%;
     bottom:25px;
+
     transform:translateX(-50%);
-    width:170px;
-    height:130px;
+
+    width:175px;
+    height:132px;
+
     border-radius:8px;
+
     background:
         linear-gradient(
             90deg,
-            #8e234b,
-            #d64d72 45%,
-            #bd355f
+            #9e2354,
+            #e04b75 48%,
+            #b62e59
         );
+
     box-shadow:
-        inset 0 4px 10px rgba(255,255,255,.13),
-        0 15px 25px rgba(0,0,0,.3);
+        inset 0 5px 12px rgba(255,255,255,.16),
+        0 17px 28px rgba(0,0,0,.38);
 }
 
 .gift::before{
     content:"";
+
     position:absolute;
     left:50%;
     top:0;
+
     transform:translateX(-50%);
-    width:24px;
+
+    width:25px;
     height:100%;
-    background:linear-gradient(
-        90deg,
-        #f0a62e,
-        #ffd86c,
-        #e99b26
-    );
-    box-shadow:0 0 14px rgba(255,196,63,.4);
+
+    background:
+        linear-gradient(
+            90deg,
+            #e39a24,
+            #ffe16b,
+            #e99b27
+        );
+
+    box-shadow:
+        0 0 16px rgba(255,196,63,.5);
 }
 
 .lid{
     position:absolute;
     left:50%;
-    top:-19px;
+    top:-20px;
+
     transform:translateX(-50%);
-    width:188px;
-    height:42px;
-    border-radius:7px;
-    background:linear-gradient(
-        180deg,
-        #dc5576,
-        #a72a51
-    );
+
+    width:194px;
+    height:43px;
+
+    border-radius:8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #e35a7b,
+            #a82750
+        );
+
     box-shadow:
-        inset 0 3px 8px rgba(255,255,255,.16),
-        0 7px 12px rgba(0,0,0,.3);
+        inset 0 3px 9px rgba(255,255,255,.17),
+        0 8px 14px rgba(0,0,0,.35);
 }
 
 .lid::before{
     content:"";
+
     position:absolute;
     left:50%;
     top:0;
+
     transform:translateX(-50%);
-    width:25px;
+
+    width:26px;
     height:100%;
-    background:linear-gradient(
-        90deg,
-        #eaa029,
-        #ffdc65,
-        #e89b27
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            #e99b25,
+            #ffdd62,
+            #e69a24
+        );
 }
 
 .bow{
     position:absolute;
     left:50%;
-    top:-51px;
+    top:-53px;
+
     transform:translateX(-50%);
-    width:82px;
-    height:42px;
+
+    width:90px;
+    height:45px;
 }
 
 .bow::before,
 .bow::after{
     content:"";
+
     position:absolute;
-    top:8px;
-    width:43px;
-    height:27px;
-    border:8px solid #ffc94d;
-    box-shadow:0 0 8px rgba(255,192,61,.45);
+    top:7px;
+
+    width:48px;
+    height:29px;
+
+    border:8px solid #ffd15a;
+
+    box-shadow:
+        0 0 10px rgba(255,196,61,.6);
 }
 
 .bow::before{
-    right:40px;
+    right:41px;
     border-radius:55% 45% 50% 50%;
-    transform:rotate(-15deg);
+    transform:rotate(-17deg);
 }
 
 .bow::after{
-    left:40px;
+    left:41px;
     border-radius:45% 55% 50% 50%;
-    transform:rotate(15deg);
+    transform:rotate(17deg);
 }
 
 .bow span{
     position:absolute;
     left:50%;
-    top:8px;
+    top:7px;
+
     transform:translateX(-50%);
-    width:17px;
-    height:32px;
+
+    width:18px;
+    height:34px;
+
     border-radius:5px;
-    background:#ffd35a;
+
+    background:#ffd45a;
+
     z-index:2;
 }
 
 /* =========================================================
-   BUTTON
+   OPEN BUTTON
 ========================================================= */
 
 .open-button{
     position:relative;
-    border:1px solid rgba(255,218,184,.45);
+
+    border:1px solid rgba(255,220,191,.5);
     border-radius:40px;
-    padding:17px 38px;
+
+    padding:16px 37px;
+
     background:
         linear-gradient(
             135deg,
-            rgba(54,37,60,.75),
-            rgba(25,20,42,.78)
+            rgba(40,24,54,.7),
+            rgba(21,14,37,.75)
         );
-    color:#fff5e8;
+
+    color:#fff5ea;
+
     font-family:inherit;
-    font-size:12px;
+    font-size:11px;
     letter-spacing:3px;
+
     cursor:pointer;
+
     box-shadow:
-        0 10px 30px rgba(0,0,0,.25),
-        inset 0 0 20px rgba(255,220,178,.05);
+        0 12px 35px rgba(0,0,0,.35),
+        inset 0 0 18px rgba(255,220,180,.06);
+
+    backdrop-filter:blur(8px);
+
     transition:.3s ease;
 }
 
 .open-button:hover{
     transform:translateY(-3px);
-    border-color:rgba(255,222,187,.8);
+
+    border-color:rgba(255,225,198,.9);
+
     box-shadow:
-        0 15px 35px rgba(0,0,0,.35),
-        0 0 25px rgba(255,190,144,.16);
+        0 16px 40px rgba(0,0,0,.42),
+        0 0 28px rgba(255,178,135,.2);
 }
 
 .open-button span{
     display:block;
-    margin-top:7px;
-    font-size:16px;
+
+    margin-top:6px;
+
+    font-size:17px;
     letter-spacing:0;
-    color:#ffd9b5;
+
+    color:#ffd5b1;
+
+    text-shadow:
+        0 0 12px rgba(255,174,125,.75);
 }
 
 /* =========================================================
-   CONTENT ROOMS
+   OPENING ANIMATION
+========================================================= */
+
+.gift-wrap.opening{
+    animation:
+        giftOpen 1.05s cubic-bezier(.2,.75,.25,1) forwards;
+}
+
+@keyframes giftOpen{
+
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+
+    35%{
+        transform:translateY(-18px) scale(1.04);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-105px) scale(.72);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   CONTENT
 ========================================================= */
 
 .gift-content{
     position:absolute;
     inset:0;
+
     z-index:30;
+
     display:none;
+
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:35px 18px;
+
+    padding:30px 18px;
+
     opacity:0;
     transform:translateY(25px);
-    transition:opacity .7s,transform .7s;
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .gift-content.show{
@@ -373,71 +661,98 @@ body{
 }
 
 .room-title{
-    font-size:clamp(34px,6vw,58px);
+    font-size:clamp(38px,6vw,62px);
     font-weight:normal;
-    color:#fff1df;
-    text-shadow:0 0 25px rgba(255,211,170,.2);
+
+    color:#fff1dd;
+
+    text-shadow:
+        0 0 20px rgba(255,209,177,.35),
+        0 7px 25px rgba(0,0,0,.55);
 }
 
 .room-subtitle{
     margin-top:10px;
-    color:rgba(255,237,223,.68);
+
+    color:rgba(255,235,224,.75);
+
     font-style:italic;
 }
 
 .menu{
     width:min(850px,100%);
+
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    margin-top:32px;
+
+    gap:13px;
+
+    margin-top:28px;
 }
 
 .menu-card{
-    padding:24px 18px;
-    border:1px solid rgba(255,220,190,.13);
+    padding:21px 18px;
+
+    border:1px solid rgba(255,220,190,.16);
     border-radius:18px;
+
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.025)
+            rgba(35,21,55,.62),
+            rgba(12,8,27,.5)
         );
-    backdrop-filter:blur(14px);
+
+    backdrop-filter:blur(15px);
+
     cursor:pointer;
+
     transition:.3s ease;
 }
 
 .menu-card:hover{
     transform:translateY(-4px);
-    border-color:rgba(255,219,184,.4);
-    background:rgba(255,255,255,.09);
+
+    border-color:rgba(255,220,190,.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55,31,69,.72),
+            rgba(18,10,34,.62)
+        );
 }
 
 .menu-icon{
     font-size:27px;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .menu-title{
-    font-size:18px;
+    font-size:17px;
     color:#fff1e5;
 }
 
 .menu-desc{
-    margin-top:7px;
+    margin-top:6px;
+
     font-size:12px;
     line-height:1.6;
-    color:rgba(255,235,223,.57);
+
+    color:rgba(255,235,223,.6);
 }
 
 .back-button{
-    margin-top:28px;
+    margin-top:22px;
+
     border:0;
     background:none;
-    color:rgba(255,231,213,.65);
+
+    color:rgba(255,231,213,.7);
+
     font-family:inherit;
     letter-spacing:2px;
+
     cursor:pointer;
 }
 
@@ -448,15 +763,22 @@ body{
 .modal{
     position:fixed;
     inset:0;
+
     z-index:100;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:20px;
-    background:rgba(2,2,10,.72);
-    backdrop-filter:blur(10px);
+
+    background:rgba(3,1,13,.75);
+
+    backdrop-filter:blur(12px);
+
     opacity:0;
     visibility:hidden;
+
     transition:.35s;
 }
 
@@ -467,18 +789,26 @@ body{
 
 .modal-box{
     width:min(520px,100%);
+
     padding:40px 30px;
+
     text-align:center;
-    border:1px solid rgba(255,220,190,.22);
+
+    border:1px solid rgba(255,220,190,.23);
     border-radius:24px;
+
     background:
         linear-gradient(
             145deg,
-            rgba(42,28,53,.96),
-            rgba(12,12,28,.96)
+            rgba(42,25,55,.97),
+            rgba(10,7,25,.97)
         );
-    box-shadow:0 30px 80px rgba(0,0,0,.55);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.65);
+
     transform:translateY(20px) scale(.97);
+
     transition:.35s;
 }
 
@@ -499,42 +829,27 @@ body{
 
 .modal-text{
     margin-top:16px;
+
     line-height:1.8;
+
     color:rgba(255,236,225,.72);
 }
 
 .close-button{
     margin-top:25px;
+
     padding:11px 24px;
+
     border:1px solid rgba(255,220,190,.25);
     border-radius:25px;
+
     background:transparent;
+
     color:#ffe9d5;
+
     font-family:inherit;
+
     cursor:pointer;
-}
-
-/* =========================================================
-   OPENING ANIMATION
-========================================================= */
-
-.gift-wrap.opening{
-    animation:giftRise 1s ease forwards;
-}
-
-@keyframes giftRise{
-    0%{
-        transform:translateY(0);
-    }
-
-    40%{
-        transform:translateY(-20px);
-    }
-
-    100%{
-        transform:translateY(-80px) scale(.8);
-        opacity:0;
-    }
 }
 
 /* =========================================================
@@ -543,59 +858,86 @@ body{
 
 @media(max-width:650px){
 
-    .title{
-        font-size:clamp(42px,12vw,70px);
-        letter-spacing:-2px;
+    .container{
+        padding:25px 15px;
     }
 
     .eyebrow{
+        font-size:8px;
+        letter-spacing:4px;
+    }
+
+    .title{
+        font-size:clamp(42px,11vw,68px);
+        letter-spacing:-2px;
+    }
+
+    .subtitle{
+        margin-top:19px;
+        font-size:21px;
+    }
+
+    .small-text{
         font-size:9px;
         letter-spacing:4px;
     }
 
-    .subtitle{
-        font-size:21px;
+    .decor-line{
+        width:48px;
     }
 
     .gift-wrap{
         transform:scale(.82);
-        margin-top:40px;
-        margin-bottom:20px;
+        margin-top:32px;
+        margin-bottom:15px;
+    }
+
+    .gift-wrap:hover{
+        transform:scale(.84);
     }
 
     .gift-wrap.opening{
-        animation:giftRiseMobile 1s ease forwards;
+        animation:giftOpenMobile 1.05s cubic-bezier(.2,.75,.25,1) forwards;
     }
 
-    @keyframes giftRiseMobile{
+    @keyframes giftOpenMobile{
 
         0%{
             transform:scale(.82) translateY(0);
+            opacity:1;
         }
 
-        40%{
-            transform:scale(.82) translateY(-15px);
+        35%{
+            transform:scale(.86) translateY(-15px);
+            opacity:1;
         }
 
         100%{
-            transform:scale(.65) translateY(-80px);
+            transform:scale(.58) translateY(-90px);
             opacity:0;
         }
     }
 
     .menu{
         grid-template-columns:1fr;
-        max-height:58vh;
+
+        max-height:57vh;
+
         overflow-y:auto;
+
         padding-right:3px;
     }
 
     .menu-card{
-        padding:19px 16px;
+        padding:18px 16px;
     }
 
     .room-title{
-        font-size:37px;
+        font-size:38px;
+    }
+
+    .room-subtitle{
+        font-size:14px;
     }
 }
 </style>
@@ -604,13 +946,45 @@ body{
 <body>
 
 <!-- =========================================================
-     CINEMATIC NIGHT WORLD
+     NIGHT WORLD
 ========================================================= -->
 
-<div class="scene"></div>
+<div class="scene">
+
+    <div class="stars">
+
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+        <span class="star big"></span>
+        <span class="star"></span>
+        <span class="star"></span>
+
+    </div>
+
+    <div class="petals">
+
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+
+    </div>
+
+</div>
 
 <!-- =========================================================
-     WELCOME
+     MAIN
 ========================================================= -->
 
 <main class="container">
@@ -618,7 +992,17 @@ body{
     <section class="welcome" id="welcome">
 
         <div class="eyebrow">
-            A LITTLE WORLD MADE FOR YOU
+            A LITTLE SOMETHING
+        </div>
+
+        <div class="decor">
+
+            <span class="decor-line"></span>
+
+            <span class="decor-heart">♡</span>
+
+            <span class="decor-line right"></span>
+
         </div>
 
         <h1 class="title">
@@ -629,11 +1013,26 @@ body{
             For Kunjii Kuttyy
         </div>
 
-        <div class="small-text">
-            A little something
+        <div class="decor">
+
+            <span class="decor-line"></span>
+
+            <span class="decor-heart">♥</span>
+
+            <span class="decor-line right"></span>
+
         </div>
 
-        <div class="gift-wrap" id="gift">
+        <!-- ENTIRE GIFT IS CLICKABLE -->
+
+        <div
+            class="gift-wrap"
+            id="gift"
+            onclick="openBox()"
+            role="button"
+            tabindex="0"
+            aria-label="Open Kunjii Sammanam"
+        >
 
             <div class="gift-glow"></div>
 
@@ -649,9 +1048,14 @@ body{
 
         </div>
 
-        <button class="open-button" onclick="openBox()">
+        <button
+            class="open-button"
+            onclick="openBox()"
+        >
             OPEN THE SAMMANAM
+
             <span>♡</span>
+
         </button>
 
     </section>
@@ -660,7 +1064,10 @@ body{
          GIFT CONTENT
     ====================================================== -->
 
-    <section class="gift-content" id="giftContent">
+    <section
+        class="gift-content"
+        id="giftContent"
+    >
 
         <div class="room-title">
             For You
@@ -672,120 +1079,175 @@ body{
 
         <div class="menu">
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '💌',
-                 'A Letter for You',
-                 'Some words I wanted you to have, exactly as they are.'
-                 )">
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '💌',
+                    'A Letter for You',
+                    'Some words I wanted you to have, exactly as they are.'
+                )"
+            >
 
                 <div class="menu-icon">💌</div>
-                <div class="menu-title">A Letter for You</div>
+
+                <div class="menu-title">
+                    A Letter for You
+                </div>
+
                 <div class="menu-desc">
                     Something written especially for you.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '📖',
-                 'The Things You Don’t Remember',
-                 'Little moments, tiny details, and memories that stayed with me.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '📖',
+                    'The Things You Don’t Remember',
+                    'Little moments, tiny details, and memories that stayed with me.'
+                )"
+            >
 
                 <div class="menu-icon">📖</div>
-                <div class="menu-title">The Things You Don’t Remember</div>
+
+                <div class="menu-title">
+                    The Things You Don’t Remember
+                </div>
+
                 <div class="menu-desc">
                     Little moments that became important to me.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '🌱',
-                 'The Girl I See',
-                 'A little collection of the things I admire about you.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '🌱',
+                    'The Girl I See',
+                    'A little collection of the things I admire about you.'
+                )"
+            >
 
                 <div class="menu-icon">🌱</div>
-                <div class="menu-title">The Girl I See</div>
+
+                <div class="menu-title">
+                    The Girl I See
+                </div>
+
                 <div class="menu-desc">
                     The beautiful things you may not always see in yourself.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '🎙️',
-                 'Listen to This',
-                 'Some things sound different when they are spoken instead of written.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '🎙️',
+                    'Listen to This',
+                    'Some things sound different when they are spoken instead of written.'
+                )"
+            >
 
                 <div class="menu-icon">🎙️</div>
-                <div class="menu-title">Listen to This</div>
+
+                <div class="menu-title">
+                    Listen to This
+                </div>
+
                 <div class="menu-desc">
                     A few things I wanted you to hear from me.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '✍️',
-                 'Words I Couldn’t Say',
-                 'Thoughts that found their way onto paper before they found their way into words.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '✍️',
+                    'Words I Couldn’t Say',
+                    'Thoughts that found their way onto paper before they found their way into words.'
+                )"
+            >
 
                 <div class="menu-icon">✍️</div>
-                <div class="menu-title">Words I Couldn’t Say</div>
+
+                <div class="menu-title">
+                    Words I Couldn’t Say
+                </div>
+
                 <div class="menu-desc">
                     Poems, thoughts and little pieces of me.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '🎥',
-                 'Behind the Box',
-                 'A few moments from the journey of making this little place.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '🎥',
+                    'Behind the Box',
+                    'A few moments from the journey of making this little place.'
+                )"
+            >
 
                 <div class="menu-icon">🎥</div>
-                <div class="menu-title">Behind the Box</div>
+
+                <div class="menu-title">
+                    Behind the Box
+                </div>
+
                 <div class="menu-desc">
                     The story of how this little world came to exist.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '📸',
-                 'Little Things',
-                 'A collection of moments I wanted to keep.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '📸',
+                    'Little Things',
+                    'A collection of moments I wanted to keep.'
+                )"
+            >
 
                 <div class="menu-icon">📸</div>
-                <div class="menu-title">Little Things</div>
+
+                <div class="menu-title">
+                    Little Things
+                </div>
+
                 <div class="menu-desc">
                     Photos, memories and tiny pieces of time.
                 </div>
 
             </div>
 
-            <div class="menu-card"
-                 onclick="openModal(
-                 '❤️',
-                 'Open Last',
-                 'Some things are better saved until everything else has been seen.'
-                 )">
+
+            <div
+                class="menu-card"
+                onclick="openModal(
+                    '❤️',
+                    'Open Last',
+                    'Some things are better saved until everything else has been seen.'
+                )"
+            >
 
                 <div class="menu-icon">❤️</div>
-                <div class="menu-title">Open Last</div>
+
+                <div class="menu-title">
+                    Open Last
+                </div>
+
                 <div class="menu-desc">
                     Keep this one for the very end.
                 </div>
@@ -794,7 +1256,10 @@ body{
 
         </div>
 
-        <button class="back-button" onclick="goBack()">
+        <button
+            class="back-button"
+            onclick="goBack()"
+        >
             ← BACK TO THE NIGHT
         </button>
 
@@ -806,23 +1271,38 @@ body{
      MODAL
 ========================================================= -->
 
-<div class="modal" id="modal">
+<div
+    class="modal"
+    id="modal"
+>
 
     <div class="modal-box">
 
-        <div class="modal-icon" id="modalIcon">
+        <div
+            class="modal-icon"
+            id="modalIcon"
+        >
             💌
         </div>
 
-        <h2 class="modal-title" id="modalTitle">
+        <h2
+            class="modal-title"
+            id="modalTitle"
+        >
             A Letter for You
         </h2>
 
-        <p class="modal-text" id="modalText">
+        <p
+            class="modal-text"
+            id="modalText"
+        >
             Coming soon...
         </p>
 
-        <button class="close-button" onclick="closeModal()">
+        <button
+            class="close-button"
+            onclick="closeModal()"
+        >
             CLOSE
         </button>
 
@@ -832,16 +1312,33 @@ body{
 
 <script>
 
+/* =========================================================
+   OPEN THE GIFT
+========================================================= */
+
+let boxOpened = false;
+
 function openBox(){
 
-    const gift = document.getElementById("gift");
-    const welcome = document.getElementById("welcome");
-    const content = document.getElementById("giftContent");
+    if(boxOpened) return;
+
+    boxOpened = true;
+
+    const gift =
+        document.getElementById("gift");
+
+    const welcome =
+        document.getElementById("welcome");
+
+    const content =
+        document.getElementById("giftContent");
 
     gift.classList.add("opening");
 
     setTimeout(function(){
+
         welcome.classList.add("hide");
+
     },650);
 
     setTimeout(function(){
@@ -849,18 +1346,54 @@ function openBox(){
         content.style.display = "flex";
 
         requestAnimationFrame(function(){
+
             content.classList.add("show");
+
         });
 
     },1000);
 }
 
 
+/* =========================================================
+   KEYBOARD SUPPORT FOR THE GIFT
+========================================================= */
+
+document
+    .getElementById("gift")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key === "Enter" ||
+                event.key === " "
+            ){
+
+                event.preventDefault();
+
+                openBox();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   GO BACK
+========================================================= */
+
 function goBack(){
 
-    const gift = document.getElementById("gift");
-    const welcome = document.getElementById("welcome");
-    const content = document.getElementById("giftContent");
+    const gift =
+        document.getElementById("gift");
+
+    const welcome =
+        document.getElementById("welcome");
+
+    const content =
+        document.getElementById("giftContent");
 
     content.classList.remove("show");
 
@@ -872,40 +1405,64 @@ function goBack(){
 
         gift.classList.remove("opening");
 
+        boxOpened = false;
+
     },500);
 }
 
 
-function openModal(icon,title,text){
+/* =========================================================
+   MODAL
+========================================================= */
 
-    document.getElementById("modalIcon").textContent = icon;
+function openModal(
+    icon,
+    title,
+    text
+){
 
-    document.getElementById("modalTitle").textContent = title;
+    document
+        .getElementById("modalIcon")
+        .textContent = icon;
 
-    document.getElementById("modalText").textContent = text;
+    document
+        .getElementById("modalTitle")
+        .textContent = title;
 
-    document.getElementById("modal").classList.add("show");
+    document
+        .getElementById("modalText")
+        .textContent = text;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
 }
 
 
 function closeModal(){
 
-    document.getElementById("modal").classList.remove("show");
+    document
+        .getElementById("modal")
+        .classList.remove("show");
 }
 
 
-document.getElementById("modal").addEventListener(
-    "click",
-    function(event){
+document
+    .getElementById("modal")
+    .addEventListener(
+        "click",
+        function(event){
 
-        if(event.target === this){
-            closeModal();
+            if(event.target === this){
+
+                closeModal();
+
+            }
+
         }
-
-    }
-);
+    );
 
 </script>
 
 </body>
-</html>
+    </html>
