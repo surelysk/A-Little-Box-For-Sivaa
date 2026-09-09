@@ -32,401 +32,59 @@ body{
     position:fixed;
     inset:0;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 78% 14%,rgba(255,220,170,.13),transparent 14%),
-        radial-gradient(circle at 18% 48%,rgba(91,63,151,.24),transparent 35%),
         linear-gradient(
-            180deg,
-            #020513 0%,
-            #070a22 28%,
-            #151033 52%,
-            #241737 72%,
-            #070712 100%
-        );
+            rgba(8,5,25,.28),
+            rgba(5,3,18,.42)
+        ),
+        url("https://images.pexels.com/photos/18928472/pexels-photo-18928472.jpeg?cs=srgb&dl=pexels-bylukemiller-18928472.jpg&fm=jpg")
+        center center / cover no-repeat;
+
+    background-attachment:fixed;
 }
 
-/* subtle atmospheric glow */
 .scene::before{
     content:"";
     position:absolute;
-    inset:-20%;
-    background:
-        radial-gradient(ellipse at 50% 60%,rgba(143,103,194,.16),transparent 38%),
-        radial-gradient(ellipse at 75% 30%,rgba(255,216,164,.09),transparent 24%);
-    filter:blur(35px);
-    animation:atmosphere 12s ease-in-out infinite alternate;
-}
-
-@keyframes atmosphere{
-    from{transform:translate3d(-1%,0,0) scale(1);}
-    to{transform:translate3d(1%,2%,0) scale(1.04);}
-}
-
-/* =========================================================
-   STARS
-========================================================= */
-
-.stars{
-    position:absolute;
     inset:0;
-    z-index:1;
-}
 
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    border-radius:50%;
-    background:#fff;
-    box-shadow:0 0 8px rgba(255,255,255,.8);
-    animation:twinkle 3s ease-in-out infinite;
-}
-
-.star.big{
-    width:4px;
-    height:4px;
-    box-shadow:
-        0 0 5px #fff,
-        0 0 14px rgba(255,226,190,.8);
-}
-
-.star:nth-child(1){left:7%;top:16%;animation-delay:.4s}
-.star:nth-child(2){left:15%;top:9%;animation-delay:1.2s}
-.star:nth-child(3){left:23%;top:23%;animation-delay:2s}
-.star:nth-child(4){left:31%;top:12%;animation-delay:.8s}
-.star:nth-child(5){left:40%;top:18%;animation-delay:1.7s}
-.star:nth-child(6){left:49%;top:8%;animation-delay:.2s}
-.star:nth-child(7){left:58%;top:22%;animation-delay:2.3s}
-.star:nth-child(8){left:67%;top:11%;animation-delay:1s}
-.star:nth-child(9){left:73%;top:27%;animation-delay:.6s}
-.star:nth-child(10){left:84%;top:17%;animation-delay:1.8s}
-.star:nth-child(11){left:91%;top:31%;animation-delay:2.5s}
-.star:nth-child(12){left:12%;top:37%;animation-delay:1.1s}
-.star:nth-child(13){left:36%;top:34%;animation-delay:2.1s}
-.star:nth-child(14){left:55%;top:39%;animation-delay:.7s}
-.star:nth-child(15){left:94%;top:10%;animation-delay:1.5s}
-.star:nth-child(16){left:4%;top:46%;animation-delay:2.7s}
-.star:nth-child(17){left:78%;top:43%;animation-delay:1.3s}
-.star:nth-child(18){left:88%;top:52%;animation-delay:.9s}
-
-@keyframes twinkle{
-    0%,100%{opacity:.25;transform:scale(.7)}
-    50%{opacity:1;transform:scale(1.35)}
-}
-
-/* =========================================================
-   MOON
-========================================================= */
-
-.moon{
-    position:absolute;
-    z-index:3;
-    top:8%;
-    right:10%;
-    width:92px;
-    height:92px;
-    border-radius:50%;
-    background:
-        radial-gradient(circle at 35% 32%,#fffdf4 0 18%,transparent 19%),
-        radial-gradient(circle at 65% 65%,rgba(178,157,139,.28) 0 7%,transparent 8%),
-        radial-gradient(circle at 38% 67%,rgba(185,165,149,.25) 0 10%,transparent 11%),
-        radial-gradient(circle at 58% 35%,rgba(183,160,144,.2) 0 8%,transparent 9%),
-        linear-gradient(145deg,#fffdf3,#ffe9c5 58%,#d9c2a7);
-    box-shadow:
-        0 0 25px rgba(255,235,192,.75),
-        0 0 70px rgba(255,214,159,.35),
-        0 0 130px rgba(181,140,221,.18);
-    animation:moonBreath 7s ease-in-out infinite;
-}
-
-.moon::after{
-    content:"";
-    position:absolute;
-    inset:-25px;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(255,226,178,.17),transparent 65%);
-    z-index:-1;
-}
-
-@keyframes moonBreath{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.025)}
-}
-
-/* =========================================================
-   CLOUDS
-========================================================= */
-
-.cloud{
-    position:absolute;
-    z-index:2;
-    border-radius:50%;
-    filter:blur(12px);
-    opacity:.32;
-}
-
-.cloud.one{
-    width:520px;
-    height:125px;
-    left:-80px;
-    top:24%;
-    background:
-        radial-gradient(ellipse at 25% 65%,#8976a8 0 18%,transparent 48%),
-        radial-gradient(ellipse at 52% 45%,#786796 0 24%,transparent 53%),
-        radial-gradient(ellipse at 75% 65%,#665782 0 20%,transparent 52%);
-    animation:cloudMove 25s ease-in-out infinite alternate;
-}
-
-.cloud.two{
-    width:620px;
-    height:150px;
-    right:-170px;
-    top:31%;
-    opacity:.25;
-    background:
-        radial-gradient(ellipse at 20% 60%,#9a83ad 0 18%,transparent 48%),
-        radial-gradient(ellipse at 50% 45%,#76648e 0 28%,transparent 54%),
-        radial-gradient(ellipse at 80% 65%,#604e79 0 20%,transparent 50%);
-    animation:cloudMove 32s ease-in-out infinite alternate-reverse;
-}
-
-.cloud.three{
-    width:800px;
-    height:120px;
-    left:15%;
-    top:42%;
-    opacity:.15;
-    background:radial-gradient(ellipse,#b194bc,transparent 68%);
-    filter:blur(22px);
-}
-
-@keyframes cloudMove{
-    from{transform:translateX(-3%)}
-    to{transform:translateX(7%)}
-}
-
-/* =========================================================
-   DISTANT MOUNTAINS
-========================================================= */
-
-.mountains{
-    position:absolute;
-    z-index:4;
-    left:0;
-    right:0;
-    bottom:29%;
-    height:34%;
-}
-
-.mountain{
-    position:absolute;
-    bottom:0;
-    width:0;
-    height:0;
-    border-left:180px solid transparent;
-    border-right:180px solid transparent;
-    border-bottom:260px solid rgba(20,18,43,.9);
-    filter:blur(.2px);
-}
-
-.mountain::after{
-    content:"";
-    position:absolute;
-    left:-175px;
-    top:155px;
-    width:350px;
-    height:110px;
-    background:linear-gradient(
-        180deg,
-        rgba(112,89,143,.18),
-        transparent
-    );
-}
-
-.m1{left:-110px;transform:scale(1.3)}
-.m2{left:13%;transform:scale(.9);border-bottom-color:rgba(31,25,56,.85)}
-.m3{left:29%;transform:scale(1.18);border-bottom-color:rgba(26,21,50,.92)}
-.m4{left:47%;transform:scale(.78);border-bottom-color:rgba(41,30,62,.78)}
-.m5{left:61%;transform:scale(1.25);border-bottom-color:rgba(24,21,48,.9)}
-.m6{left:80%;transform:scale(.95);border-bottom-color:rgba(31,24,53,.9)}
-.m7{left:91%;transform:scale(1.25);border-bottom-color:rgba(17,17,38,.95)}
-
-/* distant haze */
-.horizon-haze{
-    position:absolute;
-    z-index:5;
-    left:-10%;
-    right:-10%;
-    bottom:28%;
-    height:15%;
-    background:linear-gradient(
-        180deg,
-        rgba(173,133,184,.06),
-        rgba(238,190,175,.12),
-        transparent
-    );
-    filter:blur(18px);
-}
-
-/* =========================================================
-   RIVER
-========================================================= */
-
-.river{
-    position:absolute;
-    z-index:5;
-    left:50%;
-    bottom:-8%;
-    transform:translateX(-50%);
-    width:75%;
-    height:47%;
-    clip-path:polygon(
-        43% 0,
-        57% 0,
-        64% 18%,
-        72% 35%,
-        82% 55%,
-        100% 100%,
-        0 100%,
-        18% 55%,
-        28% 35%,
-        36% 18%
-    );
     background:
         radial-gradient(
-            ellipse at 50% 5%,
-            rgba(255,218,180,.45),
-            transparent 18%
+            circle at 72% 17%,
+            rgba(255,218,170,.18),
+            transparent 15%
         ),
         linear-gradient(
             180deg,
-            rgba(48,50,93,.8),
-            rgba(29,35,73,.92) 40%,
-            rgba(10,16,38,1)
-        );
-    box-shadow:0 -20px 80px rgba(160,117,188,.12);
-}
-
-.river::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:3%;
-    transform:translateX(-50%);
-    width:17%;
-    height:95%;
-    background:
-        repeating-linear-gradient(
-            180deg,
-            transparent 0 12px,
-            rgba(255,210,167,.25) 13px 15px,
-            transparent 16px 30px
-        );
-    filter:blur(1px);
-    opacity:.75;
-}
-
-.river::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            165deg,
             transparent 42%,
-            rgba(175,138,202,.16) 48%,
-            transparent 53%
-        ),
-        linear-gradient(
-            195deg,
-            transparent 48%,
-            rgba(255,199,161,.13) 53%,
-            transparent 57%
+            rgba(10,5,28,.18) 70%,
+            rgba(3,2,12,.55) 100%
         );
+
+    pointer-events:none;
 }
 
-/* =========================================================
-   TREES / FOREGROUND
-========================================================= */
-
-.tree{
-    position:absolute;
-    z-index:8;
-    bottom:-4%;
-    width:280px;
-    height:520px;
-    opacity:.9;
-}
-
-.tree.left{left:-80px}
-.tree.right{right:-80px;transform:scaleX(-1)}
-
-.tree::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    bottom:0;
-    width:28px;
-    height:85%;
-    background:linear-gradient(90deg,#090813,#21162a,#06060e);
-    transform:translateX(-50%) rotate(7deg);
-    border-radius:50%;
-}
-
-.tree::after{
+.scene::after{
     content:"";
     position:absolute;
     inset:0;
-    background:
-        radial-gradient(circle at 25% 18%,#100d1c 0 13%,transparent 14%),
-        radial-gradient(circle at 47% 10%,#151020 0 18%,transparent 19%),
-        radial-gradient(circle at 68% 24%,#0d0b19 0 18%,transparent 19%),
-        radial-gradient(circle at 32% 38%,#171020 0 20%,transparent 21%),
-        radial-gradient(circle at 72% 43%,#0b0915 0 22%,transparent 23%),
-        radial-gradient(circle at 18% 58%,#100c19 0 18%,transparent 19%);
-    filter:blur(1px);
-}
 
-/* =========================================================
-   FOREGROUND GLOW / FLOWERS
-========================================================= */
-
-.foreground{
-    position:absolute;
-    z-index:9;
-    inset:auto 0 0;
-    height:24%;
     background:
+        radial-gradient(
+            ellipse at 50% 72%,
+            rgba(255,183,119,.13),
+            transparent 25%
+        ),
         linear-gradient(
-            180deg,
-            transparent,
-            rgba(3,4,12,.6) 65%,
-            #03030a 100%
+            90deg,
+            rgba(3,2,12,.35),
+            transparent 25%,
+            transparent 75%,
+            rgba(3,2,12,.35)
         );
-}
 
-.flower{
-    position:absolute;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#e9a9d3;
-    box-shadow:
-        0 0 8px rgba(255,172,220,.7),
-        0 0 18px rgba(226,127,204,.35);
-    animation:flowerGlow 4s ease-in-out infinite;
-}
-
-.flower:nth-child(1){left:7%;bottom:12%;animation-delay:.5s}
-.flower:nth-child(2){left:15%;bottom:19%;animation-delay:1.4s}
-.flower:nth-child(3){left:25%;bottom:7%;animation-delay:2.1s}
-.flower:nth-child(4){left:74%;bottom:12%;animation-delay:.8s}
-.flower:nth-child(5){left:83%;bottom:22%;animation-delay:1.8s}
-.flower:nth-child(6){left:92%;bottom:9%;animation-delay:2.5s}
-
-@keyframes flowerGlow{
-    0%,100%{opacity:.45;transform:scale(.8)}
-    50%{opacity:1;transform:scale(1.25)}
+    pointer-events:none;
 }
 
 /* =========================================================
@@ -523,8 +181,15 @@ body{
 }
 
 @keyframes giftGlow{
-    0%,100%{opacity:.65;transform:translateX(-50%) scale(.94)}
-    50%{opacity:1;transform:translateX(-50%) scale(1.08)}
+    0%,100%{
+        opacity:.65;
+        transform:translateX(-50%) scale(.94);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateX(-50%) scale(1.08);
+    }
 }
 
 .gift{
@@ -555,7 +220,12 @@ body{
     transform:translateX(-50%);
     width:24px;
     height:100%;
-    background:linear-gradient(90deg,#f0a62e,#ffd86c,#e99b26);
+    background:linear-gradient(
+        90deg,
+        #f0a62e,
+        #ffd86c,
+        #e99b26
+    );
     box-shadow:0 0 14px rgba(255,196,63,.4);
 }
 
@@ -567,7 +237,11 @@ body{
     width:188px;
     height:42px;
     border-radius:7px;
-    background:linear-gradient(180deg,#dc5576,#a72a51);
+    background:linear-gradient(
+        180deg,
+        #dc5576,
+        #a72a51
+    );
     box-shadow:
         inset 0 3px 8px rgba(255,255,255,.16),
         0 7px 12px rgba(0,0,0,.3);
@@ -581,7 +255,12 @@ body{
     transform:translateX(-50%);
     width:25px;
     height:100%;
-    background:linear-gradient(90deg,#eaa029,#ffdc65,#e89b27);
+    background:linear-gradient(
+        90deg,
+        #eaa029,
+        #ffdc65,
+        #e89b27
+    );
 }
 
 .bow{
@@ -844,9 +523,18 @@ body{
 }
 
 @keyframes giftRise{
-    0%{transform:translateY(0)}
-    40%{transform:translateY(-20px)}
-    100%{transform:translateY(-80px) scale(.8);opacity:0}
+    0%{
+        transform:translateY(0);
+    }
+
+    40%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(-80px) scale(.8);
+        opacity:0;
+    }
 }
 
 /* =========================================================
@@ -855,21 +543,14 @@ body{
 
 @media(max-width:650px){
 
-    .moon{
-        width:68px;
-        height:68px;
-        right:8%;
-        top:8%;
+    .title{
+        font-size:clamp(42px,12vw,70px);
+        letter-spacing:-2px;
     }
 
     .eyebrow{
         font-size:9px;
         letter-spacing:4px;
-    }
-
-    .title{
-        font-size:clamp(42px,12vw,70px);
-        letter-spacing:-2px;
     }
 
     .subtitle{
@@ -887,9 +568,19 @@ body{
     }
 
     @keyframes giftRiseMobile{
-        0%{transform:scale(.82) translateY(0)}
-        40%{transform:scale(.82) translateY(-15px)}
-        100%{transform:scale(.65) translateY(-80px);opacity:0}
+
+        0%{
+            transform:scale(.82) translateY(0);
+        }
+
+        40%{
+            transform:scale(.82) translateY(-15px);
+        }
+
+        100%{
+            transform:scale(.65) translateY(-80px);
+            opacity:0;
+        }
     }
 
     .menu{
@@ -906,20 +597,6 @@ body{
     .room-title{
         font-size:37px;
     }
-
-    .river{
-        width:105%;
-        height:45%;
-    }
-
-    .tree{
-        transform:scale(.75);
-        transform-origin:bottom;
-    }
-
-    .tree.right{
-        transform:scaleX(-1) scale(.75);
-    }
 }
 </style>
 </head>
@@ -927,65 +604,10 @@ body{
 <body>
 
 <!-- =========================================================
-     NIGHT SCENE
+     CINEMATIC NIGHT WORLD
 ========================================================= -->
 
-<div class="scene">
-
-    <div class="stars">
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star big"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star big"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star big"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star big"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-        <span class="star"></span>
-    </div>
-
-    <div class="moon"></div>
-
-    <div class="cloud one"></div>
-    <div class="cloud two"></div>
-    <div class="cloud three"></div>
-
-    <div class="mountains">
-        <div class="mountain m1"></div>
-        <div class="mountain m2"></div>
-        <div class="mountain m3"></div>
-        <div class="mountain m4"></div>
-        <div class="mountain m5"></div>
-        <div class="mountain m6"></div>
-        <div class="mountain m7"></div>
-    </div>
-
-    <div class="horizon-haze"></div>
-
-    <div class="river"></div>
-
-    <div class="tree left"></div>
-    <div class="tree right"></div>
-
-    <div class="foreground">
-        <span class="flower"></span>
-        <span class="flower"></span>
-        <span class="flower"></span>
-        <span class="flower"></span>
-        <span class="flower"></span>
-        <span class="flower"></span>
-    </div>
-
-</div>
+<div class="scene"></div>
 
 <!-- =========================================================
      WELCOME
@@ -1188,7 +810,9 @@ body{
 
     <div class="modal-box">
 
-        <div class="modal-icon" id="modalIcon">💌</div>
+        <div class="modal-icon" id="modalIcon">
+            💌
+        </div>
 
         <h2 class="modal-title" id="modalTitle">
             A Letter for You
@@ -1284,4 +908,4 @@ document.getElementById("modal").addEventListener(
 </script>
 
 </body>
-   </html>
+</html>
