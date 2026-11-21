@@ -325,7 +325,7 @@ const modalText=document.getElementById("modalText");modalText.replaceChildren()
 if(roomName==="photos"){renderPhotos(modalText);}
 else if(roomName==="behind"){renderVideos(modalText);}
 else if(roomName==="last"){
-const link=document.createElement("a");link.className="action-link";link.href=room.link;
+const link=document.createElement("a");link.className="action-link";link.href=room.link; console.log("ROOM:", roomName, "LINK:", link.href);
 link.target="_blank";link.rel="noopener noreferrer";link.textContent=room.button;modalText.appendChild(link);
 
 }else{
